@@ -54,6 +54,7 @@ public class playerCollider : MonoBehaviour
                 UiController.instance.inventoryPanel.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                UiController.instance.HideCraftWindow();
             }
             else
             {

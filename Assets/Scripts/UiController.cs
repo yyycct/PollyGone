@@ -50,6 +50,7 @@ public class UiController : MonoBehaviour
     public RawImage resultImage;
     public AudioSource craftSuccessSFX;
     public GameObject failPanel;
+    public GameObject BagTap;
     private void Awake()
     {
         instance = this;
@@ -86,30 +87,6 @@ public class UiController : MonoBehaviour
         insText.text = t;
     }
 
-    /*public Texture GetTexture(items.ItemType item)
-    {
-        switch (item)
-        {
-            case items.ItemType.Rock: return RockSprite; break;
-            case items.ItemType.Wood: return WoodSprite; break;
-            case items.ItemType.Mushroom: return MushSprite; break;
-            case items.ItemType.Knife: return KnifeSprite; break;
-            case items.ItemType.Can: return CanSprite; break;
-            case items.ItemType.Candle: return CandleSprite; break;
-            case items.ItemType.Pic: return PicFrameSprite; break;
-            case items.ItemType.Bat:return BatSprite; break;
-            case items.ItemType.Book: return BookSprite; break;
-            case items.ItemType.Vase: return VaseSprite; break;
-            case items.ItemType.GamCon: return GameConSprite; break;
-            case items.ItemType.Pot: return PotSprite; break;
-            case items.ItemType.Cup: return CupSprite; break;
-            case items.ItemType.Empty: return EmptySprite; break;
-            default:
-                break;
-        }
-        return EmptySprite;
-    }*/
-
     public void printInventory(items.ItemType _type, int _index, int _amount)
     {
         ItemImage[_index].texture = items.Get2dTexture(_type);
@@ -124,6 +101,14 @@ public class UiController : MonoBehaviour
         
     }
 
+    public void closeBag()
+    {
+        playerCollider.instance.bagOn = false;
+        inventoryPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        HideCraftWindow();
+    }
 
     public void DropButtonClicked()
     {
@@ -134,20 +119,23 @@ public class UiController : MonoBehaviour
     {
         if (!craftMode)
         {
-            anim.Play("craftShow");
+            anim.Play("ShowCraft");
             craftMode = true;
-            
         }
-        else
+    }
+
+    public void HideCraftWindow()
+    {
+        if (craftMode)
         {
-            for (int i = itemsInCraft.Count - 1; i >=0; i--)
+            for (int i = itemsInCraft.Count - 1; i >= 0; i--)
             {
                 playerCollider.instance.playerBag.AddItem(itemsInCraft[i]);
             }
             itemsInCraft.Clear();
             PrintCrafts();
             playerCollider.instance.loopInventory();
-            anim.Play("craftHide");
+            anim.Play("HideCraft");
             craftMode = false;
         }
     }

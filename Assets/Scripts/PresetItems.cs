@@ -2,16 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[CreateAssetMenu]
 public class PresetItems : MonoBehaviour
 {
-    /*public items.ItemType itemType;
-    public Texture texture2d;
-    public GameObject model;
-    public bool ediable;
-    public bool combinable;
-    public int amount;*/
-
     public static PresetItems instance;
     private void Awake()
     {
@@ -34,6 +26,7 @@ public class PresetItems : MonoBehaviour
     public items book = new items(items.ItemType.Book, false, true, 0);
     public items knife = new items(items.ItemType.Knife, false, true, 0);
     public items campFire = new items(items.ItemType.CampFire, false, true, 0);
+
 
     public items GetItemFromType(items.ItemType type)
     {
