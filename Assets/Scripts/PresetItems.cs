@@ -1,0 +1,77 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+//[CreateAssetMenu]
+public class PresetItems : MonoBehaviour
+{
+    /*public items.ItemType itemType;
+    public Texture texture2d;
+    public GameObject model;
+    public bool ediable;
+    public bool combinable;
+    public int amount;*/
+
+    public static PresetItems instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public items rock = new items(items.ItemType.Rock, false, true, 0);
+    public items mushroom = new items(items.ItemType.Mushroom, true, false, 0);
+    public items purpleMush = new items(items.ItemType.PurpleMush, true, false, 0);
+    public items redMush = new items(items.ItemType.RedMush, true, false, 0);
+    public items wood = new items(items.ItemType.Wood, false, true, 0);
+    public items cup = new items(items.ItemType.Cup, false, false, 0);
+    public items can = new items(items.ItemType.Can, true, false, 0);
+    public items pic = new items(items.ItemType.Pic, false, true, 0);
+    public items candle = new items(items.ItemType.Candle, false, true, 0);
+    public items pot = new items(items.ItemType.Pot, false, false, 0);
+    public items gamCon = new items(items.ItemType.GamCon, false, false, 0);
+    public items bat = new items(items.ItemType.Bat, false, false, 0);
+    public items vase = new items(items.ItemType.Vase, false, false, 0);
+    public items book = new items(items.ItemType.Book, false, true, 0);
+    public items knife = new items(items.ItemType.Knife, false, true, 0);
+    public items campFire = new items(items.ItemType.CampFire, false, true, 0);
+
+    public items GetItemFromType(items.ItemType type)
+    {
+        switch (type)
+        {
+            case items.ItemType.Rock:
+                return rock;
+            case items.ItemType.Mushroom:
+                return mushroom;
+            case items.ItemType.Wood:
+                return wood;
+            case items.ItemType.Knife:
+                return knife;
+            case items.ItemType.Cup:
+                return cup;
+            case items.ItemType.Pot:
+                return pot;
+            case items.ItemType.Pic:
+                return pic;
+            case items.ItemType.Can:
+                return can;
+            case items.ItemType.GamCon:
+                return gamCon;
+            case items.ItemType.Candle:
+                return candle;
+            case items.ItemType.Book:
+                return book;
+            case items.ItemType.Vase:
+                return vase;
+            case items.ItemType.Bat:
+                return bat;
+            case items.ItemType.CampFire:
+                return campFire;
+            case items.ItemType.Empty:
+                return null;
+            default:
+                break;
+        }
+        return null;
+    }
+}
