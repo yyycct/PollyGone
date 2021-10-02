@@ -68,6 +68,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "CraftQ",
+                    "type": "Button",
+                    "id": "2983ebcc-374c-4816-a210-7e753515d939",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "CraftE",
+                    "type": "Button",
+                    "id": "17447998-e3e5-459d-adef-c6364b723022",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -288,6 +304,28 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45b3f01d-b293-4261-b7b3-f7a1b0fbfd12",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CraftQ",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "858f24e7-3695-488e-89ce-78700d27f79e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CraftE",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

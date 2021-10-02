@@ -51,6 +51,8 @@ public class UiController : MonoBehaviour
     public AudioSource craftSuccessSFX;
     public GameObject failPanel;
     public GameObject BagTap;
+
+    public GameObject craftQTEPanel;
     private void Awake()
     {
         instance = this;
@@ -74,6 +76,7 @@ public class UiController : MonoBehaviour
         GameOverPanel.SetActive(false);
         resultPanel.SetActive(false);
         failPanel.SetActive(false);
+        craftQTEPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -104,6 +107,8 @@ public class UiController : MonoBehaviour
     public void closeBag()
     {
         playerCollider.instance.bagOn = false;
+        eatButton.SetActive(false);
+        dropButton.SetActive(false);
         inventoryPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -121,6 +126,8 @@ public class UiController : MonoBehaviour
         {
             anim.Play("ShowCraft");
             craftMode = true;
+            eatButton.SetActive(false);
+            dropButton.SetActive(false);
         }
     }
 
@@ -132,6 +139,8 @@ public class UiController : MonoBehaviour
             {
                 playerCollider.instance.playerBag.AddItem(itemsInCraft[i]);
             }
+            eatButton.SetActive(false);
+            dropButton.SetActive(false);
             itemsInCraft.Clear();
             PrintCrafts();
             playerCollider.instance.loopInventory();
@@ -216,9 +225,18 @@ public class UiController : MonoBehaviour
         deathText.text = reason;
     }
 
-
     public void CraftButtonClicked()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        craftQTEPanel.SetActive(true);
+        CraftQTE.instance.craftValue = 0f;
+        CraftQTE.instance.slider.fillAmount = 0f;
+    }
+
+    public void DoneCrafting()
+    {
+
         bool hasRecipe = false;
         foreach (Recipe recipe in CraftRecipes.instance.craftRecipes)
         {

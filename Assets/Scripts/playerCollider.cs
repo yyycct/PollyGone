@@ -42,6 +42,9 @@ public class playerCollider : MonoBehaviour
                 case 1:
                     pickupItem(targetObject);
                     break;
+                case 2:
+                    setFire(targetObject);
+                    break;
                 default:
                     break;
             }   
@@ -50,15 +53,13 @@ public class playerCollider : MonoBehaviour
         {
             if (UiController.instance.inventoryPanel.activeInHierarchy)
             {
-                bagOn = false;
-                UiController.instance.inventoryPanel.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                UiController.instance.HideCraftWindow();
+                UiController.instance.closeBag();
             }
             else
             {
                 bagOn = true;
+                UiController.instance.dropButton.SetActive(false);
+                UiController.instance.eatButton.SetActive(false);
                 UiController.instance.inventoryPanel.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -223,11 +224,24 @@ public class playerCollider : MonoBehaviour
             targetObject = other.gameObject;
             interactable = true;
         }
+        else if (other.tag == "campFire")
+        {
+            inteText = "(F) Set Fire";
+            UiController.instance.changeInsText(inteText);
+            inteCode = 2;
+            interactable = true;
+            targetObject = other.gameObject;
+        }
 
     }
     private void OnTriggerExit(Collider other)
     {
         wrapUp();
+    }
+
+    public void setFire(GameObject targetObject)
+    {
+        FireAnimation.instance.StartFireAnim();
     }
     public void loopInventory()
     {

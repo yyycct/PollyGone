@@ -21,6 +21,7 @@ public class StarterAssetsInputs : MonoBehaviour
 	[Header("Mouse Cursor Settings")]
 	public bool cursorLocked = true;
 	public bool cursorInputForLook = true;
+	private int perviousHand = 0;
 #endif
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -65,6 +66,14 @@ public class StarterAssetsInputs : MonoBehaviour
 
 		RestartInput(value.isPressed);
     }
+	public void OnCraftQ(InputValue value)
+    {
+		CraftInput(1);
+    }
+	public void OnCraftE(InputValue value)
+    {
+		CraftInput(2);
+    }
 #else
 // old input sys if we do decide to have it (most likely wont)...
 #endif
@@ -108,7 +117,14 @@ public class StarterAssetsInputs : MonoBehaviour
     {
 		restart = newRestartState;
     }
-
+	public void CraftInput(int hand)
+    {
+		if(hand != perviousHand)
+        {
+			perviousHand = hand;
+			CraftQTE.instance.craftValue++;
+        }
+    }
 #if !UNITY_IOS || !UNITY_ANDROID
 
 	private void OnApplicationFocus(bool hasFocus)
