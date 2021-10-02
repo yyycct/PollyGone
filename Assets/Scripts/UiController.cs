@@ -50,7 +50,6 @@ public class UiController : MonoBehaviour
     public RawImage resultImage;
     public AudioSource craftSuccessSFX;
     public GameObject failPanel;
-    public GameObject BagTap;
 
     public GameObject craftQTEPanel;
     private void Awake()
@@ -297,7 +296,7 @@ public class UiController : MonoBehaviour
         }
         PrintCrafts();
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
         resultPanel.SetActive(false);
         
         playerCollider.instance.loopInventory();
