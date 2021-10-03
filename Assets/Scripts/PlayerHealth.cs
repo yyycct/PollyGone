@@ -17,11 +17,13 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float hungerHealthDropSpeed = 0.3f;
     [SerializeField] private float coldHealthDropSpeed = 0.2f;
     [SerializeField] private float hungerDropSpeed = 0.1f;
+    public bool enterFireRange = false;
 
     public float healthPoints = 50f;
     public float hungerPoints = 50f;
     public float coldTime = 10f;
     private float coldTimeCounter = 0f;
+    [SerializeField]
     private float coldValue = 0f;
     public bool nearHeat = false;
     private void Awake()
@@ -71,32 +73,40 @@ public class PlayerHealth : MonoBehaviour
     }
     private void updateCold()
     {
-        if (coldStart)
+        if (inCold)
         {
-            coldValue += Time.deltaTime * 0.1f;
+            coldValue += Time.deltaTime * 0.2f;
             coldValue = clampValue(coldValue);
-            warningText.text = "It feels a little cold, where can I find some heat?";
+            //warningText.text = "It feels a little cold, where can I find some heat?";
             if(coldValue >= 50f)
             {
-                inCold = true;
+                //inCold = true;
                 warningText.text = "I am freezing, Oh no!";
             }
             else
             {
-                inCold = false;
+                //inCold = false;
                 warningText.text = "It feels a little cold, where can I find some heat?";
             }
         }
-        else if (inCold)
+        else if (nearHeat)
         {
-            //coldFigure.SetActive(true);          
+            inCold = false;
+            coldValue -= Time.deltaTime * 0.3f;
+            coldValue = clampValue(coldValue);
+            warningText.text = "Feel warm here";
         }
         else
         {
-            //coldFigure.SetActive(false);
             warningText.text = "";
         }
         coldSlider.fillAmount = coldValue / 100f;
+    }
+    private IEnumerator resetText()
+    {
+        enterFireRange = false;
+        yield return new WaitForSeconds(3f);
+        warningText.text = "";
     }
     private void decreaseHunger()
     {
@@ -114,7 +124,7 @@ public class PlayerHealth : MonoBehaviour
         {
             healthPoints += Time.deltaTime * hungerHealthDropSpeed;
         }
-        if (inCold)
+        if (coldValue >= 50f)
         {
             healthPoints -= Time.deltaTime * coldHealthDropSpeed;
         }
@@ -138,15 +148,13 @@ public class PlayerHealth : MonoBehaviour
     {
         if(!inCold)
         {
-            coldStart = true;
+            inCold = true;
         }
 
     }
 
     public void EndCold()
     {
-        coldStart = false;
-        //coldCountDown = false;
         inCold = false;
     }
     public float clampValue(float value)

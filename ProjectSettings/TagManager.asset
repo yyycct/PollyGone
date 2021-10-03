@@ -26,6 +26,7 @@ TagManager:
   - redMush
   - radio
   - cookedMush
+  - cave
   layers:
   - Default
   - TransparentFX

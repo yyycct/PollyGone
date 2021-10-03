@@ -372,6 +372,11 @@ public class UiController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void RestartButtonClicked()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void PauseClicked()
     {
         Time.timeScale = 0;

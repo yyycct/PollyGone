@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3862607576435088684}
   - component: {fileID: 4202915733994149476}
   - component: {fileID: 472494831086485538}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_CampFire_01
   m_TagString: campFire
   m_Icon: {fileID: 0}
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FireFX: {fileID: 0}
+  onFire: 0
 --- !u!95 &472494831086485538
 Animator:
   serializedVersion: 3

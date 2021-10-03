@@ -23,6 +23,7 @@ public class playerCollider : MonoBehaviour
     private StarterAssetsInputs _input;
     private int cont = 0;
     public Transform dropPoint;
+    bool inCave = false;
     private void Start()
     {
         _input = GetComponent<StarterAssetsInputs>();
@@ -236,7 +237,9 @@ public class playerCollider : MonoBehaviour
             else
             {
                 inteText = "(F) Cook";
+                PlayerHealth.instance.nearHeat = true;
                 inteCode = 3;
+                PlayerHealth.instance.enterFireRange = true;
             }
             UiController.instance.changeInsText(inteText);
             interactable = true;
@@ -245,6 +248,20 @@ public class playerCollider : MonoBehaviour
         else if (other.tag == "radio")
         {
             StartCoroutine(UiController.instance.stopRadio());
+        }
+        else if (other.tag == "cookedMush")
+        {
+            inteText = "(F) Pick up mushroom";
+            UiController.instance.changeInsText(inteText);
+            inteCode = 1;
+            targetObject = other.gameObject;
+            interactable = true;
+        }
+        else if(other.tag == "cave")
+        {
+            Debug.Log("Enter cave");
+            inCave = true;
+            PlayerHealth.instance.nearHeat = true;
         }
 
     }
@@ -281,6 +298,7 @@ public class playerCollider : MonoBehaviour
         _input.interact = false;
         interactable = false;
         UiController.instance.changeInsText("");
+        PlayerHealth.instance.nearHeat = false;
     }
     public void pickupItem(GameObject target)
     {
@@ -330,6 +348,9 @@ public class playerCollider : MonoBehaviour
                 break;
             case "knife":
                 playerBag.AddItem(PresetItems.instance.knife);
+                break;
+            case "cookedMush":
+                playerBag.AddItem(PresetItems.instance.cookedMush);
                 break;
         }
         loopInventory();
