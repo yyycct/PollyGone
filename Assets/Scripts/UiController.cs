@@ -52,19 +52,26 @@ public class UiController : MonoBehaviour
     public GameObject failPanel;
 
     public GameObject craftQTEPanel;
+    public GameObject StartPanel;
+
+    public AudioSource Radio;
+
     private void Awake()
     {
         instance = this;
+        StartPanel.SetActive(true);
     }
     public TMP_Text insText;
     void Start()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 0;
         for (int i = 0; i < itemsInBag.transform.childCount; i++)
         {
             ItemImage.Add(itemsInBag.transform.GetChild(i).GetChild(0).GetComponent<RawImage>());
             itemsInBag.transform.GetChild(i).GetChild(1).GetComponent<TMP_Text>().text = "";
         }
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         closeMenu();
     }
 
@@ -82,6 +89,12 @@ public class UiController : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public IEnumerator stopRadio()
+    {
+        yield return new WaitForSeconds(30f);
+        Radio.Stop();
     }
 
     public void changeInsText(string t)
@@ -222,6 +235,7 @@ public class UiController : MonoBehaviour
         Time.timeScale = 0;
         GameOverPanel.SetActive(true);
         deathText.text = reason;
+        StartCoroutine(Restart());
     }
 
     public void CraftButtonClicked()
@@ -303,8 +317,9 @@ public class UiController : MonoBehaviour
     }
 
 
-    public void Restart()
+    public IEnumerator Restart()
     {
+        yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(0);
     }
 
@@ -324,6 +339,19 @@ public class UiController : MonoBehaviour
         closeMenu();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void StartButtonClicked()
+    {
+        StartPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Time.timeScale = 1;
+    }
+
+    public void QuitButtonClicked()
+    {
+        Application.Quit();
     }
 }
 

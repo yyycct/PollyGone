@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4179186159228119854}
   m_Layer: 0
   m_Name: Candle_02
-  m_TagString: Untagged
+  m_TagString: candle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,8 +110,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.17130888, y: 0.22188088, z: 0.12435752}
-  m_Center: {x: 0.010015398, y: 0.11094044, z: 0.011435293}
+  m_Size: {x: 0.39820772, y: 0.39959738, z: 0.5177604}
+  m_Center: {x: 0.043935955, y: 0.19979869, z: 0.0746963}
 --- !u!54 &4179186159228119854
 Rigidbody:
   m_ObjectHideFlags: 0

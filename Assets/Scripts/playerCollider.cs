@@ -232,6 +232,10 @@ public class playerCollider : MonoBehaviour
             interactable = true;
             targetObject = other.gameObject;
         }
+        else if (other.tag == "radio")
+        {
+            StartCoroutine(UiController.instance.stopRadio());
+        }
 
     }
     private void OnTriggerExit(Collider other)
