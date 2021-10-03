@@ -8,22 +8,32 @@ public class GetItemNum : MonoBehaviour
     public void OnItemSelected()
     {
         UiController.instance.itemSelected = Int32.Parse(this.name);
-        if (UiController.instance.craftMode)
+
+        if (UiController.instance.cookMode)
         {
-            UiController.instance.AddItemsInCraft();
+            playerCollider.instance.DropCook();
         }
-        else 
+        else
         {
-            UiController.instance.dropButton.SetActive(true);
-            if (playerCollider.instance.playerBag.GetItem(UiController.instance.itemSelected).ediable)
+            if (UiController.instance.craftMode)
             {
-                UiController.instance.eatButton.SetActive(true);
+                UiController.instance.AddItemsInCraft();
             }
-            else
+            else 
             {
-                UiController.instance.eatButton.SetActive(false);
+                UiController.instance.dropButton.SetActive(true);
+                if (playerCollider.instance.playerBag.GetItem(UiController.instance.itemSelected).ediable)
+                {
+                    UiController.instance.eatButton.SetActive(true);
+                }
+                else
+                {
+                    UiController.instance.eatButton.SetActive(false);
+                }
             }
         }
+
+        
     }
 
     public void OnItemDeselected()
