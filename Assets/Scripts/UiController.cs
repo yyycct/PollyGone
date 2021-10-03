@@ -33,6 +33,7 @@ public class UiController : MonoBehaviour
     public Text deathText;
     public float combineWindowShowTime = 1f;
     public bool craftMode = false;
+    public bool cookMode = false;
     public List<RawImage> ItemImage = new List<RawImage>();
     public Dictionary<items.ItemType, GameObject> itemDic = new Dictionary<items.ItemType, GameObject>();
     public GameObject inventoryPanel;
@@ -53,6 +54,9 @@ public class UiController : MonoBehaviour
 
     public GameObject craftQTEPanel;
     public GameObject StartPanel;
+    public GameObject CookPanel;
+    public GameObject cookItems;
+    public List<items> cookList = new List<items>();
 
     public AudioSource Radio;
 
@@ -83,17 +87,12 @@ public class UiController : MonoBehaviour
         resultPanel.SetActive(false);
         failPanel.SetActive(false);
         craftQTEPanel.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        CookPanel.SetActive(false);
     }
 
     public IEnumerator stopRadio()
     {
-        yield return new WaitForSeconds(30f);
+        yield return new WaitForSeconds(20f);
         Radio.Stop();
     }
 
@@ -114,6 +113,43 @@ public class UiController : MonoBehaviour
             itemsInBag.transform.GetChild(_index).GetChild(1).GetComponent<TMP_Text>().text = _amount.ToString();
         }
         
+    }
+
+    public void printCookItems()
+    {
+        cookList.Clear();
+        foreach (items item in playerCollider.instance.playerBag.AllItem)
+        {
+            if (item.ediable)
+            {
+                cookList.Add(item);
+            }
+        }
+
+        for (int i = 0; i < cookItems.transform.childCount; i++)
+        {
+            if (i < cookList.Count)
+            {
+                cookItems.transform.GetChild(i).GetChild(0).GetComponent<RawImage>().texture =
+                    items.Get2dTexture(cookList[i].itemType);
+                cookItems.transform.GetChild(i).GetChild(1).GetComponent<TMP_Text>().text =
+                    cookList[i].amount.ToString();
+            }
+            else
+            {
+                cookItems.transform.GetChild(i).GetChild(0).GetComponent<RawImage>().texture = EmptySprite;
+                cookItems.transform.GetChild(i).GetChild(1).GetComponent<TMP_Text>().text = "";
+            }
+        }
+    }
+
+    public void CookDoneClicked()
+    {
+        playerCollider.instance.bagOn = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        cookMode = false;
+        CookPanel.SetActive(false);
     }
 
     public void closeBag()
@@ -316,6 +352,19 @@ public class UiController : MonoBehaviour
         playerCollider.instance.loopInventory();
     }
 
+    public IEnumerator ShowResult(Texture texture)
+    {
+        Debug.Log("Show result");
+        resultImage.texture = texture;
+        resultPanel.SetActive(true);
+        craftSuccessSFX.Play();
+        playerCollider.instance.DropItem(false);
+        printCookItems();
+        yield return new WaitForSeconds(1.5f);
+        resultPanel.SetActive(false);
+        playerCollider.instance.playerBag.AddItem(PresetItems.instance.GetItemFromType(items.ItemType.CookedMush));
+        
+    }
 
     public IEnumerator Restart()
     {
@@ -353,5 +402,6 @@ public class UiController : MonoBehaviour
     {
         Application.Quit();
     }
+
 }
 
