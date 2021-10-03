@@ -9,7 +9,6 @@ public class FireAnimation : MonoBehaviour
     bool settingUpFire = false;
     float settingTime = 2f;
     float timePortion = 0f;
-    public bool onFire = false;
     public static FireAnimation instance;
     private void Awake()
     {
@@ -33,10 +32,6 @@ public class FireAnimation : MonoBehaviour
                 ps.maxParticles = 50;
                 ps.startSize = 0.3f;
                 settingUpFire = false;
-                onFire = true;
-                UiController.instance.insText.text = "(F) Cook";
-                playerCollider.instance.inteCode = 3;
-                playerCollider.instance.interactable = true;
             }
         }
     }

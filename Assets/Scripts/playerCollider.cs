@@ -17,8 +17,8 @@ public class playerCollider : MonoBehaviour
         instance = this;
     }
     string inteText;
-    public bool interactable = false;
-    public int inteCode = -1;
+    bool interactable = false;
+    int inteCode = -1;
     GameObject targetObject;
     private StarterAssetsInputs _input;
     private int cont = 0;
@@ -44,9 +44,6 @@ public class playerCollider : MonoBehaviour
                     break;
                 case 2:
                     setFire(targetObject);
-                    break;
-                case 3:
-                    cook();
                     break;
                 default:
                     break;
@@ -80,6 +77,7 @@ public class playerCollider : MonoBehaviour
             _input.pause = false;
         }
     }
+
     
     private void OnTriggerEnter(Collider other)
     {
@@ -228,17 +226,9 @@ public class playerCollider : MonoBehaviour
         }
         else if (other.tag == "campFire")
         {
-            if (!other.GetComponent<FireAnimation>().onFire)
-            {
-                inteText = "(F) Set Fire";
-                inteCode = 2;
-            }
-            else
-            {
-                inteText = "(F) Cook";
-                inteCode = 3;
-            }
+            inteText = "(F) Set Fire";
             UiController.instance.changeInsText(inteText);
+            inteCode = 2;
             interactable = true;
             targetObject = other.gameObject;
         }
@@ -248,7 +238,6 @@ public class playerCollider : MonoBehaviour
         }
 
     }
-
     private void OnTriggerExit(Collider other)
     {
         wrapUp();
@@ -257,9 +246,7 @@ public class playerCollider : MonoBehaviour
     public void setFire(GameObject targetObject)
     {
         FireAnimation.instance.StartFireAnim();
-        wrapUp();
     }
-
     public void loopInventory()
     {
         for(int i = 0; i < 12; i++)
@@ -356,26 +343,6 @@ public class playerCollider : MonoBehaviour
                 UiController.instance.dropButton.SetActive(false);
             }
             loopInventory();
-        }
-    }
-
-    public void cook()
-    {
-        bagOn = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        UiController.instance.cookMode = true;
-        UiController.instance.CookPanel.SetActive(true);
-        UiController.instance.printCookItems();
-        wrapUp();
-    }
-
-    public void DropCook()
-    {
-        int selection = UiController.instance.itemSelected;
-        if (selection < UiController.instance.cookList.Count)
-        {
-            StartCoroutine(UiController.instance.ShowResult(items.Get2dTexture(items.ItemType.CookedMush)));
         }
     }
 

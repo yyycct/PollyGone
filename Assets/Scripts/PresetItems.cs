@@ -26,7 +26,6 @@ public class PresetItems : MonoBehaviour
     public items book = new items(items.ItemType.Book, false, true, 0);
     public items knife = new items(items.ItemType.Knife, false, true, 0);
     public items campFire = new items(items.ItemType.CampFire, false, true, 0);
-    public items cookedMush = new items(items.ItemType.CookedMush, true, true, 0);
 
 
     public items GetItemFromType(items.ItemType type)
@@ -61,8 +60,6 @@ public class PresetItems : MonoBehaviour
                 return bat;
             case items.ItemType.CampFire:
                 return campFire;
-            case items.ItemType.CookedMush:
-                return cookedMush;
             case items.ItemType.Empty:
                 return null;
             default:

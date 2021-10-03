@@ -25,7 +25,6 @@ TagManager:
   - purpleMush
   - redMush
   - radio
-  - cookedMush
   layers:
   - Default
   - TransparentFX
