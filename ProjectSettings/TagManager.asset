@@ -24,6 +24,7 @@ TagManager:
   - campFire
   - purpleMush
   - redMush
+  - radio
   layers:
   - Default
   - TransparentFX
