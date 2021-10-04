@@ -5,6 +5,8 @@ using UnityEngine;
 public class inventory
 {
     public List<items> AllItem;
+    public bool bagFull;
+    public int bagCapacity = 12;
     public inventory()
     {
         AllItem = new List<items>();
@@ -13,29 +15,29 @@ public class inventory
     public void AddItem(items _item)
     {
         bool repeat = false;
-        if (AllItem.Count < 12)
+        for (int i = 0; i < AllItem.Count; i++)
         {
-            for (int i = 0; i < AllItem.Count; i++)
+            if (AllItem[i] == _item)
             {
-                if (AllItem[i] == _item)
-                {
-                    repeat = true;
-                    AllItem[i].amount++;
-                    continue;
-                }
+                repeat = true;
+                AllItem[i].amount++;
+                continue;
             }
-            if (!repeat)
+        }
+        if (!repeat)
+        {
+            if (AllItem.Count >= bagCapacity)
             {
+                bagFull = true;
+                UiController.instance.insText.text = "Bag is full";
+            }
+            else
+            {
+                bagFull = false;
                 AllItem.Add(_item);
                 _item.amount++;
             }
-            
         }
-        else
-        {
-            UiController.instance.insText.text = "Bag is Full";
-        }
-
     }
     public items GetItem(int i)
     {

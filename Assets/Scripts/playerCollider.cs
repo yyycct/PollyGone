@@ -353,9 +353,12 @@ public class playerCollider : MonoBehaviour
                 playerBag.AddItem(PresetItems.instance.cookedMush);
                 break;
         }
-        loopInventory();
-        wrapUp();
-        Destroy(target);
+        if (!playerBag.bagFull)
+        {
+            loopInventory();
+            wrapUp();
+            Destroy(target);
+        }
     }
 
     public void DropItem(bool spawn)
@@ -402,7 +405,7 @@ public class playerCollider : MonoBehaviour
 
     public void openBox(GameObject target)
     {
-        GameObject item = Instantiate(BoxManager.instance.boxItems[cont], target.transform.position,Quaternion.identity);
+        GameObject item = Instantiate(BoxManager.instance.getItem(cont), target.transform.position,Quaternion.identity);
         cont++;
         wrapUp();
         Destroy(target);
