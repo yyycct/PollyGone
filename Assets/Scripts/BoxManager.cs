@@ -12,11 +12,10 @@ public class BoxManager : MonoBehaviour
     }
     public GameObject[] boxItems;
     public List<int> itemId = new List<int>();
-    private List<int> idList = new List<int>();
     private int cont =  0;
     void Start()
     {
-        while (itemId.Count < boxItems.Length)
+        while (itemId.Count < 9)
         {
             int rand = Random.Range(0, 9);
             if (!itemId.Contains(rand))
@@ -24,19 +23,6 @@ public class BoxManager : MonoBehaviour
                 itemId.Add(rand);
             }
         }
-        /*for (int i = 0; i < boxItems.Length; i++)
-        {
-            idList.Add(i);
-        }
-        Debug.Log(idList);
-
-        while (idList.Count > 0)
-        {
-            int rand = Random.Range(0, idList.Count);
-            itemId.Add(idList[rand]);
-            idList.RemoveAt(idList[rand]);
-        }*/
-        Debug.Log(itemId);
     }
 
     // Update is called once per frame
