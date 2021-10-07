@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 64879921480484030}
   - component: {fileID: 947570568393100222}
   - component: {fileID: 323467120238837871}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Food_Cup_01
   m_TagString: cup
   m_Icon: {fileID: 0}

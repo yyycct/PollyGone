@@ -27,5 +27,6 @@ public class Item3DAssets : MonoBehaviour
     public GameObject PurpleMush;
     public GameObject RedMush;
     public GameObject CookedMush;
+    public GameObject Axe;
 
 }

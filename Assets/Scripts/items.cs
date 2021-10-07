@@ -23,6 +23,7 @@ public class items
         PurpleMush,
         RedMush,
         CookedMush,
+        Axe,
         Empty
     }
 
@@ -133,6 +134,12 @@ public class items
                 combinable = true;
                 amount = 0;
                 break;
+            case ItemType.Axe:
+                itemType = _itemType;
+                ediable = false;
+                combinable = false;
+                amount = 0;
+                break;
             default:
                 break;
         }
@@ -182,6 +189,8 @@ public class items
                 return ob.CampFire;
             case ItemType.CookedMush:
                 return ob.CookedMush;
+            case ItemType.Axe:
+                return ob.Axe;
             case ItemType.Empty:
                 return ob.Empt;
             default:
@@ -232,6 +241,8 @@ public class items
                 return ob.CampFire;
             case ItemType.CookedMush:
                 return ob.CookedMush;
+            case ItemType.Axe:
+                return ob.Axe;
             default:
                 break;
         }

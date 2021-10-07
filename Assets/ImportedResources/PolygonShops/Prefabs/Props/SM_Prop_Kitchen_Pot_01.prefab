@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4431556978880290}
   - component: {fileID: 33125218022569116}
   - component: {fileID: 23452379405711950}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Kitchen_Pot_Lid_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 64018643108758650}
   - component: {fileID: 2895557160523637256}
   - component: {fileID: 1198444420959040842}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Kitchen_Pot_01
   m_TagString: pot
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ public class BoxManager : MonoBehaviour
     public List<int> itemId = new List<int>();
     void Start()
     {
-        while (itemId.Count < boxItems.Length)
+        while (itemId.Count < 9)
         {
             int rand = Random.Range(0, 9);
             if (!itemId.Contains(rand))

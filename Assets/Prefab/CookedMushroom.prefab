@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 9043617082023067952}
   - component: {fileID: 2649448444488974731}
   - component: {fileID: 3891017394612359280}
-  m_Layer: 0
+  - component: {fileID: 2449525929738697869}
+  m_Layer: 8
   m_Name: CookedMushroom
   m_TagString: cookedMush
   m_Icon: {fileID: 0}
@@ -63,6 +64,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &2449525929738697869
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4927137896370578647}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &8015071382774057496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73,6 +88,10 @@ PrefabInstance:
     - target: {fileID: 1815403580116408, guid: a31ea06d56e93ce459b73409a04fac81, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Food_Mushroom_Sliced_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815403580116408, guid: a31ea06d56e93ce459b73409a04fac81, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4935186042019680, guid: a31ea06d56e93ce459b73409a04fac81, type: 3}
       propertyPath: m_RootOrder
@@ -135,6 +154,10 @@ PrefabInstance:
     - target: {fileID: 1495283511548316, guid: d4eea703abd06304198aca58a2ae55a0, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Food_Plate_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495283511548316, guid: d4eea703abd06304198aca58a2ae55a0, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4086091064877020, guid: d4eea703abd06304198aca58a2ae55a0, type: 3}
       propertyPath: m_RootOrder

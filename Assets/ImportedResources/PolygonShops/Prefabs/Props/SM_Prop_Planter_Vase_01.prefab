@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 64027807024056874}
   - component: {fileID: 4224884166229487214}
   - component: {fileID: 8853302296042123278}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Planter_Vase_01
   m_TagString: vase
   m_Icon: {fileID: 0}

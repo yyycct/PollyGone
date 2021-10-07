@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8787144898406021209}
   - component: {fileID: 3201681421290274539}
   - component: {fileID: 441960710329619709}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Plant_Mushrooms_05
   m_TagString: redMush
   m_Icon: {fileID: 0}

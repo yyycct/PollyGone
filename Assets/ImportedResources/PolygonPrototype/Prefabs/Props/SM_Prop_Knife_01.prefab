@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 64310332023804930}
   - component: {fileID: 7397607323457791704}
   - component: {fileID: 3441260844515099540}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Knife_01
   m_TagString: knife
   m_Icon: {fileID: 0}

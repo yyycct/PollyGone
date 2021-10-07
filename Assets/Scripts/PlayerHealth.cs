@@ -21,8 +21,7 @@ public class PlayerHealth : MonoBehaviour
 
     public float healthPoints = 50f;
     public float hungerPoints = 50f;
-    public float coldTime = 10f;
-    private float coldTimeCounter = 0f;
+    public float coldBackTime = 10f;
     [SerializeField]
     private float coldValue = 0f;
     public bool nearHeat = false;
@@ -75,28 +74,27 @@ public class PlayerHealth : MonoBehaviour
     {
         if (inCold)
         {
-            coldValue += Time.deltaTime * 0.2f;
+            coldValue += Time.deltaTime * 0.5f;
             coldValue = clampValue(coldValue);
             //warningText.text = "It feels a little cold, where can I find some heat?";
-            if(coldValue >= 50f)
+            if(coldValue >= 50f && ! nearHeat)
             {
                 //inCold = true;
                 warningText.text = "I am freezing, Oh no!";
             }
-            else
+            else if (coldValue < 50f && !nearHeat)
             {
                 //inCold = false;
                 warningText.text = "It feels a little cold, where can I find some heat?";
             }
         }
-        else if (nearHeat)
+        if (nearHeat)
         {
-            inCold = false;
-            coldValue -= Time.deltaTime * 0.3f;
+            coldValue -= Time.deltaTime * 0.9f;
             coldValue = clampValue(coldValue);
             warningText.text = "Feel warm here";
         }
-        else
+        if (!nearHeat && !inCold)
         {
             warningText.text = "";
         }
@@ -156,6 +154,7 @@ public class PlayerHealth : MonoBehaviour
     public void EndCold()
     {
         inCold = false;
+        coldValue -= Time.deltaTime * coldBackTime;
     }
     public float clampValue(float value)
     {

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8954368977155668482}
   - component: {fileID: 387336155525636902}
   - component: {fileID: 48537807303535913}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Badminton_Racket_01
   m_TagString: bat
   m_Icon: {fileID: 0}

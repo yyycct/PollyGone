@@ -35,6 +35,7 @@ public class FireAnimation : MonoBehaviour
                 settingUpFire = false;
                 onFire = true;
                 UiController.instance.insText.text = "(F) Cook";
+                PlayerHealth.instance.nearHeat = true;
                 playerCollider.instance.inteCode = 3;
                 playerCollider.instance.interactable = true;
             }

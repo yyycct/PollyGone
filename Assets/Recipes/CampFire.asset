@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e772d6cd05039943813ab29ffe9709c, type: 3}
   m_Name: CampFire
   m_EditorClassIdentifier: 
-  craftMaterials: 02000000
+  craftMaterials: 020000000200000000000000
   craftResult: 13

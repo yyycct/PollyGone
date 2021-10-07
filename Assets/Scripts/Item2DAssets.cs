@@ -28,5 +28,6 @@ public class Item2DAssets : MonoBehaviour
     public Texture PurpleMush;
     public Texture RedMush;
     public Texture CookedMush;
+    public Texture Axe;
 
 }

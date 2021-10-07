@@ -55,20 +55,24 @@ public class playerCollider : MonoBehaviour
         }
         if (_input.bag)
         {
-            if (UiController.instance.inventoryPanel.activeInHierarchy)
+            if (!UiController.instance.CookPanel.activeInHierarchy)
             {
-                UiController.instance.closeBag();
+                if (UiController.instance.inventoryPanel.activeInHierarchy)
+                {
+                    UiController.instance.closeBag();
+                }
+                else
+                {
+                    bagOn = true;
+                    UiController.instance.dropButton.SetActive(false);
+                    UiController.instance.eatButton.SetActive(false);
+                    UiController.instance.inventoryPanel.SetActive(true);
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    loopInventory();
+                }
             }
-            else
-            {
-                bagOn = true;
-                UiController.instance.dropButton.SetActive(false);
-                UiController.instance.eatButton.SetActive(false);
-                UiController.instance.inventoryPanel.SetActive(true);
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                loopInventory();
-            }
+            
             _input.bag = false;
         }
         if (_input.restart)

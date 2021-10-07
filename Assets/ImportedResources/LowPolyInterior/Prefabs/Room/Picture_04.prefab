@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 64870245723477976}
   - component: {fileID: 2123175355240851400}
   - component: {fileID: 968821847262513997}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Picture_04
   m_TagString: picFrame
   m_Icon: {fileID: 0}

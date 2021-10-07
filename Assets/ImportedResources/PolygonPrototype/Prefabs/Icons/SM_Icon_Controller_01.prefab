@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2899030210310698138}
   - component: {fileID: 4664609355458741798}
   - component: {fileID: 4368815560006416710}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Icon_Controller_01
   m_TagString: gamCon
   m_Icon: {fileID: 0}

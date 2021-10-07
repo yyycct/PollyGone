@@ -120,7 +120,7 @@ public class UiController : MonoBehaviour
         cookList.Clear();
         foreach (items item in playerCollider.instance.playerBag.AllItem)
         {
-            if (item.ediable)
+            if (item.ediable && item.itemType != items.ItemType.CookedMush)
             {
                 cookList.Add(item);
             }
@@ -354,16 +354,37 @@ public class UiController : MonoBehaviour
 
     public IEnumerator ShowResult(Texture texture)
     {
-        Debug.Log("Show result");
         resultImage.texture = texture;
         resultPanel.SetActive(true);
         craftSuccessSFX.Play();
-        playerCollider.instance.DropItem(false);
+        DropCookedItem();
         printCookItems();
         yield return new WaitForSeconds(1.5f);
         resultPanel.SetActive(false);
-        playerCollider.instance.playerBag.AddItem(PresetItems.instance.GetItemFromType(items.ItemType.CookedMush));
-        
+        //playerCollider.instance.playerBag.AddItem(PresetItems.instance.GetItemFromType(items.ItemType.CookedMush));
+        GameObject newCooked = Instantiate(items.Get3dGameObject(items.ItemType.CookedMush));
+        newCooked.transform.position = playerCollider.instance.dropPoint.position;
+    }
+
+    public void DropCookedItem()
+    {
+        int selection = itemSelected;
+        if (itemSelected >= 0 && itemSelected < cookList.Count)
+        {
+            items.ItemType it = cookList[selection].itemType;
+            for (int i = 0; i < playerCollider.instance.playerBag.GetSize(); i++)
+            {
+                if (playerCollider.instance.playerBag.AllItem[i].itemType == it)
+                {
+                    playerCollider.instance.playerBag.AllItem[i].amount--;
+                    if (playerCollider.instance.playerBag.AllItem[i].amount <= 0)
+                    {
+                        playerCollider.instance.playerBag.AllItem.Remove(playerCollider.instance.playerBag.AllItem[i]);
+                    }
+                }
+            }
+            playerCollider.instance.loopInventory();
+        }
     }
 
     public IEnumerator Restart()

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 64611394691944450}
   - component: {fileID: 4296010982776014813}
   - component: {fileID: 3794276195945244775}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Tree_Swamp_Branch_02
   m_TagString: branch
   m_Icon: {fileID: 0}

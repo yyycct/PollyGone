@@ -25,7 +25,7 @@ public class PresetItems : MonoBehaviour
     public items vase = new items(items.ItemType.Vase, false, false, 0);
     public items book = new items(items.ItemType.Book, false, true, 0);
     public items knife = new items(items.ItemType.Knife, false, true, 0);
-    public items campFire = new items(items.ItemType.CampFire, false, true, 0);
+    public items campFire = new items(items.ItemType.CampFire, false, false, 0);
     public items cookedMush = new items(items.ItemType.CookedMush, true, true, 0);
 
 
