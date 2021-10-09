@@ -27,19 +27,17 @@ public class UiController : MonoBehaviour
     public Texture BookSprite;
     //public List<Text> inventoryAmount = new List<Text>();
     public GameObject itemsInBag;
-    public GameObject dropButton, craftButton;
+    public GameObject craftButton;
     public GameObject GameOverPanel;
     public GameObject pausePanel;
     public Text deathText;
     public float combineWindowShowTime = 1f;
-    public bool craftMode = false;
     public bool cookMode = false;
     public List<RawImage> ItemImage = new List<RawImage>();
     public Dictionary<items.ItemType, GameObject> itemDic = new Dictionary<items.ItemType, GameObject>();
     public GameObject inventoryPanel;
     public GameObject itemPrefab;
     public Animator anim;
-    public GameObject eatButton;
 
     public GameObject craftItems;
     public List<items> itemsInCraft = new List<items>();
@@ -58,7 +56,15 @@ public class UiController : MonoBehaviour
     public GameObject cookItems;
     public List<items> cookList = new List<items>();
 
+    public GameObject eatArea;
+    public GameObject dropArea;
+
+    public Canvas canvas;
+    public Transform topLayerTransform;
+
     public AudioSource Radio;
+
+    public int DragItemNumber = -1;
 
     private void Awake()
     {
@@ -88,6 +94,8 @@ public class UiController : MonoBehaviour
         failPanel.SetActive(false);
         craftQTEPanel.SetActive(false);
         CookPanel.SetActive(false);
+        eatArea.SetActive(false);
+        dropArea.SetActive(false);
     }
 
     public IEnumerator stopRadio()
@@ -155,20 +163,18 @@ public class UiController : MonoBehaviour
     public void closeBag()
     {
         playerCollider.instance.bagOn = false;
-        eatButton.SetActive(false);
-        dropButton.SetActive(false);
         inventoryPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        HideCraftWindow();
+        //HideCraftWindow();
     }
 
-    public void DropButtonClicked()
+    /*public void DropButtonClicked()
     {
         playerCollider.instance.DropItem(true);
-    }
+    }*/
 
-    public void ShowCraftWindow()
+    /*public void ShowCraftWindow()
     {
         if (!craftMode)
         {
@@ -177,9 +183,9 @@ public class UiController : MonoBehaviour
             eatButton.SetActive(false);
             dropButton.SetActive(false);
         }
-    }
+    }*/
 
-    public void HideCraftWindow()
+    /*public void HideCraftWindow()
     {
         if (craftMode)
         {
@@ -195,29 +201,22 @@ public class UiController : MonoBehaviour
             anim.Play("HideCraft");
             craftMode = false;
         }
-    }
+    }*/
 
-    public void Selectable(bool selectable, int index)
+    /*public void Selectable(bool selectable, int index)
     {
         itemsInBag.transform.GetChild(index).GetComponent<Button>().enabled = selectable;
-    }
-
-    public void checkDropButtonState()
-    {
-        if (itemSelected == -1)
-        {
-            dropButton.SetActive(false);
-        }
-    }
+    }*/
 
     public void AddItemsInCraft()
     {
         if (itemsInCraft.Count < 5)
         {
-            itemsInCraft.Add(playerCollider.instance.playerBag.AllItem[itemSelected]);
-            playerCollider.instance.DropItem(false);
+            itemsInCraft.Add(playerCollider.instance.playerBag.AllItem[DragItemNumber]);
+            playerCollider.instance.DropItem(false, true);
             PrintCrafts();
         }
+        playerCollider.instance.loopInventory();
     }
 
     public void RemoveItemsFromCraft()
@@ -232,6 +231,7 @@ public class UiController : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
+            craftItems.transform.GetChild(i).GetChild(0).localPosition = new Vector3(0f, 0f, 0f);
             if (i < itemsInCraft.Count)
             {
                 craftItems.transform.GetChild(i).GetChild(0).GetComponent<RawImage>().texture
@@ -245,20 +245,40 @@ public class UiController : MonoBehaviour
         }
     }
 
-    public void EatButtonClicked()
+    public void EatButtonClicked(bool bag)
     {
-        if(playerCollider.instance.playerBag.AllItem[itemSelected].itemType == items.ItemType.PurpleMush)
+        Debug.Log("Eating");
+        if (bag)
         {
-            ThirdPersonController.instance.MoveSpeed -= 0.5f;
-            ThirdPersonController.instance.SprintSpeed -= 1f;
-            StartCoroutine(GainSpeedBack());
+            if (playerCollider.instance.playerBag.GetItem(DragItemNumber).itemType == items.ItemType.PurpleMush)
+            {
+                ThirdPersonController.instance.MoveSpeed -= 0.5f;
+                ThirdPersonController.instance.SprintSpeed -= 1f;
+                StartCoroutine(GainSpeedBack());
+            }
+            else if (playerCollider.instance.playerBag.GetItem(DragItemNumber).itemType == items.ItemType.RedMush)
+            {
+                GameOver("posioned");
+            }
         }
-        else if (playerCollider.instance.playerBag.AllItem[itemSelected].itemType == items.ItemType.RedMush)
+        else
         {
-            GameOver("posioned");
+            if (itemsInCraft[craftItemSelected].itemType == items.ItemType.PurpleMush)
+            {
+                ThirdPersonController.instance.MoveSpeed -= 0.5f;
+                ThirdPersonController.instance.SprintSpeed -= 1f;
+                StartCoroutine(GainSpeedBack());
+            }
+            else if (itemsInCraft[craftItemSelected].itemType == items.ItemType.RedMush)
+            {
+                GameOver("posioned");
+            }
         }
-        PlayerHealth.instance.EatFood(10);
-        playerCollider.instance.DropItem(false);
+        Debug.Log("Still Eating");
+
+        PlayerHealth.instance.EatFood(10, bag);
+        playerCollider.instance.DropItem(false, bag);
+        
     }
     public IEnumerator GainSpeedBack()
     {

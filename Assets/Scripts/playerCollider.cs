@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public class playerCollider : MonoBehaviour
 {
@@ -64,8 +65,6 @@ public class playerCollider : MonoBehaviour
                 else
                 {
                     bagOn = true;
-                    UiController.instance.dropButton.SetActive(false);
-                    UiController.instance.eatButton.SetActive(false);
                     UiController.instance.inventoryPanel.SetActive(true);
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
@@ -285,15 +284,16 @@ public class playerCollider : MonoBehaviour
     {
         for(int i = 0; i < 12; i++)
         {
+            UiController.instance.itemsInBag.transform.GetChild(i).GetChild(0).localPosition = new Vector3(0f, 0f, 0f);
             if(i < playerBag.GetSize())
             {
                 UiController.instance.printInventory(playerBag.GetItem(i).itemType, i, playerBag.GetItem(i).amount);
-                UiController.instance.Selectable(true, i);
+                //UiController.instance.Selectable(true, i);
             }
             else
             {
                 UiController.instance.printInventory(items.ItemType.Empty, i, 0);
-                UiController.instance.Selectable(false, i);
+                //UiController.instance.Selectable(false, i);
             }
         }
     }
@@ -365,25 +365,41 @@ public class playerCollider : MonoBehaviour
         }
     }
 
-    public void DropItem(bool spawn)
+    public void DropItem(bool spawn, bool bag)
     {
-        int selection = UiController.instance.itemSelected;
-        if (UiController.instance.itemSelected >= 0 &&
-            UiController.instance.itemSelected < playerBag.AllItem.Count())
+        if (bag)
         {
-            if (spawn)
+            int selection = UiController.instance.DragItemNumber;
+            if (selection >= 0 && selection < playerBag.AllItem.Count())
             {
-                GameObject newItem = Instantiate(playerBag.AllItem[UiController.instance.itemSelected].Get3dGameObject()
-                    , dropPoint.transform.position, dropPoint.transform.rotation);
+                if (spawn)
+                {
+                    GameObject newItem = Instantiate(playerBag.AllItem[selection].Get3dGameObject()
+                        , dropPoint.transform.position, dropPoint.transform.rotation);
+                }
+
+                playerBag.AllItem[selection].amount--;
+                if (playerBag.AllItem[selection].amount <= 0)
+                {
+                    playerBag.AllItem.Remove(playerBag.AllItem[selection]);
+                }
+                loopInventory();
             }
-            
-            playerBag.AllItem[selection].amount--;
-            if (playerBag.AllItem[selection].amount <= 0)
+        }
+        else
+        {
+            int selection = UiController.instance.craftItemSelected;
+            if (selection >= 0 && selection < UiController.instance.itemsInCraft.Count)
             {
-                playerBag.AllItem.Remove(playerBag.AllItem[selection]);
-                UiController.instance.dropButton.SetActive(false);
+                if (spawn)
+                {
+                    GameObject newItem = Instantiate(UiController.instance.itemsInCraft[selection].Get3dGameObject()
+                        , dropPoint.transform.position, dropPoint.transform.rotation);
+                }
+
+                UiController.instance.itemsInCraft.Remove(UiController.instance.itemsInCraft[selection]);
+                UiController.instance.PrintCrafts();
             }
-            loopInventory();
         }
     }
 

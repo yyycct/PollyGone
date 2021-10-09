@@ -13,25 +13,6 @@ public class GetItemNum : MonoBehaviour
         {
             playerCollider.instance.DropCook();
         }
-        else
-        {
-            if (UiController.instance.craftMode)
-            {
-                UiController.instance.AddItemsInCraft();
-            }
-            else 
-            {
-                UiController.instance.dropButton.SetActive(true);
-                if (playerCollider.instance.playerBag.GetItem(UiController.instance.itemSelected).ediable)
-                {
-                    UiController.instance.eatButton.SetActive(true);
-                }
-                else
-                {
-                    UiController.instance.eatButton.SetActive(false);
-                }
-            }
-        }
 
         
     }
@@ -42,7 +23,6 @@ public class GetItemNum : MonoBehaviour
         {
             UiController.instance.itemSelected = -1;
         }
-        UiController.instance.checkDropButtonState();
 
     }
 }
