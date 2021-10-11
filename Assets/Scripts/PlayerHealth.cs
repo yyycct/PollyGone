@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Image healthSlider;
     [SerializeField] private Image hungerSlider;
     [SerializeField] private Image coldSlider;
+    [SerializeField] private Image hydgateSlider;
     [SerializeField] private GameObject coldFigure;
     [SerializeField] private bool coldStart = false;
     [SerializeField] private bool inCold = false;
@@ -25,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private float coldValue = 0f;
     public bool nearHeat = false;
+    public float hydgatePoints = 20f;
     private void Awake()
     {
         instance = this;
@@ -42,6 +44,7 @@ public class PlayerHealth : MonoBehaviour
         healthEffect();
         updateHealth();
         updateHunger();
+        updateHydra();
 
     }
     private void updateHealth()
@@ -65,6 +68,11 @@ public class PlayerHealth : MonoBehaviour
         else if(healthPoints >= 100) { healthPoints = 100; }
         healthSlider.fillAmount = healthPoints/100f;
         healthText.text = ((int)healthPoints).ToString();
+    }
+    private void updateHydra()
+    {
+        hydgatePoints -= Time.deltaTime * 0.5f;
+        hydgateSlider.fillAmount = hydgatePoints / 100f;
     }
     private void updateHunger()
     {
@@ -125,6 +133,10 @@ public class PlayerHealth : MonoBehaviour
         if (coldValue >= 50f)
         {
             healthPoints -= Time.deltaTime * coldHealthDropSpeed;
+        }
+        if(hydgatePoints <= 10f)
+        {
+            healthPoints -= Time.deltaTime * 0.4f;
         }
         healthPoints = clampValue(healthPoints);
     }

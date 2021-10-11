@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class FireAnimation : MonoBehaviour
 {
-    public Animator FireFX;
+    //public Animator FireFX;
     private ParticleSystem ps;
+    private Light FireLight;
     bool settingUpFire = false;
     float settingTime = 2f;
     float timePortion = 0f;
@@ -19,6 +20,7 @@ public class FireAnimation : MonoBehaviour
     private void Start()
     {
         ps = this.transform.GetChild(0).GetComponent<ParticleSystem>();
+        FireLight = this.transform.GetChild(1).GetComponent<Light>();
     }
 
     private void Update()
@@ -28,6 +30,7 @@ public class FireAnimation : MonoBehaviour
             timePortion += 1/settingTime;
             ps.startSize = Mathf.Lerp(0f, 0.3f, Time.deltaTime * timePortion);
             ps.maxParticles = (int)Mathf.Lerp(0f, 50f, Time.deltaTime * timePortion);
+            FireLight.intensity = Mathf.Lerp(0f, 2f, Time.deltaTime * timePortion);
             if (ps.maxParticles > 45)
             {
                 ps.maxParticles = 50;
