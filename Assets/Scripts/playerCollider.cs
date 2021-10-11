@@ -25,6 +25,9 @@ public class playerCollider : MonoBehaviour
     private int cont = 0;
     public Transform dropPoint;
     bool inCave = false;
+    public bool equipped = false;
+    public GameObject axeInHand;
+
     private void Start()
     {
         _input = GetComponent<StarterAssetsInputs>();

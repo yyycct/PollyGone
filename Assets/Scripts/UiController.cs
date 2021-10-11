@@ -58,9 +58,11 @@ public class UiController : MonoBehaviour
 
     public GameObject eatArea;
     public GameObject dropArea;
+    public GameObject equipArea;
 
     public Canvas canvas;
     public Transform topLayerTransform;
+    public GameObject uiviewAxe;
 
     public AudioSource Radio;
 
@@ -96,6 +98,7 @@ public class UiController : MonoBehaviour
         CookPanel.SetActive(false);
         eatArea.SetActive(false);
         dropArea.SetActive(false);
+        equipArea.SetActive(false);
     }
 
     public IEnumerator stopRadio()
@@ -309,7 +312,7 @@ public class UiController : MonoBehaviour
         bool hasRecipe = false;
         foreach (Recipe recipe in CraftRecipes.instance.craftRecipes)
         {
-            if (recipe.craftMaterials.Count > itemsInCraft.Count) break;
+            if (recipe.craftMaterials.Count > itemsInCraft.Count) continue;
             
             List<items.ItemType> remains = new List<items.ItemType>();
             foreach (items _item in itemsInCraft) remains.Add(_item.itemType);

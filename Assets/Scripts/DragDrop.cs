@@ -31,13 +31,22 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        int selection = int.Parse(this.transform.parent.name);
+        int selection = -1;
+        if (this.name != "AxeImage")
+        {
+            selection = int.Parse(this.transform.parent.name);
+        }
+        
         if (this.name == "itemImage")
         {
             UiController.instance.DragItemNumber = selection;
             if (playerCollider.instance.playerBag.GetItem(selection).ediable)
             {
                 UiController.instance.eatArea.SetActive(true);
+            }
+            if (playerCollider.instance.playerBag.GetItem(selection).itemType == items.ItemType.Axe)
+            {
+                UiController.instance.equipArea.SetActive(true);
             }
         }
         else if (this.name == "CraftSlot")
@@ -47,6 +56,14 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
             {
                 UiController.instance.eatArea.SetActive(true);
             }
+            if (UiController.instance.itemsInCraft[selection].itemType == items.ItemType.Axe)
+            {
+                UiController.instance.equipArea.SetActive(true);
+            }
+        }
+        else if (this.name == "AxeImage")
+        {
+            UiController.instance.equipArea.SetActive(false);
         }
 
 
@@ -89,8 +106,13 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
         
         playerCollider.instance.loopInventory();
         UiController.instance.PrintCrafts();
-        Debug.Log("bag: " + playerCollider.instance.playerBag.AllItem.Count.ToString());
-        Debug.Log("craft: " + UiController.instance.itemsInCraft.Count.ToString());
+        /*Debug.Log("bag: " + playerCollider.instance.playerBag.AllItem.Count.ToString());
+        Debug.Log("craft: " + UiController.instance.itemsInCraft.Count.ToString());*/
+
+        if (!playerCollider.instance.equipped)
+        {
+            UiController.instance.equipArea.SetActive(false);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
