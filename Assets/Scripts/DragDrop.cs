@@ -56,12 +56,12 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
             {
                 UiController.instance.eatArea.SetActive(true);
             }
-            if (UiController.instance.itemsInCraft[selection].itemType == items.ItemType.Axe)
+            if (UiController.instance.itemsInCraft[selection].usable)
             {
                 UiController.instance.equipArea.SetActive(true);
             }
         }
-        else if (this.name == "AxeImage")
+        else if (this.name == "EquipImage")
         {
             UiController.instance.equipArea.SetActive(false);
         }

@@ -291,7 +291,6 @@ public class UiController : MonoBehaviour
     }
     public void GameOver(string reason)
     {
-        Time.timeScale = 0;
         GameOverPanel.SetActive(true);
         deathText.text = reason;
         StartCoroutine(Restart());
@@ -412,7 +411,10 @@ public class UiController : MonoBehaviour
 
     public IEnumerator Restart()
     {
-        yield return new WaitForSeconds(5f);
+        playerCollider.instance.bagOn = true;
+        yield return new WaitForSeconds(3f);
+        Debug.Log("Restarting");
+        //Time.timeScale = 0;
         SceneManager.LoadScene(0);
     }
 

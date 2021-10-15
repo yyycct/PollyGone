@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Image healthSlider;
     [SerializeField] private Image hungerSlider;
     [SerializeField] private Image coldSlider;
-    [SerializeField] private Image hydgateSlider;
+    [SerializeField] private Image hydrateSlider;
     [SerializeField] private GameObject coldFigure;
     [SerializeField] private bool coldStart = false;
     [SerializeField] private bool inCold = false;
@@ -18,6 +18,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float hungerHealthDropSpeed = 0.3f;
     [SerializeField] private float coldHealthDropSpeed = 0.2f;
     [SerializeField] private float hungerDropSpeed = 0.1f;
+    [SerializeField] private float hydrateDropSpeed = 0.2f;
     public bool enterFireRange = false;
 
     public float healthPoints = 50f;
@@ -26,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private float coldValue = 0f;
     public bool nearHeat = false;
-    public float hydgatePoints = 20f;
+    public float hydratePoints = 20f;
     private void Awake()
     {
         instance = this;
@@ -44,7 +45,7 @@ public class PlayerHealth : MonoBehaviour
         healthEffect();
         updateHealth();
         updateHunger();
-        updateHydra();
+        updateHydrate();
 
     }
     private void updateHealth()
@@ -52,27 +53,29 @@ public class PlayerHealth : MonoBehaviour
         if(healthPoints<= 0) 
         { 
             healthPoints = 0;
-            if (inCold && hungerPoints<10f)
+            string reason = "You died";
+            if (inCold)
             {
-                UiController.instance.GameOver("Hungry and cold");
+                reason += ", Too Cold";
             }
-            else if (inCold)
+            if(hungerPoints < 10f)
             {
-                UiController.instance.GameOver("Too cold");
+                reason += ", Too hungery";
             }
-            else if(hungerPoints < 10f)
+            if(hydratePoints < 10f)
             {
-                UiController.instance.GameOver("I need food");
+                reason += ", Need Water";
             }
+            UiController.instance.GameOver(reason);
         }
         else if(healthPoints >= 100) { healthPoints = 100; }
         healthSlider.fillAmount = healthPoints/100f;
         healthText.text = ((int)healthPoints).ToString();
     }
-    private void updateHydra()
+    private void updateHydrate()
     {
-        hydgatePoints -= Time.deltaTime * 0.5f;
-        hydgateSlider.fillAmount = hydgatePoints / 100f;
+        hydratePoints -= Time.deltaTime * hydrateDropSpeed;
+        hydrateSlider.fillAmount = hydratePoints / 100f;
     }
     private void updateHunger()
     {
@@ -134,7 +137,7 @@ public class PlayerHealth : MonoBehaviour
         {
             healthPoints -= Time.deltaTime * coldHealthDropSpeed;
         }
-        if(hydgatePoints <= 10f)
+        if(hydratePoints <= 10f)
         {
             healthPoints -= Time.deltaTime * 0.4f;
         }

@@ -12,9 +12,19 @@ public class DayControl : MonoBehaviour
     [SerializeField] Light MoonLight;
     [SerializeField] float fadeTime = 2f;
     [SerializeField] float moonIntensity = 0.02f;
+    [SerializeField] Color rainColor;
+    [SerializeField] Color normalColor;
+    public float dayLightIntensity = 1f;
+    public bool raining;
+    [SerializeField] GameObject rainEFX;
     float timeElapsed;
     //how many seconds is a day in game
     private float timeRatio = 6 * 60 / 24;
+    public static DayControl instance;
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
     }
@@ -29,6 +39,18 @@ public class DayControl : MonoBehaviour
         MoonLight.transform.rotation = Quaternion.Euler((xRotation + 180f) % 360f, 0f, 0f);
         fadeLight();
         changeTemp();
+        if (raining)
+        {
+            Rain();
+            rainEFX.SetActive(true);
+            dayLightIntensity = 0.2f;
+        }
+        else
+        {
+            RainStoped();
+            rainEFX.SetActive(false);
+            dayLightIntensity = 1f;
+        }
     }
 
     private void fadeLight()
@@ -42,13 +64,13 @@ public class DayControl : MonoBehaviour
                 theSun.intensity = 0f;
             }
         }
-        else if (transform.localEulerAngles.x <= 180f && theSun.intensity < 1f)
+        else if (transform.localEulerAngles.x <= 180f && theSun.intensity < dayLightIntensity)
         {
-            theSun.intensity = Mathf.Lerp(theSun.intensity, 1f, Time.deltaTime / fadeTime);
+            theSun.intensity = Mathf.Lerp(theSun.intensity, dayLightIntensity, Time.deltaTime / fadeTime);
             //timeElapsed += Time.deltaTime;
-            if (theSun.intensity >= 0.95f)
+            if (theSun.intensity >= dayLightIntensity-0.05f)
             {
-                theSun.intensity = 1f;
+                theSun.intensity = dayLightIntensity;
             }
         }
     }
@@ -66,11 +88,11 @@ public class DayControl : MonoBehaviour
         }
         else
         {
-            theSun.intensity = Mathf.Lerp(theSun.intensity, 1f, timeElapsed / fadeTime);
+            theSun.intensity = Mathf.Lerp(theSun.intensity, dayLightIntensity, timeElapsed / fadeTime);
             timeElapsed += Time.deltaTime;
-            if (theSun.intensity >= 0.95f)
+            if (theSun.intensity >= dayLightIntensity-0.05f)
             {
-                theSun.intensity = 1f;
+                theSun.intensity = dayLightIntensity;
             }
         }
         yield return new WaitForSeconds(fadeTime);
@@ -89,6 +111,15 @@ public class DayControl : MonoBehaviour
             PlayerHealth.instance.EndCold();
             //theSun.cullingMask = day;
         }
+    }
+
+    private void Rain()
+    {
+        RenderSettings.skybox.SetColor("_SkyTint", rainColor);
+    }
+    private void RainStoped()
+    {
+        RenderSettings.skybox.SetColor("_SkyTint", normalColor);
     }
 
 }

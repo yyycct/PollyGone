@@ -28,6 +28,8 @@ TagManager:
   - cookedMush
   - cave
   - axe
+  - coconut
+  - palmTree
   layers:
   - Default
   - TransparentFX

@@ -58,7 +58,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ClockIdle
-  m_Speed: 0.0055555557
+  m_Speed: 0.011111111
   m_CycleOffset: 0.125
   m_Transitions: []
   m_StateMachineBehaviours: []

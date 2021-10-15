@@ -17,8 +17,13 @@ public class DropSlot : MonoBehaviour, IDropHandler
             {
                 playerCollider.instance.DropItem(true, false);
             }
-            else
+            else if (eventData.pointerDrag.GetComponent<Transform>().name == "itemImage")
             {
+                playerCollider.instance.DropItem(true, true);
+            }
+            else if (eventData.pointerDrag.GetComponent<Transform>().name == "EquipImage")
+            {
+                PutAxeBackToBag();
                 playerCollider.instance.DropItem(true, true);
             }
         }
@@ -28,7 +33,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
             {
                 UiController.instance.EatButtonClicked(false);
             }
-            else
+            else 
             {
                 UiController.instance.EatButtonClicked(true);
             }
@@ -40,6 +45,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
                 //GetComponent<RawImage>().texture = eventData.pointerDrag.GetComponent<RawImage>().texture;
                 UiController.instance.AddItemsInCraft();
             }
+            
         }
         else if (this.name == "itemImage")
         {
@@ -48,11 +54,21 @@ public class DropSlot : MonoBehaviour, IDropHandler
                 //GetComponent<RawImage>().texture = eventData.pointerDrag.GetComponent<RawImage>().texture;
                 UiController.instance.RemoveItemsFromCraft();
             }
+            else if (eventData.pointerDrag.GetComponent<Transform>().name == "EquipImage")
+            {
+                PutAxeBackToBag();
+            }
         }
         else if (this.name == "EquipArea")
         {
             EquipTool();
         }
+    }
+
+    public void PutAxeBackToBag()
+    {
+        playerCollider.instance.playerBag.AddItem(PresetItems.instance.axe);
+        UnEquipTool();
     }
 
     public void EquipTool()

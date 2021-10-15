@@ -31,9 +31,9 @@ public class playerCollider : MonoBehaviour
     private void Start()
     {
         _input = GetComponent<StarterAssetsInputs>();
-        rock = new items(items.ItemType.Rock,  false, true, 0);
+        /*rock = new items(items.ItemType.Rock,  false, true, 0);
         mushroom = new items(items.ItemType.Mushroom, true, false, 0);
-        wood = new items(items.ItemType.Wood, false, true, 0);
+        wood = new items(items.ItemType.Wood, false, true, 0);*/
     }
     private void Update()
     {
@@ -339,6 +339,7 @@ public class playerCollider : MonoBehaviour
                 playerBag.AddItem(PresetItems.instance.candle);
                 break;
             case "pot":
+                //checkWater();
                 playerBag.AddItem(PresetItems.instance.pot);
                 break;
             case "gamCon":

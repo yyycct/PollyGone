@@ -122,11 +122,11 @@ public class ThirdPersonController : MonoBehaviour
 			_animator.SetFloat(_animIDSpeed, 0f);
 		}
 		GroundedCheck();
-        if (_input.sprint)
+        /*if (_input.sprint)
         {
 			running = !running;
 			_input.sprint = false;
-        }
+        }*/
 	}
 
 	private void LateUpdate()
@@ -180,7 +180,7 @@ public class ThirdPersonController : MonoBehaviour
 	private void Move()
 	{
 		// set target speed based on move speed, sprint speed and if sprint is pressed
-		float targetSpeed = running ? SprintSpeed : MoveSpeed;
+		float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
 		// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 

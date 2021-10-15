@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System;
+using System.Security.Cryptography;
 
 public class BoxManager : MonoBehaviour
 {
@@ -11,17 +14,25 @@ public class BoxManager : MonoBehaviour
         instance = this;
     }
     public GameObject[] boxItems;
-    public List<int> itemId = new List<int>();
+    public int[] itemId;
     void Start()
     {
-        while (itemId.Count < 9)
+        itemId = new int[boxItems.Length];
+        for (int i = 0; i < boxItems.Length; i++)
         {
-            int rand = Random.Range(0, 9);
+            itemId[i] = i;
+        }
+
+        System.Random random = new System.Random();
+        itemId = itemId.OrderBy(x => random.Next()).ToArray();
+        /*while (itemId.Count < boxItems.Length)
+        {
+            int rand = Random.Range(0, boxItems.Length-1);
             if (!itemId.Contains(rand))
             {
                 itemId.Add(rand);
             }
-        }
+        }*/
     }
 
     // Update is called once per frame

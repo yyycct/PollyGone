@@ -31,12 +31,14 @@ public class items
     public bool ediable;
     public bool combinable;
     //public int index;
+    public bool usable;
     public int amount;
-    public items(ItemType _itemType, bool _ediable, bool _combinable, int _amount)
+    public items(ItemType _itemType, bool _ediable, bool _combinable, bool _usable, int _amount)
     {
         itemType = _itemType;
         ediable = _ediable;
         combinable = _combinable;
+        usable = _usable;
         amount = _amount;
     }
 
@@ -48,96 +50,112 @@ public class items
                 itemType = _itemType;
                 ediable = false;
                 combinable = true;
+                usable = true;
                 amount = 0;
                 break;
             case ItemType.Mushroom:
                 itemType = _itemType;
                 ediable = true;
                 combinable = true;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.Wood:
                 itemType = _itemType;
                 ediable = false;
                 combinable = true;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.Knife:
                 itemType = _itemType;
                 ediable = false;
                 combinable = false;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.Cup:
                 itemType = _itemType;
                 ediable = false;
                 combinable = false;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.Pot:
                 itemType = _itemType;
                 ediable = false;
                 combinable = false;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.Pic:
                 itemType = _itemType;
                 ediable = false;
                 combinable = false;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.Can:
                 itemType = _itemType;
                 ediable = false;
                 combinable = false;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.GamCon:
                 itemType = _itemType;
                 ediable = false;
                 combinable = false;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.Candle:
                 itemType = _itemType;
                 ediable = false;
                 combinable = false;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.Book:
                 itemType = _itemType;
                 ediable = false;
                 combinable = false;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.Vase:
                 itemType = _itemType;
                 ediable = false;
                 combinable = false;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.Bat:
                 itemType = _itemType;
                 ediable = false;
                 combinable = false;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.CampFire:
                 itemType = _itemType;
                 ediable = false;
                 combinable = false;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.CookedMush:
                 itemType = _itemType;
                 ediable = true;
                 combinable = true;
+                usable = false;
                 amount = 0;
                 break;
             case ItemType.Axe:
                 itemType = _itemType;
                 ediable = false;
                 combinable = false;
+                usable = true;
                 amount = 0;
                 break;
             default:

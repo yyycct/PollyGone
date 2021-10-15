@@ -10,24 +10,24 @@ public class PresetItems : MonoBehaviour
         instance = this;
     }
 
-    public items rock = new items(items.ItemType.Rock, false, true, 0);
-    public items mushroom = new items(items.ItemType.Mushroom, true, false, 0);
-    public items purpleMush = new items(items.ItemType.PurpleMush, true, false, 0);
-    public items redMush = new items(items.ItemType.RedMush, true, false, 0);
-    public items wood = new items(items.ItemType.Wood, false, true, 0);
-    public items cup = new items(items.ItemType.Cup, false, false, 0);
-    public items can = new items(items.ItemType.Can, true, false, 0);
-    public items pic = new items(items.ItemType.Pic, false, true, 0);
-    public items candle = new items(items.ItemType.Candle, false, true, 0);
-    public items pot = new items(items.ItemType.Pot, false, false, 0);
-    public items gamCon = new items(items.ItemType.GamCon, false, false, 0);
-    public items bat = new items(items.ItemType.Bat, false, false, 0);
-    public items vase = new items(items.ItemType.Vase, false, false, 0);
-    public items book = new items(items.ItemType.Book, false, true, 0);
-    public items knife = new items(items.ItemType.Knife, false, true, 0);
-    public items campFire = new items(items.ItemType.CampFire, false, false, 0);
-    public items cookedMush = new items(items.ItemType.CookedMush, true, true, 0);
-    public items axe = new items(items.ItemType.Axe, false, false, 0);
+    public items rock = new items(items.ItemType.Rock, false, true, true, 0);
+    public items mushroom = new items(items.ItemType.Mushroom, true, false, false, 0);
+    public items purpleMush = new items(items.ItemType.PurpleMush, true, false, false, 0);
+    public items redMush = new items(items.ItemType.RedMush, true, false, false, 0);
+    public items wood = new items(items.ItemType.Wood, false, true, false, 0);
+    public items cup = new items(items.ItemType.Cup, false, false, false, 0);
+    public items can = new items(items.ItemType.Can, true, false, false, 0);
+    public items pic = new items(items.ItemType.Pic, false, true, false, 0);
+    public items candle = new items(items.ItemType.Candle, false, true, false, 0);
+    public items pot = new items(items.ItemType.Pot, false, false, false, 0);
+    public items gamCon = new items(items.ItemType.GamCon, false, false, false, 0);
+    public items bat = new items(items.ItemType.Bat, false, false, false, 0);
+    public items vase = new items(items.ItemType.Vase, false, false, false, 0);
+    public items book = new items(items.ItemType.Book, false, true, false, 0);
+    public items knife = new items(items.ItemType.Knife, false, true, false, 0);
+    public items campFire = new items(items.ItemType.CampFire, false, false, false, 0);
+    public items cookedMush = new items(items.ItemType.CookedMush, true, true, false, 0);
+    public items axe = new items(items.ItemType.Axe, false, false, true, 0);
 
 
     public items GetItemFromType(items.ItemType type)
