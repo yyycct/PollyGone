@@ -32,7 +32,7 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
     public void OnBeginDrag(PointerEventData eventData)
     {
         int selection = -1;
-        if (this.name != "AxeImage")
+        if (this.name != "EquipImage")
         {
             selection = int.Parse(this.transform.parent.name);
         }
@@ -44,7 +44,7 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
             {
                 UiController.instance.eatArea.SetActive(true);
             }
-            if (playerCollider.instance.playerBag.GetItem(selection).itemType == items.ItemType.Axe)
+            if (playerCollider.instance.playerBag.GetItem(selection).usable)
             {
                 UiController.instance.equipArea.SetActive(true);
             }

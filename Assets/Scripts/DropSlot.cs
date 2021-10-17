@@ -61,7 +61,16 @@ public class DropSlot : MonoBehaviour, IDropHandler
         }
         else if (this.name == "EquipArea")
         {
-            EquipTool();
+            items temp = null;
+            if (eventData.pointerDrag.GetComponent<RawImage>().texture == items.Get2dTexture(items.ItemType.Axe))
+            {
+                temp = PresetItems.instance.axe;
+            }
+            else if (eventData.pointerDrag.GetComponent<RawImage>().texture == items.Get2dTexture(items.ItemType.Rock))
+            {
+                temp = PresetItems.instance.rock;
+            }
+            EquipTool(temp);
         }
     }
 
@@ -71,19 +80,30 @@ public class DropSlot : MonoBehaviour, IDropHandler
         UnEquipTool();
     }
 
-    public void EquipTool()
+    public void EquipTool(items item)
     {
         playerCollider.instance.equipped = true;
-        UiController.instance.uiviewAxe.SetActive(true);
-        playerCollider.instance.axeInHand.SetActive(true);
-        this.transform.GetChild(0).GetComponent<RawImage>().texture = items.Get2dTexture(items.ItemType.Axe);
+        if (item.itemType == items.ItemType.Axe)
+        {
+            UiController.instance.uiviewAxe.SetActive(true);
+            playerCollider.instance.axeInHand.SetActive(true);
+        }
+        else if (item.itemType == items.ItemType.Rock)
+        {
+
+        }
+        this.transform.GetChild(0).GetComponent<RawImage>().texture = items.Get2dTexture(item.itemType);
         this.transform.GetChild(0).GetComponent<RawImage>().color = new Color(1f, 1f, 1f, 1f);
         this.transform.GetChild(1).gameObject.SetActive(false);
         for (int i = 0; i < playerCollider.instance.playerBag.AllItem.Count; i++)
         {
-            if (playerCollider.instance.playerBag.AllItem[i].itemType == items.ItemType.Axe)
+            if (playerCollider.instance.playerBag.AllItem[i].itemType == item.itemType)
             {
-                playerCollider.instance.playerBag.AllItem.Remove(playerCollider.instance.playerBag.AllItem[i]);
+                playerCollider.instance.playerBag.AllItem[i].amount--;
+                if (playerCollider.instance.playerBag.AllItem[i].amount <=0)
+                {
+                    playerCollider.instance.playerBag.AllItem.Remove(playerCollider.instance.playerBag.AllItem[i]);
+                }
             }
         }
     }

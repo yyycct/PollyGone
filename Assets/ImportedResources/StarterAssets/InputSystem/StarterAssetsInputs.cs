@@ -14,6 +14,7 @@ public class StarterAssetsInputs : MonoBehaviour
 	public bool bag;
 	public bool restart;
 	public bool pause;
+	public bool action;
 	[Header("Movement Settings")]
 	public bool analogMovement;
 
@@ -29,6 +30,11 @@ public class StarterAssetsInputs : MonoBehaviour
 	{
 		MoveInput(value.Get<Vector2>());
 	}
+
+	public void OnAction(InputValue value)
+    {
+		ActionInput(value.isPressed);
+    }
 
 	public void OnPause(InputValue value)
     {
@@ -78,6 +84,10 @@ public class StarterAssetsInputs : MonoBehaviour
 // old input sys if we do decide to have it (most likely wont)...
 #endif
 
+	public void ActionInput(bool newActionState)
+    {
+		action = newActionState;
+    }
 
 	public void MoveInput(Vector2 newMoveDirection)
 	{

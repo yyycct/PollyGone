@@ -30,5 +30,6 @@ public class Item2DAssets : MonoBehaviour
     public Texture CookedMush;
     public Texture Axe;
     public Texture Water;
+    public Texture WoodBlock;
 
 }

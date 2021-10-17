@@ -233,6 +233,22 @@ public class playerCollider : MonoBehaviour
             targetObject = other.gameObject;
             interactable = true;
         }
+        else if (other.tag == "axe")
+        {
+            inteText = "(F) Pick up axe";
+            UiController.instance.changeInsText(inteText);
+            inteCode = 1;
+            targetObject = other.gameObject;
+            interactable = true;
+        }
+        else if (other.tag == "woodBlock")
+        {
+            inteText = "(F) Pick up wood block";
+            UiController.instance.changeInsText(inteText);
+            inteCode = 1;
+            targetObject = other.gameObject;
+            interactable = true;
+        }
         else if (other.tag == "campFire")
         {
             if (!other.GetComponent<FireAnimation>().onFire)
@@ -299,6 +315,15 @@ public class playerCollider : MonoBehaviour
                 //UiController.instance.Selectable(false, i);
             }
         }
+
+        if (equipped)
+        {
+            UiController.instance.equipArea.SetActive(true);
+        }
+        else
+        {
+            UiController.instance.equipArea.SetActive(false);
+        }
     }
     public void wrapUp()
     {
@@ -359,6 +384,9 @@ public class playerCollider : MonoBehaviour
                 break;
             case "cookedMush":
                 playerBag.AddItem(PresetItems.instance.cookedMush);
+                break;
+            case "axe":
+                playerBag.AddItem(PresetItems.instance.axe);
                 break;
         }
         if (!playerBag.bagFull)

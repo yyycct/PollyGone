@@ -24,6 +24,7 @@ public class items
         RedMush,
         CookedMush,
         Axe,
+        WoodBlock,
         Empty
     }
 
@@ -158,6 +159,13 @@ public class items
                 usable = true;
                 amount = 0;
                 break;
+            case ItemType.WoodBlock:
+                itemType = _itemType;
+                ediable = false;
+                combinable = true;
+                usable = false;
+                amount = 0;
+                break;
             default:
                 break;
         }
@@ -209,6 +217,8 @@ public class items
                 return ob.CookedMush;
             case ItemType.Axe:
                 return ob.Axe;
+            case ItemType.WoodBlock:
+                return ob.WoodBlock;
             case ItemType.Empty:
                 return ob.Empt;
             default:
@@ -261,6 +271,8 @@ public class items
                 return ob.CookedMush;
             case ItemType.Axe:
                 return ob.Axe;
+            case ItemType.WoodBlock:
+                return ob.WoodBlock;
             default:
                 break;
         }

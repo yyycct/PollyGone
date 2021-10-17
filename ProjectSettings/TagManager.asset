@@ -30,6 +30,8 @@ TagManager:
   - axe
   - coconut
   - palmTree
+  - hitArea
+  - woodBlock
   layers:
   - Default
   - TransparentFX
@@ -44,7 +46,7 @@ TagManager:
   - playerUI
   - plane
   - cave
-  - 
+  - Post Processing
   - 
   - 
   - 

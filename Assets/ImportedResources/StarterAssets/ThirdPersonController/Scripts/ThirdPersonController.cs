@@ -116,13 +116,14 @@ public class ThirdPersonController : MonoBehaviour
         {
 			JumpAndGravity();
 			Move();
+			UseTool();
 		}
         else if (playerCollider.instance.bagOn)
         {
 			_animator.SetFloat(_animIDSpeed, 0f);
 		}
 		GroundedCheck();
-        /*if (_input.sprint)
+		/*if (_input.sprint)
         {
 			running = !running;
 			_input.sprint = false;
@@ -146,7 +147,15 @@ public class ThirdPersonController : MonoBehaviour
 		_animIDFreeFall = Animator.StringToHash("FreeFall");
 		_animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
 	}
-
+	private void UseTool()
+    {
+		if(_input.action && _input.move == Vector2.zero)
+        {
+			HittingManager.instance.CutTree();
+			_animator.Play("UseTool");
+			_input.action = false;
+		}   
+	}
 	private void GroundedCheck()
 	{
 		// set sphere position, with offset

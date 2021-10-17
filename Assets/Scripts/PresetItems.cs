@@ -28,6 +28,7 @@ public class PresetItems : MonoBehaviour
     public items campFire = new items(items.ItemType.CampFire, false, false, false, 0);
     public items cookedMush = new items(items.ItemType.CookedMush, true, true, false, 0);
     public items axe = new items(items.ItemType.Axe, false, false, true, 0);
+    public items woodBlock = new items(items.ItemType.WoodBlock, false, true, false, 0);
 
 
     public items GetItemFromType(items.ItemType type)
@@ -66,6 +67,8 @@ public class PresetItems : MonoBehaviour
                 return cookedMush;
             case items.ItemType.Axe:
                 return axe;
+            case items.ItemType.WoodBlock:
+                return woodBlock;
             case items.ItemType.Empty:
                 return null;
             default:

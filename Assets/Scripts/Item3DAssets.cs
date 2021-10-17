@@ -29,5 +29,5 @@ public class Item3DAssets : MonoBehaviour
     public GameObject CookedMush;
     public GameObject Axe;
     public GameObject Water;
-
+    public GameObject WoodBlock;
 }

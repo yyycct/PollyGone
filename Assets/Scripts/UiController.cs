@@ -37,7 +37,6 @@ public class UiController : MonoBehaviour
     public Dictionary<items.ItemType, GameObject> itemDic = new Dictionary<items.ItemType, GameObject>();
     public GameObject inventoryPanel;
     public GameObject itemPrefab;
-    public Animator anim;
 
     public GameObject craftItems;
     public List<items> itemsInCraft = new List<items>();
@@ -63,6 +62,8 @@ public class UiController : MonoBehaviour
     public Canvas canvas;
     public Transform topLayerTransform;
     public GameObject uiviewAxe;
+
+    public items equipItem = null;
 
     public AudioSource Radio;
 
