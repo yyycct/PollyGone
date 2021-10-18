@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4171900268666162063}
   - component: {fileID: 2451418538816813340}
   - component: {fileID: 168495075486734290}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cup_01
   m_TagString: cup
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 1430573789677706327}
   - component: {fileID: 1665351666885488250}
   - component: {fileID: 4760539290788655794}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}

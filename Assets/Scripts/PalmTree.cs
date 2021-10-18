@@ -42,7 +42,13 @@ public class PalmTree : MonoBehaviour
         {
             if (palmTree.transform.GetChild(i).CompareTag("coconut"))
             {
-                palmTree.transform.GetChild(i).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                Transform temp = palmTree.transform.GetChild(i).transform;
+                GameObject gob = palmTree.transform.GetChild(i).gameObject;
+                gob.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                gob.transform.parent = this.transform.parent;
+                gob.transform.position = temp.position;
+                gob.transform.rotation = temp.rotation;
+                
             }
 
         }

@@ -252,35 +252,38 @@ public class UiController : MonoBehaviour
     public void EatButtonClicked(bool bag)
     {
         Debug.Log("Eating");
-        if (bag)
+        items.ItemType objType;
+        if (bag) objType = playerCollider.instance.playerBag.GetItem(DragItemNumber).itemType;
+        else objType = itemsInCraft[craftItemSelected].itemType;
+            
+        if (objType == items.ItemType.PurpleMush)
         {
-            if (playerCollider.instance.playerBag.GetItem(DragItemNumber).itemType == items.ItemType.PurpleMush)
-            {
-                ThirdPersonController.instance.MoveSpeed -= 0.5f;
-                ThirdPersonController.instance.SprintSpeed -= 1f;
-                StartCoroutine(GainSpeedBack());
-            }
-            else if (playerCollider.instance.playerBag.GetItem(DragItemNumber).itemType == items.ItemType.RedMush)
-            {
-                GameOver("posioned");
-            }
+            ThirdPersonController.instance.MoveSpeed -= 0.5f;
+            ThirdPersonController.instance.SprintSpeed -= 1f;
+            StartCoroutine(GainSpeedBack());
+        }
+        else if (objType == items.ItemType.RedMush)
+        {
+            GameOver("posioned");
+        }
+        else if (objType == items.ItemType.Water)
+        {
+            PlayerHealth.instance.drink(5);
+        }
+        else if (objType == items.ItemType.Coconut)
+        {
+            PlayerHealth.instance.EatFood(5);
+            PlayerHealth.instance.drink(3);
+        }
+        else if (objType == items.ItemType.CookedMush)
+        {
+            PlayerHealth.instance.EatFood(20);
         }
         else
         {
-            if (itemsInCraft[craftItemSelected].itemType == items.ItemType.PurpleMush)
-            {
-                ThirdPersonController.instance.MoveSpeed -= 0.5f;
-                ThirdPersonController.instance.SprintSpeed -= 1f;
-                StartCoroutine(GainSpeedBack());
-            }
-            else if (itemsInCraft[craftItemSelected].itemType == items.ItemType.RedMush)
-            {
-                GameOver("posioned");
-            }
+            PlayerHealth.instance.EatFood(10);
         }
-        Debug.Log("Still Eating");
-
-        PlayerHealth.instance.EatFood(10, bag);
+        
         playerCollider.instance.DropItem(false, bag);
         
     }

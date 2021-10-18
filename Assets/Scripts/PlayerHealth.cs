@@ -145,42 +145,20 @@ public class PlayerHealth : MonoBehaviour
         }
         healthPoints = clampValue(healthPoints);
     }
-    public void EatFood(int points, bool bag)
+    public void EatFood(int points)
     {
-        if (bag)
-        {
-            if (playerCollider.instance.playerBag.AllItem[UiController.instance.DragItemNumber].itemType
-            == items.ItemType.CookedMush)
-            {
-                hungerPoints += points * 2;
-                eatEFX.Play();
-                hungerPoints = clampValue(hungerPoints);
-            }
-            else
-            {
-                hungerPoints += points;
-                eatEFX.Play();
-                hungerPoints = clampValue(hungerPoints);
-            }
-        }
-        else
-        {
-            if (UiController.instance.itemsInCraft[UiController.instance.craftItemSelected].itemType
-            == items.ItemType.CookedMush)
-            {
-                hungerPoints += points * 2;
-                eatEFX.Play();
-                hungerPoints = clampValue(hungerPoints);
-            }
-            else
-            {
-                hungerPoints += points;
-                eatEFX.Play();
-                hungerPoints = clampValue(hungerPoints);
-            }
-        }
-
+        hungerPoints += points;
+        eatEFX.Play();
+        hungerPoints = clampValue(hungerPoints);
     }
+
+    public void drink(int points)
+    {
+        hydratePoints += points;
+        drinkEFX.Play();
+        hydratePoints = clampValue(hydratePoints);
+    }
+
     public void StartCold()
     {
         if(!inCold)
