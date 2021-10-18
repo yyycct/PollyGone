@@ -62,12 +62,13 @@ public class UiController : MonoBehaviour
     public Canvas canvas;
     public Transform topLayerTransform;
     public GameObject uiviewAxe;
+    public GameObject uiviewRock;
 
     public items equipItem = null;
-
     public AudioSource Radio;
-
     public int DragItemNumber = -1;
+    public bool DraggingTool = false;
+    public int lastInBagNumber = -1;
 
     private void Awake()
     {
@@ -231,6 +232,13 @@ public class UiController : MonoBehaviour
         PrintCrafts();
     }
 
+    public void RemoveLastAddedItemInBag()
+    {
+        playerCollider.instance.playerBag.AllItem.RemoveAt(lastInBagNumber);
+        playerCollider.instance.loopInventory();
+    }
+
+
     public void PrintCrafts()
     {
         for (int i = 0; i < 5; i++)
@@ -273,7 +281,7 @@ public class UiController : MonoBehaviour
         else if (objType == items.ItemType.Coconut)
         {
             PlayerHealth.instance.EatFood(5);
-            PlayerHealth.instance.drink(3);
+            PlayerHealth.instance.drink(5);
         }
         else if (objType == items.ItemType.CookedMush)
         {
@@ -458,6 +466,7 @@ public class UiController : MonoBehaviour
     {
         Application.Quit();
     }
+
 
 }
 

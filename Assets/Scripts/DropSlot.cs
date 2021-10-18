@@ -11,6 +11,17 @@ public class DropSlot : MonoBehaviour, IDropHandler
         eventData.pointerDrag.GetComponent<Transform>().
             SetParent(eventData.pointerDrag.GetComponent<DragDrop>().parentTransform);
         eventData.pointerDrag.GetComponent<Transform>().SetSiblingIndex(0);
+
+        items temp = null;
+        if (eventData.pointerDrag.GetComponent<RawImage>().texture == items.Get2dTexture(items.ItemType.Axe))
+        {
+            temp = PresetItems.instance.axe;
+        }
+        else if (eventData.pointerDrag.GetComponent<RawImage>().texture == items.Get2dTexture(items.ItemType.Rock))
+        {
+            temp = PresetItems.instance.rock;
+        }
+
         if (this.name == "DropArea")
         {
             if (eventData.pointerDrag.GetComponent<Transform>().name == "CraftSlot")
@@ -23,8 +34,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
             }
             else if (eventData.pointerDrag.GetComponent<Transform>().name == "EquipImage")
             {
-                PutAxeBackToBag();
-                playerCollider.instance.DropItem(true, true);
+                UnEquipTool(temp, true);
             }
         }
         else if (this.name == "EatArea")
@@ -45,7 +55,12 @@ public class DropSlot : MonoBehaviour, IDropHandler
                 //GetComponent<RawImage>().texture = eventData.pointerDrag.GetComponent<RawImage>().texture;
                 UiController.instance.AddItemsInCraft();
             }
-            
+            else if (eventData.pointerDrag.GetComponent<Transform>().name == "EquipImage")
+            {
+                PutToolBackToBag(temp);
+                UiController.instance.DragItemNumber = UiController.instance.lastInBagNumber;
+                UiController.instance.AddItemsInCraft();
+            }
         }
         else if (this.name == "itemImage")
         {
@@ -56,65 +71,82 @@ public class DropSlot : MonoBehaviour, IDropHandler
             }
             else if (eventData.pointerDrag.GetComponent<Transform>().name == "EquipImage")
             {
-                PutAxeBackToBag();
+                PutToolBackToBag(temp);
             }
         }
         else if (this.name == "EquipArea")
         {
-            items temp = null;
-            if (eventData.pointerDrag.GetComponent<RawImage>().texture == items.Get2dTexture(items.ItemType.Axe))
+            
+            if (eventData.pointerDrag.GetComponent<Transform>().name == "itemImage")
             {
-                temp = PresetItems.instance.axe;
+                EquipTool(temp, true);
             }
-            else if (eventData.pointerDrag.GetComponent<RawImage>().texture == items.Get2dTexture(items.ItemType.Rock))
+            else if (eventData.pointerDrag.GetComponent<Transform>().name == "CraftSlot")
             {
-                temp = PresetItems.instance.rock;
+                EquipTool(temp, false);
             }
-            EquipTool(temp);
+            
         }
     }
 
-    public void PutAxeBackToBag()
+    public void PutToolBackToBag(items item)
     {
-        playerCollider.instance.playerBag.AddItem(PresetItems.instance.axe);
-        UnEquipTool();
+        playerCollider.instance.playerBag.AddItem(item);
+        UnEquipTool(item, false);
+        playerCollider.instance.loopInventory();
     }
 
-    public void EquipTool(items item)
+    public void EquipTool(items item, bool bag)
     {
-        playerCollider.instance.equipped = true;
+        if (!playerCollider.instance.equipped)
+        {
+            playerCollider.instance.equipped = true;
+            UiController.instance.equipItem = item;
+            if (item.itemType == items.ItemType.Axe)
+            {
+                UiController.instance.uiviewAxe.SetActive(true);
+                playerCollider.instance.axeInHand.SetActive(true);
+            }
+            else if (item.itemType == items.ItemType.Rock)
+            {
+                UiController.instance.uiviewRock.SetActive(true);
+                playerCollider.instance.rockInHand.SetActive(true);
+            }
+            UiController.instance.equipArea.transform.GetChild(0).GetComponent<RawImage>().texture = items.Get2dTexture(item.itemType);
+            UiController.instance.equipArea.transform.GetChild(0).GetComponent<RawImage>().color = new Color(1f, 1f, 1f, 1f);
+            UiController.instance.equipArea.transform.GetChild(1).gameObject.SetActive(false);
+
+            playerCollider.instance.DropItem(false, bag);
+
+            UiController.instance.equipArea.transform.GetChild(0).GetComponent<CanvasGroup>().blocksRaycasts = true;
+            UiController.instance.equipArea.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 1f;
+        }
+    }
+
+    public void UnEquipTool(items item, bool spawn)
+    {
+        if (spawn)
+        {
+            GameObject newItem = Instantiate(items.Get3dGameObject(UiController.instance.equipItem.itemType),
+            playerCollider.instance.dropPoint.transform.position, playerCollider.instance.dropPoint.transform.rotation);
+        }
+        UiController.instance.equipItem = null;
+        UiController.instance.equipArea.SetActive(false);
+        playerCollider.instance.equipped = false;
+
         if (item.itemType == items.ItemType.Axe)
         {
-            UiController.instance.uiviewAxe.SetActive(true);
-            playerCollider.instance.axeInHand.SetActive(true);
+            UiController.instance.uiviewAxe.SetActive(false);
+            playerCollider.instance.axeInHand.SetActive(false);
         }
         else if (item.itemType == items.ItemType.Rock)
         {
-
+            UiController.instance.uiviewRock.SetActive(false);
+            playerCollider.instance.rockInHand.SetActive(false);
         }
-        this.transform.GetChild(0).GetComponent<RawImage>().texture = items.Get2dTexture(item.itemType);
-        this.transform.GetChild(0).GetComponent<RawImage>().color = new Color(1f, 1f, 1f, 1f);
-        this.transform.GetChild(1).gameObject.SetActive(false);
-        for (int i = 0; i < playerCollider.instance.playerBag.AllItem.Count; i++)
-        {
-            if (playerCollider.instance.playerBag.AllItem[i].itemType == item.itemType)
-            {
-                playerCollider.instance.playerBag.AllItem[i].amount--;
-                if (playerCollider.instance.playerBag.AllItem[i].amount <=0)
-                {
-                    playerCollider.instance.playerBag.AllItem.Remove(playerCollider.instance.playerBag.AllItem[i]);
-                }
-            }
-        }
-    }
 
-    public void UnEquipTool()
-    {
-        playerCollider.instance.equipped = false;
-        UiController.instance.uiviewAxe.SetActive(false);
-        playerCollider.instance.axeInHand.SetActive(false);
-        this.transform.GetChild(0).GetComponent<RawImage>().texture = null;
-        this.transform.GetChild(0).GetComponent<RawImage>().color = new Color(1f, 1f, 1f, 0f);
-        this.transform.GetChild(1).gameObject.SetActive(true);
+        UiController.instance.equipArea.transform.GetChild(0).GetComponent<RawImage>().texture = null;
+        UiController.instance.equipArea.transform.GetChild(0).GetComponent<RawImage>().color = new Color(1f, 1f, 1f, 0f);
+        UiController.instance.equipArea.transform.GetChild(1).gameObject.SetActive(true);
     }
 }

@@ -61,9 +61,14 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
                 UiController.instance.equipArea.SetActive(true);
             }
         }
-        else if (this.name == "EquipImage")
+        
+        if (this.name == "EquipImage")
         {
-            UiController.instance.equipArea.SetActive(false);
+            UiController.instance.DraggingTool = true;
+        }
+        else
+        {
+            UiController.instance.DraggingTool = false;
         }
 
 
@@ -78,13 +83,11 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
         }
 
         UiController.instance.dropArea.SetActive(true);
-        
 
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.8f;
 
         this.transform.parent = topLayerTransform;
-        //rectTransform = GetComponent<RectTransform>();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -97,12 +100,12 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        canvasGroup.blocksRaycasts = true;
+        canvasGroup.alpha = 1f;
         this.transform.SetParent(parentTransform);
         this.transform.SetSiblingIndex(0);
         UiController.instance.dropArea.SetActive(false);
         UiController.instance.eatArea.SetActive(false);
-        canvasGroup.blocksRaycasts = true;
-        canvasGroup.alpha = 1f;
         
         playerCollider.instance.loopInventory();
         UiController.instance.PrintCrafts();

@@ -149,7 +149,7 @@ public class ThirdPersonController : MonoBehaviour
 	}
 	private void UseTool()
     {
-		if(_input.action && _input.move == Vector2.zero)
+		if(_input.action && _input.move == Vector2.zero && playerCollider.instance.equipped)
         {
 			HittingManager.instance.CutTree();
 			_animator.Play("UseTool");

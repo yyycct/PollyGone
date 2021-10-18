@@ -27,6 +27,7 @@ public class playerCollider : MonoBehaviour
     bool inCave = false;
     public bool equipped = false;
     public GameObject axeInHand;
+    public GameObject rockInHand;
 
     private void Start()
     {
@@ -330,7 +331,7 @@ public class playerCollider : MonoBehaviour
         for(int i = 0; i < 12; i++)
         {
             UiController.instance.itemsInBag.transform.GetChild(i).GetChild(0).localPosition = new Vector3(0f, 0f, 0f);
-            if(i < playerBag.GetSize())
+            if (i < playerBag.GetSize())
             {
                 UiController.instance.printInventory(playerBag.GetItem(i).itemType, i, playerBag.GetItem(i).amount);
                 //UiController.instance.Selectable(true, i);
@@ -341,6 +342,8 @@ public class playerCollider : MonoBehaviour
                 //UiController.instance.Selectable(false, i);
             }
         }
+
+        UiController.instance.equipArea.transform.GetChild(0).localPosition = new Vector3(0f, 0f, 0f);
 
         if (equipped)
         {

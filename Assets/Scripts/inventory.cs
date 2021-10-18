@@ -23,6 +23,7 @@ public class inventory
                 AllItem[i].amount++;
                 continue;
             }
+            UiController.instance.lastInBagNumber = i;
         }
         if (!repeat)
         {
@@ -36,6 +37,7 @@ public class inventory
                 bagFull = false;
                 AllItem.Add(_item);
                 _item.amount++;
+                UiController.instance.lastInBagNumber = AllItem.Count-1;
             }
         }
     }
