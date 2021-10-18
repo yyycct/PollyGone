@@ -448,6 +448,7 @@ public class UiController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale = 1;
+        playerCollider.instance.bagOn = false;
     }
 
     public void QuitButtonClicked()

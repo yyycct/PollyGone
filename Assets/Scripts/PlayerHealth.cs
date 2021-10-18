@@ -19,6 +19,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float coldHealthDropSpeed = 0.2f;
     [SerializeField] private float hungerDropSpeed = 0.1f;
     [SerializeField] private float hydrateDropSpeed = 0.2f;
+    [SerializeField] private ParticleSystem eatEFX;
+    [SerializeField] private ParticleSystem drinkEFX;
     public bool enterFireRange = false;
 
     public float healthPoints = 50f;
@@ -151,11 +153,13 @@ public class PlayerHealth : MonoBehaviour
             == items.ItemType.CookedMush)
             {
                 hungerPoints += points * 2;
+                eatEFX.Play();
                 hungerPoints = clampValue(hungerPoints);
             }
             else
             {
                 hungerPoints += points;
+                eatEFX.Play();
                 hungerPoints = clampValue(hungerPoints);
             }
         }
@@ -165,11 +169,13 @@ public class PlayerHealth : MonoBehaviour
             == items.ItemType.CookedMush)
             {
                 hungerPoints += points * 2;
+                eatEFX.Play();
                 hungerPoints = clampValue(hungerPoints);
             }
             else
             {
                 hungerPoints += points;
+                eatEFX.Play();
                 hungerPoints = clampValue(hungerPoints);
             }
         }

@@ -25,6 +25,8 @@ public class items
         CookedMush,
         Axe,
         WoodBlock,
+        Water,
+        Coconut,
         Empty
     }
 
@@ -166,6 +168,20 @@ public class items
                 usable = false;
                 amount = 0;
                 break;
+            case ItemType.Water:
+                itemType = _itemType;
+                ediable = true;
+                combinable = true;
+                usable = false;
+                amount = 0;
+                break;
+            case ItemType.Coconut:
+                itemType = _itemType;
+                ediable = true;
+                combinable = true;
+                usable = false;
+                amount = 0;
+                break;
             default:
                 break;
         }
@@ -219,6 +235,10 @@ public class items
                 return ob.Axe;
             case ItemType.WoodBlock:
                 return ob.WoodBlock;
+            case ItemType.Water:
+                return ob.Water;
+            case ItemType.Coconut:
+                return ob.Coconut;
             case ItemType.Empty:
                 return ob.Empt;
             default:
@@ -273,6 +293,10 @@ public class items
                 return ob.Axe;
             case ItemType.WoodBlock:
                 return ob.WoodBlock;
+            case ItemType.Water:
+                return ob.Water;
+            case ItemType.Coconut:
+                return ob.Coconut;
             default:
                 break;
         }

@@ -12,7 +12,7 @@ public class playerCollider : MonoBehaviour
     public static playerCollider instance;
     public inventory playerBag = new inventory();
     public items rock, mushroom, wood;
-    public bool bagOn = false;
+    public bool bagOn = true;
     private void Awake()
     {
         instance = this;
@@ -108,10 +108,17 @@ public class playerCollider : MonoBehaviour
         }
         else if (other.tag == "fire")
         {
-            inteText = "(F) Light Fire";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 2;
-            targetObject = other.gameObject;
+            if (!DayControl.instance.raining)
+            {
+                inteText = "(F) Light Fire";
+                UiController.instance.changeInsText(inteText);
+                inteCode = 2;
+                targetObject = other.gameObject;
+            }
+            else
+            {
+                inteText = "It's Raining, can't set fire now";
+            }
         }
         else if (other.tag == "rock")
         {
@@ -279,15 +286,34 @@ public class playerCollider : MonoBehaviour
             targetObject = other.gameObject;
             interactable = true;
         }
-        else if(other.tag == "cave")
+
+        else if(other.tag == "coconut")
+        {
+            inteText = "(F) Pick up coconut";
+            UiController.instance.changeInsText(inteText);
+            inteCode = 1;
+            targetObject = other.gameObject;
+            interactable = true;
+        }
+        else if (other.tag == "woodBlock")
+        {
+            inteText = "(F) Pick up wood block";
+            UiController.instance.changeInsText(inteText);
+            inteCode = 1;
+            targetObject = other.gameObject;
+            interactable = true;
+        }
+
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "cave")
         {
             Debug.Log("Enter cave");
             inCave = true;
             PlayerHealth.instance.nearHeat = true;
         }
-
     }
-
     private void OnTriggerExit(Collider other)
     {
         wrapUp();
@@ -352,6 +378,7 @@ public class playerCollider : MonoBehaviour
                 playerBag.AddItem(PresetItems.instance.redMush);
                 break;
             case "cup":
+                checkWater(target);
                 playerBag.AddItem(PresetItems.instance.cup);
                 break;
             case "can":
@@ -364,7 +391,7 @@ public class playerCollider : MonoBehaviour
                 playerBag.AddItem(PresetItems.instance.candle);
                 break;
             case "pot":
-                //checkWater();
+                checkWater(target);
                 playerBag.AddItem(PresetItems.instance.pot);
                 break;
             case "gamCon":
@@ -374,6 +401,7 @@ public class playerCollider : MonoBehaviour
                 playerBag.AddItem(PresetItems.instance.bat);
                 break;
             case "vase":
+                checkWater(target);
                 playerBag.AddItem(PresetItems.instance.vase);
                 break;
             case "book":
@@ -384,6 +412,12 @@ public class playerCollider : MonoBehaviour
                 break;
             case "cookedMush":
                 playerBag.AddItem(PresetItems.instance.cookedMush);
+                break;
+            case "coconut":
+                playerBag.AddItem(PresetItems.instance.coconut);
+                break;
+            case "woodBlock":
+                playerBag.AddItem(PresetItems.instance.woodBlock);
                 break;
             case "axe":
                 playerBag.AddItem(PresetItems.instance.axe);
@@ -396,7 +430,23 @@ public class playerCollider : MonoBehaviour
             Destroy(target);
         }
     }
-
+    public void checkWater(GameObject target)
+    {
+        int waterCount = 0;
+        GameObject water = target.transform.GetChild(0).gameObject;
+        if (water.transform.localScale.y > 0)
+        {
+            float waterAmount = water.transform.localScale.x * water.transform.localScale.y * water.transform.localScale.z;
+            waterCount = Mathf.CeilToInt(waterAmount / 0.00075f);
+        }
+        if (waterCount > 0)
+        {
+            for(int i = 0; i < waterCount; i++)
+            {
+                playerBag.AddItem(PresetItems.instance.water);
+            }
+        }
+    }
     public void DropItem(bool spawn, bool bag)
     {
         if (bag)
