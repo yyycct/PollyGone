@@ -60,6 +60,8 @@ public class PalmTree : MonoBehaviour
         yield return new WaitForSeconds(2f);
         GameObject newWoodBlock = Instantiate(items.Get3dGameObject(items.ItemType.WoodBlock), this.transform.position, this.transform.rotation);
         newWoodBlock.transform.parent = this.transform;
+        transform.GetChild(1).SetParent(newWoodBlock.transform);
+        GetComponent<MeshCollider>().enabled = false;
         Destroy(palmTree);
     }
 }
