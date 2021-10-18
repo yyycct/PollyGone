@@ -18,6 +18,11 @@ public class HittingManager : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        col = null;
+    }
+
     public void CutTree()
     {
         if (UiController.instance.equipItem.itemType == items.ItemType.Axe)

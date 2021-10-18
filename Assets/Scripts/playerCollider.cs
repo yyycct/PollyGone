@@ -84,7 +84,14 @@ public class playerCollider : MonoBehaviour
         }
         if (_input.pause)
         {
-            UiController.instance.PauseClicked();
+            if (UiController.instance.inventoryPanel.activeInHierarchy)
+            {
+                UiController.instance.closeBag();
+            }
+            else
+            {
+                UiController.instance.PauseClicked();
+            }
             _input.pause = false;
         }
     }
@@ -257,24 +264,6 @@ public class playerCollider : MonoBehaviour
             targetObject = other.gameObject;
             interactable = true;
         }
-        else if (other.tag == "campFire")
-        {
-            if (!other.GetComponent<FireAnimation>().onFire)
-            {
-                inteText = "(F) Set Fire";
-                inteCode = 2;
-            }
-            else
-            {
-                inteText = "(F) Cook";
-                PlayerHealth.instance.nearHeat = true;
-                inteCode = 3;
-                PlayerHealth.instance.enterFireRange = true;
-            }
-            UiController.instance.changeInsText(inteText);
-            interactable = true;
-            targetObject = other.gameObject;
-        }
         else if (other.tag == "radio")
         {
             StartCoroutine(UiController.instance.stopRadio());
@@ -313,6 +302,24 @@ public class playerCollider : MonoBehaviour
             Debug.Log("Enter cave");
             inCave = true;
             PlayerHealth.instance.nearHeat = true;
+        }
+        else if (other.tag == "campFire")
+        {
+            if (!other.GetComponent<FireAnimation>().onFire)
+            {
+                inteText = "(F) Set Fire";
+                inteCode = 2;
+            }
+            else
+            {
+                inteText = "(F) Cook";
+                PlayerHealth.instance.nearHeat = true;
+                inteCode = 3;
+                PlayerHealth.instance.enterFireRange = true;
+            }
+            UiController.instance.changeInsText(inteText);
+            interactable = true;
+            targetObject = other.gameObject;
         }
     }
     private void OnTriggerExit(Collider other)
@@ -510,7 +517,8 @@ public class playerCollider : MonoBehaviour
 
     public void openBox(GameObject target)
     {
-        GameObject item = Instantiate(BoxManager.instance.getItem(cont), target.transform.position,Quaternion.identity);
+        Vector3 pos = new Vector3(target.transform.position.x, target.transform.position.y + 0.5f, target.transform.position.z);
+        GameObject item = Instantiate(BoxManager.instance.getItem(cont), pos, Quaternion.identity);
         cont++;
         wrapUp();
         Destroy(target);

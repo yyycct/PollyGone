@@ -56,10 +56,10 @@ public class PlayerHealth : MonoBehaviour
         { 
             healthPoints = 0;
             string reason = "You died";
-            if (inCold)
+            /*if (inCold)
             {
                 reason += ", Too Cold";
-            }
+            }*/
             if(hungerPoints < 10f)
             {
                 reason += ", Too hungery";
@@ -103,7 +103,7 @@ public class PlayerHealth : MonoBehaviour
         }
         if (nearHeat)
         {
-            coldValue -= Time.deltaTime * 0.9f;
+            coldValue -= Time.deltaTime * 10f;
             coldValue = clampValue(coldValue);
             warningText.text = "Feel warm here";
         }
@@ -135,10 +135,10 @@ public class PlayerHealth : MonoBehaviour
         {
             healthPoints += Time.deltaTime * hungerHealthDropSpeed;
         }
-        if (coldValue >= 50f)
+        /*if (coldValue >= 50f)
         {
             healthPoints -= Time.deltaTime * coldHealthDropSpeed;
-        }
+        }*/
         if(hydratePoints <= 10f)
         {
             healthPoints -= Time.deltaTime * 0.4f;
