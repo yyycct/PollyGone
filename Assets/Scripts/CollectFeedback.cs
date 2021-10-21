@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.IO;
+using System;
 
 // This class encapsulates all of the metrics that need to be tracked in your game. These may range
 // from number of deaths, number of times the player uses a particular mechanic, or the total time
@@ -24,7 +25,8 @@ public class CollectFeedback : MonoBehaviour
     private bool axeCrafted;
     private bool campFireCrafted;
     private bool cave;
-    private string dataFolderPath = @"C:\Users\yyycc\Desktop\PollyGone_Builds\FeedBackData\";
+    private string dataFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\PollyGone_Builds\FeedBackData\";
+    //private string dataFolderPath = @"C:\Users\yyycc\Desktop\PollyGone_Builds\FeedBackData\";
 
     // Public method to add to Metric 1.
     public void AddToWoodBranch(int value)
