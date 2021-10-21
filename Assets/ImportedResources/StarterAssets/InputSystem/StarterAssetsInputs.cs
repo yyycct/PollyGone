@@ -11,6 +11,7 @@ public class StarterAssetsInputs : MonoBehaviour
 	public bool jump;
 	public bool sprint;
 	public bool interact;
+	public bool interactTwo;
 	public bool bag;
 	public bool restart;
 	public bool pause;
@@ -62,7 +63,10 @@ public class StarterAssetsInputs : MonoBehaviour
     {
 		InteractInput(value.isPressed);
     }
-
+	public void OnInteractTwo(InputValue value)
+    {
+		InteractTwoInput(value.isPressed);
+    }
 	public void OnBag(InputValue value)
     {
 		BagInput(value.isPressed);
@@ -117,6 +121,10 @@ public class StarterAssetsInputs : MonoBehaviour
 	public void InteractInput(bool newInteractState)
     {
 		interact = newInteractState;
+    }
+	public void InteractTwoInput(bool newInteractState)
+    {
+		interactTwo = newInteractState;
     }
 
 	public void BagInput(bool newBagState)

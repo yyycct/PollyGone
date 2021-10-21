@@ -54,7 +54,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Restart",
+                    "name": "InteractTwo",
                     "type": "Button",
                     "id": "6ff9b4ee-3f38-4ddf-b3e7-8fd845d42a38",
                     "expectedControlType": "Button",
@@ -90,6 +90,14 @@
                     "type": "PassThrough",
                     "id": "e2947da6-3dc3-4010-be77-d71c5e57a6f1",
                     "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "fc2e40d1-bbef-4d5a-a072-eab8e222f0f8",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -300,7 +308,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "Restart",
+                    "action": "InteractTwo",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -345,6 +353,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e4a0d78e-8f8a-42a8-8dc4-89a4e74bdf8c",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
