@@ -29,6 +29,8 @@ public class playerCollider : MonoBehaviour
     public GameObject axeInHand;
     public GameObject rockInHand;
 
+    public int craftOrCook = 0; //0 for craft, 1 for cook
+
     private void Start()
     {
         _input = GetComponent<StarterAssetsInputs>();
@@ -52,7 +54,7 @@ public class playerCollider : MonoBehaviour
                     setFire(targetObject);
                     break;
                 case 3:
-                    cook();
+                    //cook();
                     break;
                 case 4:
                     //pickUpWater(targetObject);
@@ -320,6 +322,14 @@ public class playerCollider : MonoBehaviour
             targetObject = other.gameObject;
             interactable = true;
         }
+        else if (other.tag == "soup")
+        {
+            inteText = "(F) Pick up soup";
+            UiController.instance.changeInsText(inteText);
+            inteCode = 1;
+            targetObject = other.gameObject;
+            interactable = true;
+        }
         else if (other.tag == "woodBlock")
         {
             inteText = "(F) Pick up wood block";
@@ -348,8 +358,10 @@ public class playerCollider : MonoBehaviour
             }
             else
             {
-                inteText = "(F) Cook";
+                inteText = "Open bag start cooking"; //cooking state
                 PlayerHealth.instance.nearHeat = true;
+                craftOrCook = 1;
+                UiController.instance.CookingMode();
                 inteCode = 3;
                 PlayerHealth.instance.enterFireRange = true;
             }
@@ -358,6 +370,9 @@ public class playerCollider : MonoBehaviour
             targetObject = other.gameObject;
         }
     }
+
+    
+
     private void OnTriggerExit(Collider other)
     {
         wrapUp();
@@ -405,6 +420,8 @@ public class playerCollider : MonoBehaviour
         UiController.instance.changeInsText("");
         UiController.instance.changeInsTwoText("");
         PlayerHealth.instance.nearHeat = false;
+        craftOrCook = 0;
+        UiController.instance.CraftingMode();
     }
     public void pickUpWater(GameObject target)
     {
@@ -499,6 +516,9 @@ public class playerCollider : MonoBehaviour
                 break;
             case "coconut":
                 playerBag.AddItem(PresetItems.instance.coconut);
+                break;
+            case "soup":
+                playerBag.AddItem(PresetItems.instance.soup);
                 break;
             case "woodBlock":
                 playerBag.AddItem(PresetItems.instance.woodBlock);

@@ -31,6 +31,7 @@ public class PresetItems : MonoBehaviour
     public items woodBlock = new items(items.ItemType.WoodBlock, false, true, false, 0);
     public items water = new items(items.ItemType.Water, true, true, false, 0);
     public items coconut = new items(items.ItemType.Coconut, true, true, false, 0);
+    public items soup = new items(items.ItemType.Soup, true, true, false, 0);
     public items GetItemFromType(items.ItemType type)
     {
         switch (type)
@@ -73,6 +74,8 @@ public class PresetItems : MonoBehaviour
                 return water;
             case items.ItemType.Coconut:
                 return coconut;
+            case items.ItemType.Soup:
+                return soup;
             case items.ItemType.Empty:
                 return null;
             default:

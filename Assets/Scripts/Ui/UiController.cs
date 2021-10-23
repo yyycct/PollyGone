@@ -33,6 +33,7 @@ public class UiController : MonoBehaviour
     public Text deathText;
     public float combineWindowShowTime = 1f;
     public bool cookMode = false;
+    public Text craftCookInstructionText;
     public List<RawImage> ItemImage = new List<RawImage>();
     public Dictionary<items.ItemType, GameObject> itemDic = new Dictionary<items.ItemType, GameObject>();
     public GameObject inventoryPanel;
@@ -49,7 +50,10 @@ public class UiController : MonoBehaviour
     public AudioSource craftSuccessSFX;
     public GameObject failPanel;
 
+    [SerializeField] private Sprite craftSprite;
+    [SerializeField] private Sprite cookSprite;
     public GameObject craftQTEPanel;
+    [SerializeField] private Image craftQTEImage;
     public GameObject StartPanel;
     public GameObject CookPanel;
     public GameObject cookItems;
@@ -71,6 +75,9 @@ public class UiController : MonoBehaviour
     public int lastInBagNumber = -1;
     public TMP_Text insText;
     public TMP_Text insTwoText;
+
+
+
     private void Awake()
     {
         instance = this;
@@ -160,6 +167,19 @@ public class UiController : MonoBehaviour
         }
     }
 
+    public void CookingMode()
+    {
+        craftButton.transform.GetChild(0).GetComponent<Text>().text = "Cook";
+        craftCookInstructionText.text = "Cook something new...";
+        craftQTEImage.sprite = cookSprite;
+    }
+
+    public void CraftingMode()
+    {
+        craftButton.transform.GetChild(0).GetComponent<Text>().text = "Craft";
+        craftCookInstructionText.text = "Drop Items here to make something new...";
+        craftQTEImage.sprite = craftSprite;
+    }
     public void CookDoneClicked()
     {
         playerCollider.instance.bagOn = false;
@@ -175,47 +195,7 @@ public class UiController : MonoBehaviour
         inventoryPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        //HideCraftWindow();
     }
-
-    /*public void DropButtonClicked()
-    {
-        playerCollider.instance.DropItem(true);
-    }*/
-
-    /*public void ShowCraftWindow()
-    {
-        if (!craftMode)
-        {
-            anim.Play("ShowCraft");
-            craftMode = true;
-            eatButton.SetActive(false);
-            dropButton.SetActive(false);
-        }
-    }*/
-
-    /*public void HideCraftWindow()
-    {
-        if (craftMode)
-        {
-            for (int i = itemsInCraft.Count - 1; i >= 0; i--)
-            {
-                playerCollider.instance.playerBag.AddItem(itemsInCraft[i]);
-            }
-            eatButton.SetActive(false);
-            dropButton.SetActive(false);
-            itemsInCraft.Clear();
-            PrintCrafts();
-            playerCollider.instance.loopInventory();
-            anim.Play("HideCraft");
-            craftMode = false;
-        }
-    }*/
-
-    /*public void Selectable(bool selectable, int index)
-    {
-        itemsInBag.transform.GetChild(index).GetComponent<Button>().enabled = selectable;
-    }*/
 
     public void AddItemsInCraft()
     {
@@ -272,6 +252,7 @@ public class UiController : MonoBehaviour
         {
             ThirdPersonController.instance.MoveSpeed -= 0.5f;
             ThirdPersonController.instance.SprintSpeed -= 1f;
+            PlayerHealth.instance.EatFood(10);
             StartCoroutine(GainSpeedBack());
         }
         else if (objType == items.ItemType.RedMush)
@@ -290,6 +271,11 @@ public class UiController : MonoBehaviour
         else if (objType == items.ItemType.CookedMush)
         {
             PlayerHealth.instance.EatFood(20);
+        }
+        else if (objType == items.ItemType.Soup)
+        {
+            PlayerHealth.instance.EatFood(10);
+            PlayerHealth.instance.drink(10);
         }
         else
         {
@@ -324,9 +310,18 @@ public class UiController : MonoBehaviour
 
     public void DoneCrafting()
     {
-
         bool hasRecipe = false;
-        foreach (Recipe recipe in CraftRecipes.instance.craftRecipes)
+        List<Recipe> targetRecipes = new List<Recipe>();
+        if (playerCollider.instance.craftOrCook == 0)
+        {
+            targetRecipes = CraftRecipes.instance.craftRecipes;
+        }
+        else if (playerCollider.instance.craftOrCook == 1)
+        {
+            targetRecipes = CraftRecipes.instance.cookingRecipes;
+        }
+
+        foreach (Recipe recipe in targetRecipes)
         {
             if (recipe.craftMaterials.Count > itemsInCraft.Count) continue;
             
@@ -381,6 +376,7 @@ public class UiController : MonoBehaviour
 
         foreach (var i in result)
         {
+            Debug.Log(PresetItems.instance.GetItemFromType(i).itemType);
             playerCollider.instance.playerBag.AddItem(PresetItems.instance.GetItemFromType(i));
         }
         PrintCrafts();

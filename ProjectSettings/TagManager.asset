@@ -32,6 +32,7 @@ TagManager:
   - palmTree
   - hitArea
   - woodBlock
+  - soup
   layers:
   - Default
   - TransparentFX

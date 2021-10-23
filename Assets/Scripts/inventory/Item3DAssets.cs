@@ -31,4 +31,5 @@ public class Item3DAssets : MonoBehaviour
     public GameObject Water;
     public GameObject WoodBlock;
     public GameObject Coconut;
+    public GameObject Soup;
 }

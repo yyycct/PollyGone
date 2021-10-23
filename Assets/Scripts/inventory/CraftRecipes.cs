@@ -10,4 +10,5 @@ public class CraftRecipes : MonoBehaviour
         instance = this;
     }
     public List<Recipe> craftRecipes = new List<Recipe>();
+    public List<Recipe> cookingRecipes = new List<Recipe>();
 }

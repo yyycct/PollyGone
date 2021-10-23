@@ -27,6 +27,7 @@ public class items
         WoodBlock,
         Water,
         Coconut,
+        Soup,
         Empty
     }
 
@@ -182,6 +183,13 @@ public class items
                 usable = false;
                 amount = 0;
                 break;
+            case ItemType.Soup:
+                itemType = _itemType;
+                ediable = true;
+                combinable = true;
+                usable = false;
+                amount = 0;
+                break;
             default:
                 break;
         }
@@ -239,6 +247,8 @@ public class items
                 return ob.Water;
             case ItemType.Coconut:
                 return ob.Coconut;
+            case ItemType.Soup:
+                return ob.Soup;
             case ItemType.Empty:
                 return ob.Empt;
             default:
@@ -297,6 +307,8 @@ public class items
                 return ob.Water;
             case ItemType.Coconut:
                 return ob.Coconut;
+            case ItemType.Soup:
+                return ob.Soup;
             default:
                 break;
         }

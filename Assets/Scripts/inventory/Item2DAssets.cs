@@ -32,4 +32,5 @@ public class Item2DAssets : MonoBehaviour
     public Texture Water;
     public Texture WoodBlock;
     public Texture Coconut;
+    public Texture Soup;
 }
