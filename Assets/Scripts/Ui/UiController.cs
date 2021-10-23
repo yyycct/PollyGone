@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
+using UnityEngine.InputSystem;
 
 public class UiController : MonoBehaviour
 {
@@ -86,7 +86,7 @@ public class UiController : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 0;
+        ZeroTimeScale();
         for (int i = 0; i < itemsInBag.transform.childCount; i++)
         {
             ItemImage.Add(itemsInBag.transform.GetChild(i).GetChild(0).GetComponent<RawImage>());
@@ -436,7 +436,6 @@ public class UiController : MonoBehaviour
         playerCollider.instance.bagOn = true;
         yield return new WaitForSeconds(3f);
         Debug.Log("Restarting");
-        //Time.timeScale = 0;
         SceneManager.LoadScene(0);
     }
 
@@ -447,7 +446,7 @@ public class UiController : MonoBehaviour
 
     public void PauseClicked()
     {
-        Time.timeScale = 0;
+        ZeroTimeScale();
         closeMenu();
         pausePanel.SetActive(true);
         Cursor.visible = true;
@@ -457,7 +456,7 @@ public class UiController : MonoBehaviour
     public void ResumeClicked()
     {
         playerCollider.instance.bagOn = false;
-        Time.timeScale = 1;
+        OneTimeScale();
         closeMenu();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -469,8 +468,21 @@ public class UiController : MonoBehaviour
         StartPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        Time.timeScale = 1;
+        OneTimeScale();
         playerCollider.instance.bagOn = false;
+        Tutorial.instance.WalkTuto();
+    }
+
+    public void ZeroTimeScale()
+    {
+        Time.timeScale = 0;
+        InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
+    }
+
+    public void OneTimeScale()
+    {
+        Time.timeScale = 1;
+        InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
     }
 
     public void QuitButtonClicked()

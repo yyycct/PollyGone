@@ -156,42 +156,27 @@ public class playerCollider : MonoBehaviour
         else if (other.tag == "rock")
         {
             inteText = "(F) Pick Up Rock";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "branch")
         {
             inteText = "(F) Pick up branch";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "mushroom")
         {
             inteText = "(F) Pick up mushroom";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "purpleMush")
         {
             inteText = "(F) Pick up mushroom";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if(other.tag == "redMush")
         {
             inteText = "(F) Pick up mushroom";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "cup")
         {
@@ -200,10 +185,7 @@ public class playerCollider : MonoBehaviour
                 UiController.instance.changeInsTwoText("(R) Collect Water");
             }
             inteText = "(F) Pick up cup";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "pot")
         {
@@ -212,50 +194,32 @@ public class playerCollider : MonoBehaviour
                 UiController.instance.changeInsTwoText("(R) Collect Water");
             }
             inteText = "(F) Pick up pot";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "picFrame")
         {
             inteText = "(F) Pick up picture frame";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "book")
         {
             inteText = "(F) Pick up book";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "candle")
         {
             inteText = "(F) Pick up candle";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "gamCon")
         {
             inteText = "(F) Pick up game controller";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "knife")
         {
             inteText = "(F) Pick up knife";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "vase")
         {
@@ -264,42 +228,27 @@ public class playerCollider : MonoBehaviour
                 UiController.instance.changeInsTwoText("(R) Collect Water");
             }
             inteText = "(F) Pick up vase";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "can")
         {
             inteText = "(F) Pick up can";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "bat")
         {
             inteText = "(F) Pick up badminton racket";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "axe")
         {
             inteText = "(F) Pick up axe";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "woodBlock")
         {
             inteText = "(F) Pick up wood block";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "radio")
         {
@@ -307,39 +256,36 @@ public class playerCollider : MonoBehaviour
         }
         else if (other.tag == "cookedMush")
         {
-            inteText = "(F) Pick up mushroom";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            inteText = "(F) Pick up cooked mushroom";
+            ChangeInstruText(inteText, other, 1);
         }
-
         else if(other.tag == "coconut")
         {
             inteText = "(F) Pick up coconut";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "soup")
         {
             inteText = "(F) Pick up soup";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
         else if (other.tag == "woodBlock")
         {
             inteText = "(F) Pick up wood block";
-            UiController.instance.changeInsText(inteText);
-            inteCode = 1;
-            targetObject = other.gameObject;
-            interactable = true;
+            ChangeInstruText(inteText, other, 1);
         }
-
     }
+
+    void ChangeInstruText(string inteText, Collider other, int intecode)
+    {
+        Tutorial.instance.PickUpTuto();
+        Debug.Log(other.gameObject.name);
+        UiController.instance.changeInsText(inteText);
+        inteCode = intecode;
+        targetObject = other.gameObject;
+        interactable = true;
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "cave")
@@ -456,6 +402,7 @@ public class playerCollider : MonoBehaviour
     }
     public void pickupItem(GameObject target)
     {
+        Tutorial.instance.OpenBagTuto();
         switch (target.tag)
         {
             case "rock":
