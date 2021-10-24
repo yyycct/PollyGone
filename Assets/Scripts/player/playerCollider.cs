@@ -51,6 +51,7 @@ public class playerCollider : MonoBehaviour
                     pickupItem(targetObject);
                     break;
                 case 2:
+                    Debug.Log("I am calling");
                     setFire(targetObject);
                     break;
                 case 3:
@@ -138,20 +139,6 @@ public class playerCollider : MonoBehaviour
             UiController.instance.changeInsText(inteText);
             inteCode = 3;
             targetObject = other.gameObject;
-        }
-        else if (other.tag == "fire")
-        {
-            if (!DayControl.instance.raining)
-            {
-                inteText = "(F) Light Fire";
-                UiController.instance.changeInsText(inteText);
-                inteCode = 2;
-                targetObject = other.gameObject;
-            }
-            else
-            {
-                inteText = "It's Raining, can't set fire now";
-            }
         }
         else if (other.tag == "rock")
         {
@@ -288,6 +275,7 @@ public class playerCollider : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        //Debug.Log(other);
         if (other.tag == "cave")
         {
             CollectFeedback.instance.FoundCave();
@@ -297,7 +285,8 @@ public class playerCollider : MonoBehaviour
         }
         else if (other.tag == "campFire")
         {
-            if (!other.GetComponent<FireAnimation>().onFire)
+            Debug.Log(other.name);
+            if (!other.gameObject.GetComponent<FireAnimation>().onFire)
             {
                 inteText = "(F) Set Fire";
                 inteCode = 2;
@@ -326,7 +315,9 @@ public class playerCollider : MonoBehaviour
 
     public void setFire(GameObject targetObject)
     {
-        FireAnimation.instance.StartFireAnim();
+        targetObject.GetComponent<FireAnimation>().StartFireAnim();
+        float time = targetObject.GetComponent<FireAnimation>().FireTime;
+        Debug.Log(time);
         wrapUp();
     }
 
