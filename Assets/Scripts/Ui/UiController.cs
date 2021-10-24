@@ -294,6 +294,7 @@ public class UiController : MonoBehaviour
         
         playerCollider.instance.DropItem(false, bag);
         
+        
     }
     public IEnumerator GainSpeedBack()
     {

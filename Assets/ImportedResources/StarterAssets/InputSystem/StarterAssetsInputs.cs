@@ -16,6 +16,7 @@ public class StarterAssetsInputs : MonoBehaviour
 	public bool restart;
 	public bool pause;
 	public bool action;
+	public bool anykey;
 	[Header("Movement Settings")]
 	public bool analogMovement;
 
@@ -31,6 +32,11 @@ public class StarterAssetsInputs : MonoBehaviour
 	{
 		MoveInput(value.Get<Vector2>());
 	}
+
+	public void OnAnykey(InputValue value)
+    {
+		AnykeyInput(value.isPressed);
+    }
 
 	public void OnAction(InputValue value)
     {
@@ -93,6 +99,10 @@ public class StarterAssetsInputs : MonoBehaviour
 		action = newActionState;
     }
 
+	public void AnykeyInput(bool newAnykeyState)
+    {
+		anykey = newAnykeyState;
+    }
 	public void MoveInput(Vector2 newMoveDirection)
 	{
 		move = newMoveDirection;

@@ -26,11 +26,25 @@ public class DropSlot : MonoBehaviour, IDropHandler
         {
             if (eventData.pointerDrag.GetComponent<Transform>().name == "CraftSlot")
             {
-                playerCollider.instance.DropItem(true, false);
+                if (playerCollider.instance.craftOrCook == 0)
+                {
+                    playerCollider.instance.DropItem(true, false);
+                }
+                else if (playerCollider.instance.craftOrCook == 1)
+                {
+                    playerCollider.instance.DropToFire(false);
+                }
             }
             else if (eventData.pointerDrag.GetComponent<Transform>().name == "itemImage")
             {
-                playerCollider.instance.DropItem(true, true);
+                if (playerCollider.instance.craftOrCook == 0)
+                {
+                    playerCollider.instance.DropItem(true, true);
+                }
+                else if (playerCollider.instance.craftOrCook == 1)
+                {
+                    playerCollider.instance.DropToFire(true);
+                }
             }
             else if (eventData.pointerDrag.GetComponent<Transform>().name == "EquipImage")
             {

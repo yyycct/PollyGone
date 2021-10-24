@@ -483,6 +483,37 @@ public class playerCollider : MonoBehaviour
         }
         return waterCount;
     }
+
+    public void DropToFire(bool bag)
+    {
+        if (bag)
+        {
+            int selection = UiController.instance.DragItemNumber;
+            if (selection >= 0 && selection < playerBag.AllItem.Count())
+            {
+                targetObject.GetComponent<FireAnimation>().UpdateFireTime(playerBag.AllItem[selection].itemType);
+
+                playerBag.AllItem[selection].amount--;
+                if (playerBag.AllItem[selection].amount <= 0)
+                {
+                    playerBag.AllItem.Remove(playerBag.AllItem[selection]);
+                }
+                loopInventory();
+            }
+        }
+        else
+        {
+            int selection = UiController.instance.craftItemSelected;
+            if (selection >= 0 && selection < UiController.instance.itemsInCraft.Count)
+            {
+                targetObject.GetComponent<FireAnimation>().UpdateFireTime(playerBag.AllItem[selection].itemType);
+
+                UiController.instance.itemsInCraft.Remove(UiController.instance.itemsInCraft[selection]);
+                UiController.instance.PrintCrafts();
+            }
+        }
+    }
+
     public void DropItem(bool spawn, bool bag)
     {
         if (bag)
@@ -490,14 +521,10 @@ public class playerCollider : MonoBehaviour
             int selection = UiController.instance.DragItemNumber;
             if (selection >= 0 && selection < playerBag.AllItem.Count())
             {
-                if (craftOrCook == 0 && spawn)
+                if (spawn)
                 {
                     GameObject newItem = Instantiate(playerBag.AllItem[selection].Get3dGameObject()
                         , dropPoint.transform.position, dropPoint.transform.rotation);
-                }
-                else if (craftOrCook == 1)
-                {
-                    targetObject.GetComponent<FireAnimation>().UpdateFireTime(playerBag.AllItem[selection].itemType);
                 }
 
                 playerBag.AllItem[selection].amount--;
@@ -513,14 +540,10 @@ public class playerCollider : MonoBehaviour
             int selection = UiController.instance.craftItemSelected;
             if (selection >= 0 && selection < UiController.instance.itemsInCraft.Count)
             {
-                if (spawn && craftOrCook == 0)
+                if (spawn)
                 {
                     GameObject newItem = Instantiate(UiController.instance.itemsInCraft[selection].Get3dGameObject()
                         , dropPoint.transform.position, dropPoint.transform.rotation);
-                }
-                else if (craftOrCook == 1)
-                {
-                    targetObject.GetComponent<FireAnimation>().UpdateFireTime(playerBag.AllItem[selection].itemType);
                 }
 
                 UiController.instance.itemsInCraft.Remove(UiController.instance.itemsInCraft[selection]);

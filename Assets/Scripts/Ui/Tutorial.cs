@@ -15,6 +15,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject tutorialBubble;
     [SerializeField] private TMP_Text tutorialText;
     [SerializeField] private TMP_Text continueText;
+    bool bagOnBefore = false;
     private bool inTutorial = false;
 
     private void Start()
@@ -38,6 +39,7 @@ public class Tutorial : MonoBehaviour
 
     void ShowBubble(string instruction)
     {
+        bagOnBefore = playerCollider.instance.bagOn;
         playerCollider.instance.bagOn = true;
         UiController.instance.ZeroTimeScale();
         tutorialText.text = instruction;
@@ -48,15 +50,19 @@ public class Tutorial : MonoBehaviour
 
     public void OnlyShowBubble(string instruction)
     {
-        tutorialText.text = instruction;
-        tutorialBubble.gameObject.SetActive(true);
-        inTutorial = true;
-        continueText.gameObject.SetActive(false);
+        if (!inTutorial)
+        {
+            tutorialText.text = instruction;
+            tutorialBubble.gameObject.SetActive(true);
+            inTutorial = false;
+            continueText.gameObject.SetActive(false);
+        }
+        
     }
 
     void HideBubble()
     {
-        playerCollider.instance.bagOn = false;
+        playerCollider.instance.bagOn = bagOnBefore;
         UiController.instance.OneTimeScale();
         CloseTutorial();
         inTutorial = false;

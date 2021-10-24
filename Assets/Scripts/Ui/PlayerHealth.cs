@@ -105,7 +105,10 @@ public class PlayerHealth : MonoBehaviour
         {
             coldValue -= Time.deltaTime * 10f;
             coldValue = clampValue(coldValue);
-            Tutorial.instance.OnlyShowBubble("Feel warm here");
+            if (!playerCollider.instance.bagOn)
+            {
+                Tutorial.instance.OnlyShowBubble("Feel warm here");
+            }
         }
         if (!nearHeat && !inCold)
         {
