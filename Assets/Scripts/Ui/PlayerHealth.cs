@@ -105,11 +105,11 @@ public class PlayerHealth : MonoBehaviour
         {
             coldValue -= Time.deltaTime * 10f;
             coldValue = clampValue(coldValue);
-            warningText.text = "Feel warm here";
+            Tutorial.instance.OnlyShowBubble("Feel warm here");
         }
         if (!nearHeat && !inCold)
         {
-            warningText.text = "";
+            Tutorial.instance.OnlyHideBubble();
         }
         coldSlider.fillAmount = coldValue / 100f;
     }

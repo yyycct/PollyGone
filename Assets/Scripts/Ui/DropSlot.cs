@@ -50,6 +50,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
         }
         else if (this.name == "CraftSlot")
         {
+            Tutorial.instance.CraftTuto();
             if (eventData.pointerDrag.GetComponent<Transform>().name == "itemImage")
             {
                 //GetComponent<RawImage>().texture = eventData.pointerDrag.GetComponent<RawImage>().texture;

@@ -17,7 +17,7 @@ public class FireAnimation : MonoBehaviour
     public static FireAnimation instance;
     public float FireTime = 0;
     public float TargetFireSize = 0;
-    public float WoodBranchTime = 20f;
+    public float WoodBranchTime = 30f;
     public float WoodBlockTime = 60f;
     private void Awake()
     {
@@ -56,7 +56,7 @@ public class FireAnimation : MonoBehaviour
                 onFire = true;
                 //UiController.instance.insText.text = "(F) Cook";
                 //UiController.instance.insTwoText.text = "(R) Add Wood Branch";
-                PlayerHealth.instance.nearHeat = true;
+                //PlayerHealth.instance.nearHeat = true;
                 //playerCollider.instance.inteCode = -1;
                 //playerCollider.instance.interactable = false;
             }
@@ -75,7 +75,7 @@ public class FireAnimation : MonoBehaviour
                 onFire = false;
                 //UiController.instance.insText.text = "(F) Start Fire";
                 //UiController.instance.insTwoText.text = "(R) Add Wood Branch";
-                PlayerHealth.instance.nearHeat = false;
+                //PlayerHealth.instance.nearHeat = false;
                 //playerCollider.instance.inteCode = 2;
                 //playerCollider.instance.interactable = true;
             }

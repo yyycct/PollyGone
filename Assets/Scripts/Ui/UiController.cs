@@ -63,6 +63,9 @@ public class UiController : MonoBehaviour
     public GameObject dropArea;
     public GameObject equipArea;
 
+    public Text dropAreaText;
+    public GameObject dropAreaFireImage;
+
     public Canvas canvas;
     public Transform topLayerTransform;
     public GameObject uiviewAxe;
@@ -95,6 +98,7 @@ public class UiController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         closeMenu();
+        CraftingMode();
     }
 
     void closeMenu()
@@ -172,6 +176,9 @@ public class UiController : MonoBehaviour
         craftButton.transform.GetChild(0).GetComponent<Text>().text = "Cook";
         craftCookInstructionText.text = "Cook something new...";
         craftQTEImage.sprite = cookSprite;
+
+        dropAreaFireImage.SetActive(true);
+        dropAreaText.text = "Drop To Fire";
     }
 
     public void CraftingMode()
@@ -179,6 +186,9 @@ public class UiController : MonoBehaviour
         craftButton.transform.GetChild(0).GetComponent<Text>().text = "Craft";
         craftCookInstructionText.text = "Drop Items here to make something new...";
         craftQTEImage.sprite = craftSprite;
+
+        dropAreaFireImage.SetActive(false);
+        dropAreaText.text = "Drop To Ground";
     }
     public void CookDoneClicked()
     {

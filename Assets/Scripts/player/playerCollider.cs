@@ -86,20 +86,22 @@ public class playerCollider : MonoBehaviour
         }
         if (_input.bag)
         {
-            if (!UiController.instance.CookPanel.activeInHierarchy)
+            if (UiController.instance.inventoryPanel.activeInHierarchy)
             {
-                if (UiController.instance.inventoryPanel.activeInHierarchy)
+                UiController.instance.closeBag();
+            }
+            else
+            {
+                if (PlayerHealth.instance.nearHeat)
                 {
-                    UiController.instance.closeBag();
+                    Tutorial.instance.CookTuto();
                 }
-                else
-                {
-                    bagOn = true;
-                    UiController.instance.inventoryPanel.SetActive(true);
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-                    loopInventory();
-                }
+                Tutorial.instance.DragAndDropTuto();
+                bagOn = true;
+                UiController.instance.inventoryPanel.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                loopInventory();
             }
             
             _input.bag = false;
@@ -289,20 +291,18 @@ public class playerCollider : MonoBehaviour
             if (!other.gameObject.GetComponent<FireAnimation>().onFire)
             {
                 inteText = "(F) Set Fire";
-                inteCode = 2;
+                ChangeInstruText(inteText, other, 2);
             }
             else
             {
+                Tutorial.instance.AddWoodTuto();
                 inteText = "Open bag start cooking"; //cooking state
                 PlayerHealth.instance.nearHeat = true;
                 craftOrCook = 1;
                 UiController.instance.CookingMode();
-                inteCode = 3;
-                PlayerHealth.instance.enterFireRange = true;
+                /*inteCode = 3;
+                PlayerHealth.instance.enterFireRange = true;*/
             }
-            UiController.instance.changeInsText(inteText);
-            interactable = true;
-            targetObject = other.gameObject;
         }
     }
 
@@ -490,10 +490,14 @@ public class playerCollider : MonoBehaviour
             int selection = UiController.instance.DragItemNumber;
             if (selection >= 0 && selection < playerBag.AllItem.Count())
             {
-                if (spawn)
+                if (craftOrCook == 0 && spawn)
                 {
                     GameObject newItem = Instantiate(playerBag.AllItem[selection].Get3dGameObject()
                         , dropPoint.transform.position, dropPoint.transform.rotation);
+                }
+                else if (craftOrCook == 1)
+                {
+                    targetObject.GetComponent<FireAnimation>().UpdateFireTime(playerBag.AllItem[selection].itemType);
                 }
 
                 playerBag.AllItem[selection].amount--;
@@ -509,10 +513,14 @@ public class playerCollider : MonoBehaviour
             int selection = UiController.instance.craftItemSelected;
             if (selection >= 0 && selection < UiController.instance.itemsInCraft.Count)
             {
-                if (spawn)
+                if (spawn && craftOrCook == 0)
                 {
                     GameObject newItem = Instantiate(UiController.instance.itemsInCraft[selection].Get3dGameObject()
                         , dropPoint.transform.position, dropPoint.transform.rotation);
+                }
+                else if (craftOrCook == 1)
+                {
+                    targetObject.GetComponent<FireAnimation>().UpdateFireTime(playerBag.AllItem[selection].itemType);
                 }
 
                 UiController.instance.itemsInCraft.Remove(UiController.instance.itemsInCraft[selection]);

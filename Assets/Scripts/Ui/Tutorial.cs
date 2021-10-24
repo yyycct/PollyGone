@@ -14,7 +14,7 @@ public class Tutorial : MonoBehaviour
 
     [SerializeField] private GameObject tutorialBubble;
     [SerializeField] private TMP_Text tutorialText;
-
+    [SerializeField] private TMP_Text continueText;
     private bool inTutorial = false;
 
     private void Start()
@@ -43,6 +43,15 @@ public class Tutorial : MonoBehaviour
         tutorialText.text = instruction;
         tutorialBubble.gameObject.SetActive(true);
         inTutorial = true;
+        continueText.gameObject.SetActive(true);
+    }
+
+    public void OnlyShowBubble(string instruction)
+    {
+        tutorialText.text = instruction;
+        tutorialBubble.gameObject.SetActive(true);
+        inTutorial = true;
+        continueText.gameObject.SetActive(false);
     }
 
     void HideBubble()
@@ -51,6 +60,14 @@ public class Tutorial : MonoBehaviour
         UiController.instance.OneTimeScale();
         CloseTutorial();
         inTutorial = false;
+    }
+
+    public void OnlyHideBubble()
+    {
+        if (!inTutorial)
+        {
+            CloseTutorial();
+        }
     }
 
     public void WalkTuto()
@@ -77,6 +94,42 @@ public class Tutorial : MonoBehaviour
         {
             ShowBubble("It should be in my pocket. \n(Press TAB to open/close bag)");
             PlayerPrefs.SetInt("OpenTutorial", 1);
+        }
+    }
+
+    public void DragAndDropTuto()
+    {
+        if (!PlayerPrefs.HasKey("DragAndDropTutorial"))
+        {
+            ShowBubble("I think I can drag thing around");
+            PlayerPrefs.SetInt("DragAndDropTutorial", 1);
+        }
+    }
+
+    public void CraftTuto()
+    {
+        if (!PlayerPrefs.HasKey("CraftTuto"))
+        {
+            ShowBubble("Can I make something new?");
+            PlayerPrefs.SetInt("CraftTuto", 1);
+        }
+    }
+
+    public void CookTuto()
+    {
+        if (!PlayerPrefs.HasKey("CookTuto"))
+        {
+            ShowBubble("I should now be able to cook something around fire.");
+            PlayerPrefs.SetInt("CookTuto", 1);
+        }
+    }
+
+    public void AddWoodTuto()
+    {
+        if (!PlayerPrefs.HasKey("AddWoodTutorial"))
+        {
+            ShowBubble("Drop something to the fire to extend fire duration.");
+            PlayerPrefs.SetInt("AddWoodTutorial", 1);
         }
     }
 }
