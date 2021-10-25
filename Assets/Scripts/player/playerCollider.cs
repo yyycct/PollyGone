@@ -130,7 +130,21 @@ public class playerCollider : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        _input.interact = false;
+        
+    }
+
+    void ChangeInstruText(string inteText, string inteTwoText, Collider other, int intecode)
+    {
+        Tutorial.instance.PickUpTuto();
+        UiController.instance.changeInsText(inteText);
+        UiController.instance.changeInsTwoText(inteTwoText);
+        inteCode = intecode;
+        targetObject = other.gameObject;
+        interactable = true;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
         if (other.tag == "box")
         {
             inteText = "(F) Open Box";
@@ -139,7 +153,7 @@ public class playerCollider : MonoBehaviour
         }
         else if (other.tag == "tree")
         {
-            inteText = "(F) Cut Tree";            
+            inteText = "(F) Cut Tree";
             targetObject = other.gameObject;
             ChangeInstruText(inteText, "", other, 3);
         }
@@ -163,10 +177,10 @@ public class playerCollider : MonoBehaviour
             inteText = "(F) Pick up mushroom";
             ChangeInstruText(inteText, "", other, 1);
         }
-        else if(other.tag == "redMush")
+        else if (other.tag == "redMush")
         {
             inteText = "(F) Pick up mushroom";
-            ChangeInstruText(inteText,"", other, 1);
+            ChangeInstruText(inteText, "", other, 1);
         }
         else if (other.tag == "cup")
         {
@@ -261,7 +275,7 @@ public class playerCollider : MonoBehaviour
             inteText = "(F) Pick up cooked mushroom";
             ChangeInstruText(inteText, "", other, 1);
         }
-        else if(other.tag == "coconut")
+        else if (other.tag == "coconut")
         {
             inteText = "(F) Pick up coconut";
             ChangeInstruText(inteText, "", other, 1);
@@ -269,29 +283,16 @@ public class playerCollider : MonoBehaviour
         else if (other.tag == "soup")
         {
             inteText = "(F) Pick up soup";
-            ChangeInstruText(inteText,"", other, 1);
+            ChangeInstruText(inteText, "", other, 1);
         }
         else if (other.tag == "woodBlock")
         {
             inteText = "(F) Pick up wood block";
-            ChangeInstruText(inteText,"", other, 1);
+            ChangeInstruText(inteText, "", other, 1);
         }
-    }
 
-    void ChangeInstruText(string inteText, string inteTwoText, Collider other, int intecode)
-    {
-        Tutorial.instance.PickUpTuto();
-        UiController.instance.changeInsText(inteText);
-        UiController.instance.changeInsTwoText(inteTwoText);
-        inteCode = intecode;
-        targetObject = other.gameObject;
-        interactable = true;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
         //Debug.Log(other);
-        if (other.tag == "cave")
+        else if (other.tag == "cave")
         {
             CollectFeedback.instance.FoundCave();
             Debug.Log("Enter cave");
