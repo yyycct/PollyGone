@@ -93,12 +93,13 @@ public class PlayerHealth : MonoBehaviour
             if(coldValue >= 50f && ! nearHeat)
             {
                 //inCold = true;
-                warningText.text = "I am freezing, Oh no!";
+                Tutorial.instance.ColdTuto();
+                Tutorial.instance.OnlyShowBubble("I am freezing, Oh no!");
             }
             else if (coldValue < 50f && !nearHeat)
             {
                 //inCold = false;
-                warningText.text = "It feels a little cold, where can I find some heat?";
+                Tutorial.instance.OnlyShowBubble("It feels a little cold, where can I find some heat?");
             }
         }
         if (nearHeat)
@@ -121,6 +122,7 @@ public class PlayerHealth : MonoBehaviour
         enterFireRange = false;
         yield return new WaitForSeconds(3f);
         warningText.text = "";
+        Tutorial.instance.OnlyHideBubble();
     }
     private void decreaseHunger()
     {
@@ -132,10 +134,12 @@ public class PlayerHealth : MonoBehaviour
     {
         if(hungerPoints < 10f)
         {
+            Tutorial.instance.HungerTuto();
             healthPoints -= Time.deltaTime * hungerHealthDropSpeed;
         }
         else if(hungerPoints > 90f)
         {
+            Tutorial.instance.FullRaiseHealthTuto();
             healthPoints += Time.deltaTime * hungerHealthDropSpeed;
         }
         /*if (coldValue >= 50f)
@@ -144,6 +148,7 @@ public class PlayerHealth : MonoBehaviour
         }*/
         if(hydratePoints <= 10f)
         {
+            Tutorial.instance.HydrateTuto();
             healthPoints -= Time.deltaTime * 0.4f;
         }
         healthPoints = clampValue(healthPoints);

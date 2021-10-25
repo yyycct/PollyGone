@@ -268,7 +268,6 @@ public class playerCollider : MonoBehaviour
     void ChangeInstruText(string inteText, Collider other, int intecode)
     {
         Tutorial.instance.PickUpTuto();
-        Debug.Log(other.gameObject.name);
         UiController.instance.changeInsText(inteText);
         inteCode = intecode;
         targetObject = other.gameObject;
@@ -287,7 +286,6 @@ public class playerCollider : MonoBehaviour
         }
         else if (other.tag == "campFire")
         {
-            Debug.Log(other.name);
             if (!other.gameObject.GetComponent<FireAnimation>().onFire)
             {
                 inteText = "(F) Set Fire";
@@ -300,6 +298,7 @@ public class playerCollider : MonoBehaviour
                 PlayerHealth.instance.nearHeat = true;
                 craftOrCook = 1;
                 UiController.instance.CookingMode();
+                targetObject = other.gameObject;
                 /*inteCode = 3;
                 PlayerHealth.instance.enterFireRange = true;*/
             }
@@ -494,6 +493,7 @@ public class playerCollider : MonoBehaviour
                 targetObject.GetComponent<FireAnimation>().UpdateFireTime(playerBag.AllItem[selection].itemType);
 
                 playerBag.AllItem[selection].amount--;
+                Debug.Log(playerBag.AllItem[selection].amount);
                 if (playerBag.AllItem[selection].amount <= 0)
                 {
                     playerBag.AllItem.Remove(playerBag.AllItem[selection]);

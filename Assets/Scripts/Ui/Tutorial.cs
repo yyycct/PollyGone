@@ -15,6 +15,10 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject tutorialBubble;
     [SerializeField] private TMP_Text tutorialText;
     [SerializeField] private TMP_Text continueText;
+
+    [SerializeField] private GameObject coldArrow;
+    [SerializeField] private GameObject hungerArrow;
+    [SerializeField] private GameObject hydrateArrow;
     bool bagOnBefore = false;
     private bool inTutorial = false;
 
@@ -35,6 +39,9 @@ public class Tutorial : MonoBehaviour
     void CloseTutorial()
     {
         tutorialBubble.gameObject.SetActive(false);
+        coldArrow.SetActive(false);
+        hungerArrow.SetActive(false);
+        hydrateArrow.SetActive(false);
     }
 
     void ShowBubble(string instruction)
@@ -136,6 +143,46 @@ public class Tutorial : MonoBehaviour
         {
             ShowBubble("Drop something to the fire to extend fire duration.");
             PlayerPrefs.SetInt("AddWoodTutorial", 1);
+        }
+    }
+
+    public void ColdTuto()
+    {
+        if (!PlayerPrefs.HasKey("ColdTutorial"))
+        {
+            ShowBubble("The cold value reaches 50%, my health is dropping");
+            PlayerPrefs.SetInt("ColdTutorial", 1);
+            coldArrow.SetActive(true);
+        }
+    }
+
+    public void HungerTuto()
+    {
+        if (!PlayerPrefs.HasKey("HungerTutorial"))
+        {
+            ShowBubble("The hunger value is less than 10%, my health is dropping");
+            PlayerPrefs.SetInt("HungerTutorial", 1);
+            hungerArrow.SetActive(true);
+        }
+    }
+
+    public void HydrateTuto()
+    {
+        if (!PlayerPrefs.HasKey("HydrateTutorial"))
+        {
+            ShowBubble("The hydrate value is less than 10%, my health is dropping");
+            PlayerPrefs.SetInt("HydrateTutorial", 1);
+            hydrateArrow.SetActive(true);
+        }
+    }
+
+    public void FullRaiseHealthTuto()
+    {
+        if (!PlayerPrefs.HasKey("FullRaiseHealthTutorial"))
+        {
+            ShowBubble("I am 80% percent full, my health is raising!");
+            PlayerPrefs.SetInt("FullRaiseHealthTutorial", 1);
+            hydrateArrow.SetActive(true);
         }
     }
 }

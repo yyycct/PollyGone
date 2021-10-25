@@ -173,8 +173,11 @@ public class UiController : MonoBehaviour
 
     public void CookingMode()
     {
+        Color yellowColor = new Color(0.94f, 0.84f, 0.4f, 1f);
         craftButton.transform.GetChild(0).GetComponent<Text>().text = "Cook";
+        craftButton.transform.GetChild(0).GetComponent<Text>().color = yellowColor;
         craftCookInstructionText.text = "Cook something new...";
+        craftCookInstructionText.color = yellowColor;
         craftQTEImage.sprite = cookSprite;
 
         dropAreaFireImage.SetActive(true);
@@ -183,8 +186,11 @@ public class UiController : MonoBehaviour
 
     public void CraftingMode()
     {
+        Color whiteColor = new Color(1f, 1f, 1f, 1f);
         craftButton.transform.GetChild(0).GetComponent<Text>().text = "Craft";
+        craftButton.transform.GetChild(0).GetComponent<Text>().color = whiteColor;
         craftCookInstructionText.text = "Drop Items here to make something new...";
+        craftCookInstructionText.color = whiteColor;
         craftQTEImage.sprite = craftSprite;
 
         dropAreaFireImage.SetActive(false);
