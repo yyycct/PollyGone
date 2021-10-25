@@ -132,7 +132,7 @@ public class UiController : MonoBehaviour
     public void printInventory(items.ItemType _type, int _index, int _amount)
     {
         ItemImage[_index].texture = items.Get2dTexture(_type);
-        if (_amount <= 0)
+        if (_amount <= 1)
         {
             itemsInBag.transform.GetChild(_index).GetChild(1).GetComponent<TMP_Text>().text = "";
         }

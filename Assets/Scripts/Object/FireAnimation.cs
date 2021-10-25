@@ -19,6 +19,7 @@ public class FireAnimation : MonoBehaviour
     public float TargetFireSize = 0;
     public float WoodBranchTime = 30f;
     public float WoodBlockTime = 60f;
+    public bool UnderCover = false;
     private void Awake()
     {
         instance = this;
@@ -39,6 +40,10 @@ public class FireAnimation : MonoBehaviour
         {
             playerCollider.instance.wrapUp();
             Destroy(gameObject);
+        }
+        if (DayControl.instance.raining && !UnderCover)
+        {
+            FireTime = 2f;
         }
         UpdateFireText();
         if (FireTime > settingTime)
@@ -82,13 +87,35 @@ public class FireAnimation : MonoBehaviour
         }
 
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "RainFreeZone")
+        {
+            UnderCover = true;
+        }
+        if (other.tag == "cave")
+        {
+            UnderCover = true;
+        }
+    }
     public void StartFireAnim()
     {
         //ps = this.transform.GetChild(0).GetComponent<ParticleSystem>();
-        FireTime += 60f;
-        Debug.Log("Starting Fire");
-        used = true;
+        if (!DayControl.instance.raining)
+        {
+            FireTime += 60f;
+            used = true;
+        }
+        else if(DayControl.instance.raining && UnderCover)
+        {
+            FireTime += 60f;
+            used = true;
+        }
+        else
+        {
+            UiController.instance.changeInsText("It's raining, can't start a fire");
+        }
+        //Debug.Log("Starting Fire");
     }
     public void UpdateFireText()
     {

@@ -33,6 +33,7 @@ TagManager:
   - hitArea
   - woodBlock
   - soup
+  - RainFreeZone
   layers:
   - Default
   - TransparentFX

@@ -54,7 +54,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   threshold:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 3
     min: 0
   intensity:
     m_OverrideState: 1
@@ -131,7 +131,7 @@ MonoBehaviour:
     max: 100
   tint:
     m_OverrideState: 1
-    m_Value: -5
+    m_Value: 0
     min: -100
     max: 100
 --- !u!114 &1900260094152686734

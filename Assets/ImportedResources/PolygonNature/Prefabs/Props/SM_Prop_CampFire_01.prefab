@@ -152,6 +152,7 @@ MonoBehaviour:
   TargetFireSize: 0
   WoodBranchTime: 20
   WoodBlockTime: 60
+  UnderCover: 0
 --- !u!95 &472494831086485538
 Animator:
   serializedVersion: 3

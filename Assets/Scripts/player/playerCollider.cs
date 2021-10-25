@@ -73,7 +73,10 @@ public class playerCollider : MonoBehaviour
                     break;
                 case 1:
                     pickUpWater(targetObject);
-                    emptyCountainer(targetObject);
+                    if (!playerBag.bagFull)
+                    {
+                        emptyCountainer(targetObject);
+                    }
                     break;
                 case 2:                    
                     break;
@@ -171,6 +174,10 @@ public class playerCollider : MonoBehaviour
             {
                 inteTwoText = "(R) Collect Water";
             }
+            else
+            {
+                inteTwoText = "";
+            }
             inteText = "(F) Pick up cup";
             ChangeInstruText(inteText, inteTwoText, other, 1);
         }
@@ -179,6 +186,10 @@ public class playerCollider : MonoBehaviour
             if (checkWater(other.gameObject) > 0)
             {
                 inteTwoText = "(R) Collect Water";
+            }
+            else
+            {
+                inteTwoText = "";
             }
             inteText = "(F) Pick up pot";
             ChangeInstruText(inteText, inteTwoText, other, 1);
@@ -213,6 +224,10 @@ public class playerCollider : MonoBehaviour
             if (checkWater(other.gameObject) > 0)
             {
                 inteTwoText = "(R) Collect Water";
+            }
+            else
+            {
+                inteTwoText = "";
             }
             inteText = "(F) Pick up vase";
             ChangeInstruText(inteText, inteTwoText, other, 1);
@@ -267,6 +282,7 @@ public class playerCollider : MonoBehaviour
     {
         Tutorial.instance.PickUpTuto();
         UiController.instance.changeInsText(inteText);
+        UiController.instance.changeInsTwoText(inteTwoText);
         inteCode = intecode;
         targetObject = other.gameObject;
         interactable = true;
@@ -284,14 +300,10 @@ public class playerCollider : MonoBehaviour
         }
         else if (other.tag == "campFire")
         {
-<<<<<<< Updated upstream
-=======
-            //Debug.Log(other.name);
->>>>>>> Stashed changes
             if (!other.gameObject.GetComponent<FireAnimation>().onFire)
             {
                 inteText = "(F) Set Fire";
-                ChangeInstruText(inteText, other, 2);
+                ChangeInstruText(inteText,"", other, 2);
             }
             else
             {
@@ -302,16 +314,11 @@ public class playerCollider : MonoBehaviour
                 craftOrCook = 1;
                 UiController.instance.CookingMode();
                 targetObject = other.gameObject;
-                /*inteCode = 3;
-                PlayerHealth.instance.enterFireRange = true;*/
+                UiController.instance.changeInsText(inteText);
+                UiController.instance.changeInsTwoText(inteTwoText);
             }
-<<<<<<< Updated upstream
-=======
-            UiController.instance.changeInsText(inteText);
-            UiController.instance.changeInsTwoText(inteTwoText);
             interactable = true;
             targetObject = other.gameObject;
->>>>>>> Stashed changes
         }
     }
 
@@ -425,9 +432,12 @@ public class playerCollider : MonoBehaviour
                 playerBag.AddItem(PresetItems.instance.redMush);
                 CollectFeedback.instance.AddtoMushroom(1);
                 break;
-            case "cup":
-                pickUpWater(target);
+            case "cup":                
                 playerBag.AddItem(PresetItems.instance.cup);
+                if (!playerBag.bagFull)
+                {
+                    pickUpWater(target);
+                }
                 break;
             case "can":
                 playerBag.AddItem(PresetItems.instance.can);
@@ -439,8 +449,11 @@ public class playerCollider : MonoBehaviour
                 playerBag.AddItem(PresetItems.instance.candle);
                 break;
             case "pot":
-                pickUpWater(target);
                 playerBag.AddItem(PresetItems.instance.pot);
+                if (!playerBag.bagFull)
+                {
+                    pickUpWater(target);
+                }
                 break;
             case "gamCon":
                 playerBag.AddItem(PresetItems.instance.gamCon);
@@ -449,8 +462,11 @@ public class playerCollider : MonoBehaviour
                 playerBag.AddItem(PresetItems.instance.bat);
                 break;
             case "vase":
-                pickUpWater(target);
                 playerBag.AddItem(PresetItems.instance.vase);
+                if (!playerBag.bagFull)
+                {
+                    pickUpWater(target);
+                }
                 break;
             case "book":
                 playerBag.AddItem(PresetItems.instance.book);

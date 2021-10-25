@@ -24,6 +24,7 @@ public class DayControl : MonoBehaviour
     //how many seconds is a day in game
     private float timeRatio = 6 * 60 / 24;
     public static DayControl instance;
+    private bool boxSpawned = false;
     private void Awake()
     {
         instance = this;
@@ -44,6 +45,11 @@ public class DayControl : MonoBehaviour
         if (DayCount == 2 && timeofDay >= randomRainTime && timeofDay <= (randomRainTime+rainRemainTime))
         {
             raining = true;
+        }
+        else if(DayCount == 2 && timeofDay >(randomRainTime + rainRemainTime) && !boxSpawned)
+        {
+            SpawnBoxes.instance.spawnBox(5);
+            boxSpawned = true;
         }
         else 
         {

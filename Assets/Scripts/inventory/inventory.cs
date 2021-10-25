@@ -19,9 +19,17 @@ public class inventory
         {
             if (AllItem[i] == _item)
             {
-                repeat = true;
-                AllItem[i].amount++;
-                continue;
+                if (_item.combinable)
+                {
+                    repeat = true;
+                    AllItem[i].amount++;
+                    break;
+                }
+                else
+                {
+                    repeat = false;
+                    break;
+                }
             }
             UiController.instance.lastInBagNumber = i;
         }
@@ -36,7 +44,7 @@ public class inventory
             {
                 bagFull = false;
                 AllItem.Add(_item);
-                _item.amount++;
+                _item.amount = 1;
                 UiController.instance.lastInBagNumber = AllItem.Count-1;
             }
         }
