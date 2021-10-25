@@ -29,7 +29,7 @@ public class Tutorial : MonoBehaviour
     }
     private void Update()
     {
-        if (_input.jump && tutorialBubble.activeInHierarchy)
+        if (_input.jump && tutorialBubble.activeInHierarchy && inTutorial)
         {
             HideBubble();
             _input.jump = false;

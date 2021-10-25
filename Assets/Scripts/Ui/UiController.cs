@@ -504,6 +504,7 @@ public class UiController : MonoBehaviour
 
     public void QuitButtonClicked()
     {
+        PlayerPrefs.DeleteAll();
         Application.Quit();
     }
 
