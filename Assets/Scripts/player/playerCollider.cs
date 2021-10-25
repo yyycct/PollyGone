@@ -316,6 +316,7 @@ public class playerCollider : MonoBehaviour
                 targetObject = other.gameObject;
                 UiController.instance.changeInsText(inteText);
                 UiController.instance.changeInsTwoText(inteTwoText);
+                inteCode = -1;
             }
             interactable = true;
             targetObject = other.gameObject;
