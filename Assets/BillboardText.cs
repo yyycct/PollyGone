@@ -16,6 +16,6 @@ public class BillboardText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.Euler(0f, cameraRotaion.transform.eulerAngles.y, 0f);
+        transform.rotation = Quaternion.Euler(cameraRotaion.transform.eulerAngles.x, cameraRotaion.transform.eulerAngles.y, 0f);
     }
 }
