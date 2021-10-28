@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+
 public class PlayerHealth : MonoBehaviour
 {
     public static PlayerHealth instance;
@@ -21,22 +24,28 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float hydrateDropSpeed = 0.2f;
     [SerializeField] private ParticleSystem eatEFX;
     [SerializeField] private ParticleSystem drinkEFX;
+    [SerializeField] private Color Green;
+    [SerializeField] private Color Red;
     public bool enterFireRange = false;
-
-    public float healthPoints = 50f;
+    public float healthPoints = 10f;
     public float hungerPoints = 50f;
-    public float coldBackTime = 10f;
-    [SerializeField]
-    private float coldValue = 0f;
+    public float coldBackTime = 50f;
+    public float coldValue = 70f;
     public bool nearHeat = false;
     public float hydratePoints = 20f;
+    private float vignetteValue = 0f;
+    private Volume volume;
+    public VolumeProfile Sunny;
+    public VolumeProfile Rainny;
+    public VolumeProfile Cloudy;
+    private Vignette vignette;
     private void Awake()
     {
         instance = this;
     }
     void Start()
     {
-
+        volume = gameObject.GetComponent<Volume>();
     }
 
     // Update is called once per frame
@@ -70,7 +79,55 @@ public class PlayerHealth : MonoBehaviour
             }
             UiController.instance.GameOver(reason);
         }
-        else if(healthPoints >= 100) { healthPoints = 100; }
+        else if (healthPoints <= 5f)
+        {
+            if (Sunny.TryGet<Vignette>(out var vignette))
+            {
+                vignetteValue += 0.05f * Time.deltaTime;
+                if (vignetteValue < 0) { vignetteValue = 0f; }
+                else if (vignetteValue > 1) { vignetteValue = 1f; }
+                vignette.intensity.Override(vignetteValue);
+            }
+            if (Rainny.TryGet<Vignette>(out var vignette2))
+            {
+                vignetteValue += 0.05f * Time.deltaTime;
+                if (vignetteValue < 0) { vignetteValue = 0f; }
+                else if (vignetteValue > 1) { vignetteValue = 1f; }
+                vignette2.intensity.Override(vignetteValue);
+            }
+            if (Cloudy.TryGet<Vignette>(out var vignette3))
+            {
+                vignetteValue += 0.05f * Time.deltaTime;
+                if (vignetteValue < 0) { vignetteValue = 0f; }
+                else if (vignetteValue > 1) { vignetteValue = 1f; }
+                vignette3.intensity.Override(vignetteValue);
+            }
+        }
+        else if (healthPoints > 5f)
+        {
+            if (Sunny.TryGet<Vignette>(out var vignette))
+            {
+                vignetteValue -= 0.01f;
+                if(vignetteValue < 0) { vignetteValue = 0f; }
+                else if (vignetteValue > 1) { vignetteValue = 1f; }
+                vignette.intensity.Override(vignetteValue);
+            }
+            if (Rainny.TryGet<Vignette>(out var vignette2))
+            {
+                vignetteValue -= 0.01f;
+                if (vignetteValue < 0) { vignetteValue = 0f; }
+                else if (vignetteValue > 1) { vignetteValue = 1f; }
+                vignette2.intensity.Override(vignetteValue);
+            }
+            if (Cloudy.TryGet<Vignette>(out var vignette3))
+            {
+                vignetteValue -= 0.01f;
+                if (vignetteValue < 0) { vignetteValue = 0f; }
+                else if (vignetteValue > 1) { vignetteValue = 1f; }
+                vignette3.intensity.Override(vignetteValue);
+            }
+        }
+        if(healthPoints >= 100) { healthPoints = 100; }
         healthSlider.fillAmount = healthPoints/100f;
         healthText.text = ((int)healthPoints).ToString();
     }
@@ -82,21 +139,28 @@ public class PlayerHealth : MonoBehaviour
     private void updateHunger()
     {
         hungerSlider.fillAmount = hungerPoints/100f;
+        if(hungerPoints < 10f)
+        {
+            hungerSlider.color = Red;
+        }
+        else{
+            hungerSlider.color = Green;
+        }
     }
     private void updateCold()
     {
         if (inCold)
         {
-            coldValue += Time.deltaTime * 0.5f;
+            coldValue -= Time.deltaTime * 0.1f;
             coldValue = clampValue(coldValue);
             //warningText.text = "It feels a little cold, where can I find some heat?";
-            if(coldValue >= 50f && ! nearHeat)
+            if(coldValue <= 20f && ! nearHeat)
             {
                 //inCold = true;
                 Tutorial.instance.ColdTuto();
                 Tutorial.instance.OnlyShowBubble("I am freezing, Oh no!");
             }
-            else if (coldValue < 50f && !nearHeat)
+            else if (coldValue > 20f && !nearHeat && coldValue < 40f)
             {
                 //inCold = false;
                 Tutorial.instance.OnlyShowBubble("It feels a little cold, where can I find some heat?");
@@ -104,7 +168,10 @@ public class PlayerHealth : MonoBehaviour
         }
         if (nearHeat)
         {
-            coldValue -= Time.deltaTime * 10f;
+            if (coldValue <= 80)
+            {
+                coldValue += Time.deltaTime * 10f;
+            }
             coldValue = clampValue(coldValue);
             if (!playerCollider.instance.bagOn)
             {
@@ -136,21 +203,37 @@ public class PlayerHealth : MonoBehaviour
         {
             Tutorial.instance.HungerTuto();
             healthPoints -= Time.deltaTime * hungerHealthDropSpeed;
+            hungerSlider.color = Red;
         }
-        else if(hungerPoints > 90f)
+        else
+        {
+            hungerSlider.color = Green;
+        }
+        if(hungerPoints > 70f)
         {
             Tutorial.instance.FullRaiseHealthTuto();
             healthPoints += Time.deltaTime * hungerHealthDropSpeed;
         }
-        /*if (coldValue >= 50f)
+
+        if (coldValue <= 20f)
         {
             healthPoints -= Time.deltaTime * coldHealthDropSpeed;
-        }*/
+            coldSlider.color = Red;
+        }
+        else
+        {
+            coldSlider.color = Green;
+        }
         if(hydratePoints <= 10f)
         {
             Tutorial.instance.HydrateTuto();
             healthPoints -= Time.deltaTime * 0.4f;
+            hydrateSlider.color = Red;
         }
+        else
+        {
+            hydrateSlider.color = Green;
+        }       
         healthPoints = clampValue(healthPoints);
     }
     public void EatFood(int points)
@@ -179,7 +262,11 @@ public class PlayerHealth : MonoBehaviour
     public void EndCold()
     {
         inCold = false;
-        coldValue -= Time.deltaTime * coldBackTime;
+        if (coldValue <= 60)
+        {
+            coldValue += Time.deltaTime * coldBackTime;
+        }
+        
     }
     public float clampValue(float value)
     {

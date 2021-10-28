@@ -7,6 +7,7 @@ public class WeatherSwitch : MonoBehaviour
     public Volume volume;
     public VolumeProfile Sunny;
     public VolumeProfile Rainny;
+    public VolumeProfile Cloudy;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,10 @@ public class WeatherSwitch : MonoBehaviour
         if (DayControl.instance.raining)
         {
             volume.profile = Rainny;
+        }
+        else if (DayControl.instance.cloudy)
+        {
+            volume.profile = Cloudy;
         }
         else
         {

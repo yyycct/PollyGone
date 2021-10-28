@@ -19,15 +19,25 @@ public class StarterAssetsInputs : MonoBehaviour
 	public bool anykey;
 	[Header("Movement Settings")]
 	public bool analogMovement;
-
-#if !UNITY_IOS || !UNITY_ANDROID
 	[Header("Mouse Cursor Settings")]
 	public bool cursorLocked = true;
 	public bool cursorInputForLook = true;
+	public PlayerInput PlayerInput;
 	private int perviousHand = 0;
-#endif
-
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
+	private bool fullControl;
+	public void SwitchMap()
+    {
+        if (fullControl)
+        {
+			PlayerInput.SwitchCurrentActionMap("Tutorial");
+			fullControl = false;
+		}
+		else
+		{
+			PlayerInput.SwitchCurrentActionMap("Player");
+			fullControl = true;
+		}
+	}
 	public void OnMove(InputValue value)
 	{
 		MoveInput(value.Get<Vector2>());
@@ -90,9 +100,9 @@ public class StarterAssetsInputs : MonoBehaviour
     {
 		CraftInput(2);
     }
-#else
+
 // old input sys if we do decide to have it (most likely wont)...
-#endif
+
 
 	public void ActionInput(bool newActionState)
     {
@@ -153,7 +163,6 @@ public class StarterAssetsInputs : MonoBehaviour
 			CraftQTE.instance.craftValue++;
         }
     }
-#if !UNITY_IOS || !UNITY_ANDROID
 
 	private void OnApplicationFocus(bool hasFocus)
 	{
@@ -164,8 +173,6 @@ public class StarterAssetsInputs : MonoBehaviour
 	{
 		Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 	}
-
-#endif
 
 }
 	

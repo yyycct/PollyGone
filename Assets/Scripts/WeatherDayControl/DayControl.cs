@@ -14,9 +14,11 @@ public class DayControl : MonoBehaviour
     [SerializeField] private float moonIntensity = 0.02f;
     [SerializeField] private Color rainColor;
     [SerializeField] private Color normalColor;
+    [SerializeField] private Color cloudyColor;
     [SerializeField] private int DayCount = 1;
     public float dayLightIntensity = 1f;
     public bool raining;
+    public bool cloudy = false;
     [SerializeField] GameObject rainEFX;
     float timeElapsed;
     private int randomRainTime;
@@ -41,19 +43,28 @@ public class DayControl : MonoBehaviour
     {
         timeofDay += Time.deltaTime / timeRatio;
         if (timeofDay >= 24) { DayCount++; }
-        timeofDay %= 24;        
-        if (DayCount == 2 && timeofDay >= randomRainTime && timeofDay <= (randomRainTime+rainRemainTime))
+        timeofDay %= 24;
+        if (DayCount == 2 && timeofDay >= randomRainTime && timeofDay <= (randomRainTime + rainRemainTime))
         {
             raining = true;
+            cloudy = false;
         }
-        else if(DayCount == 2 && timeofDay >(randomRainTime + rainRemainTime) && !boxSpawned)
+        else if (DayCount == 2 && timeofDay > (randomRainTime + rainRemainTime) && !boxSpawned)
         {
             SpawnBoxes.instance.spawnBox(5);
             boxSpawned = true;
+            raining = false;
+            cloudy = false;
         }
-        else 
+        else if (DayCount == 3)
+        {
+            cloudy = true;
+            raining = false;
+        }
+        else
         {
             raining = false;
+            cloudy = false;
         }
 
         float xRotation = (timeofDay + 18f) % 24 / 24 * 360f;
@@ -67,9 +78,17 @@ public class DayControl : MonoBehaviour
             rainEFX.SetActive(true);
             dayLightIntensity = 0.2f;
         }
+        else if (cloudy)
+        {
+            dayLightIntensity = 0.3f;
+            RenderSettings.skybox.SetColor("_SkyTint", cloudyColor);
+            RenderSettings.skybox.SetFloat("_SkySize", 0f);
+            raining = false;
+            RenderSettings.fog = true;
+        }
         else
         {
-            RainStoped();
+            Sunny();
             rainEFX.SetActive(false);
             dayLightIntensity = 1f;
         }
@@ -137,10 +156,13 @@ public class DayControl : MonoBehaviour
     private void Rain()
     {
         RenderSettings.skybox.SetColor("_SkyTint", rainColor);
+        RenderSettings.skybox.SetFloat("_SkySize", 0f);
     }
-    private void RainStoped()
+    private void Sunny()
     {
         RenderSettings.skybox.SetColor("_SkyTint", normalColor);
+        RenderSettings.skybox.SetFloat("_SkySize", 0.12f);
+        RenderSettings.fog = false;
     }
 
 }
