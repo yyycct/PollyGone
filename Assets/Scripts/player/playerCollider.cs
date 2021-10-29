@@ -128,11 +128,6 @@ public class playerCollider : MonoBehaviour
         }
     }
     
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
     void ChangeInstruText(string inteText, string inteTwoText, Collider other, int intecode)
     {
         //Tutorial.instance.PickUpTuto();
@@ -264,6 +259,11 @@ public class playerCollider : MonoBehaviour
         else if (other.tag == "woodBlock")
         {
             inteText = "(F) Pick up wood block";
+            ChangeInstruText(inteText, "", other, 1);
+        }
+        else if (other.tag == "plank")
+        {
+            inteText = "(F) Pick up wood plank";
             ChangeInstruText(inteText, "", other, 1);
         }
         else if (other.tag == "radio")
@@ -488,6 +488,9 @@ public class playerCollider : MonoBehaviour
             case "woodBlock":
                 playerBag.AddItem(PresetItems.instance.woodBlock);
                 break;
+            case "plank":
+                playerBag.AddItem(PresetItems.instance.plank);
+                break;
             case "axe":
                 playerBag.AddItem(PresetItems.instance.axe);
                 break;
@@ -554,7 +557,10 @@ public class playerCollider : MonoBehaviour
                     GameObject newItem = Instantiate(playerBag.AllItem[selection].Get3dGameObject()
                         , dropPoint.transform.position, dropPoint.transform.rotation);
                 }
-
+                if (playerBag.AllItem[selection].itemType == items.ItemType.Boat)
+                {
+                    Tutorial.instance.BoatEnding();
+                }
                 playerBag.AllItem[selection].amount--;
                 if (playerBag.AllItem[selection].amount <= 0)
                 {
@@ -572,6 +578,11 @@ public class playerCollider : MonoBehaviour
                 {
                     GameObject newItem = Instantiate(UiController.instance.itemsInCraft[selection].Get3dGameObject()
                         , dropPoint.transform.position, dropPoint.transform.rotation);
+                }
+
+                if (UiController.instance.itemsInCraft[selection].itemType == items.ItemType.Boat)
+                {
+                    Tutorial.instance.BoatEnding();
                 }
 
                 UiController.instance.itemsInCraft.Remove(UiController.instance.itemsInCraft[selection]);

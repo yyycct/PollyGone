@@ -25,9 +25,11 @@ public class items
         CookedMush,
         Axe,
         WoodBlock,
+        Plank,
         Water,
         Coconut,
         Soup,
+        Boat,
         Empty
     }
 
@@ -169,6 +171,13 @@ public class items
                 usable = false;
                 amount = 0;
                 break;
+            case ItemType.Plank:
+                itemType = _itemType;
+                ediable = false;
+                combinable = true;
+                usable = false;
+                amount = 0;
+                break;
             case ItemType.Water:
                 itemType = _itemType;
                 ediable = true;
@@ -187,6 +196,13 @@ public class items
                 itemType = _itemType;
                 ediable = true;
                 combinable = true;
+                usable = false;
+                amount = 0;
+                break;
+            case ItemType.Boat:
+                itemType = _itemType;
+                ediable = false;
+                combinable = false;
                 usable = false;
                 amount = 0;
                 break;
@@ -243,12 +259,16 @@ public class items
                 return ob.Axe;
             case ItemType.WoodBlock:
                 return ob.WoodBlock;
+            case ItemType.Plank:
+                return ob.Plank;
             case ItemType.Water:
                 return ob.Water;
             case ItemType.Coconut:
                 return ob.Coconut;
             case ItemType.Soup:
                 return ob.Soup;
+            case ItemType.Boat:
+                return ob.Boat;
             case ItemType.Empty:
                 return ob.Empt;
             default:
@@ -303,12 +323,16 @@ public class items
                 return ob.Axe;
             case ItemType.WoodBlock:
                 return ob.WoodBlock;
+            case ItemType.Plank:
+                return ob.Plank;
             case ItemType.Water:
                 return ob.Water;
             case ItemType.Coconut:
                 return ob.Coconut;
             case ItemType.Soup:
                 return ob.Soup;
+            case ItemType.Boat:
+                return ob.Boat;
             default:
                 break;
         }

@@ -36,14 +36,38 @@ public class StarterAssetsInputs : MonoBehaviour
     {
         if (fullControl)
         {
+			if (UiController.instance.inventoryPanel.activeInHierarchy)
+            {
+				Cursor.lockState = CursorLockMode.Locked;
+				Cursor.visible = false;
+			}
 			PlayerInput.SwitchCurrentActionMap("Tutorial");
 			fullControl = false;
 		}
 		else
 		{
+			if (UiController.instance.inventoryPanel.activeInHierarchy)
+			{
+				Cursor.lockState = CursorLockMode.None;
+				Cursor.visible = true;
+			}
 			PlayerInput.SwitchCurrentActionMap("Player");
 			fullControl = true;
 		}
+	}
+
+	public void SwitchMap(bool tutorial, bool cursorVisible, CursorLockMode lockMode)
+	{
+		if (tutorial)
+        {
+			PlayerInput.SwitchCurrentActionMap("Tutorial");
+		}
+		else
+        {
+			PlayerInput.SwitchCurrentActionMap("Player");
+		}
+		Cursor.lockState = lockMode;
+		Cursor.visible = cursorVisible;
 	}
 	public void OnMove(InputValue value)
 	{

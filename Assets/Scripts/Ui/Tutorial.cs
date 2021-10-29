@@ -19,8 +19,9 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject coldArrow;
     [SerializeField] private GameObject hungerArrow;
     [SerializeField] private GameObject hydrateArrow;
-    bool bagOnBefore = false;
-    private bool inTutorial = false;
+    bool cursorVis = false;
+    CursorLockMode lockMode = CursorLockMode.Locked;
+    public bool inTutorial = false;
 
     private void Start()
     {
@@ -46,13 +47,12 @@ public class Tutorial : MonoBehaviour
 
     void ShowBubble(string instruction)
     {
-        bagOnBefore = playerCollider.instance.bagOn;
         playerCollider.instance.bagOn = true;
-        UiController.instance.ZeroTimeScale();
         tutorialText.text = instruction;
         tutorialBubble.gameObject.SetActive(true);
         inTutorial = true;
         continueText.gameObject.SetActive(true);
+        UiController.instance.ZeroTimeScale();
         StarterAssetsInputs.instance.SwitchMap();
     }
 
@@ -70,7 +70,6 @@ public class Tutorial : MonoBehaviour
 
     void HideBubble()
     {
-        playerCollider.instance.bagOn = bagOnBefore;
         UiController.instance.OneTimeScale();
         CloseTutorial();
         inTutorial = false;
@@ -186,5 +185,16 @@ public class Tutorial : MonoBehaviour
             PlayerPrefs.SetInt("FullRaiseHealthTutorial", 1);
             hydrateArrow.SetActive(true);
         }
+    }
+
+    public void BoatEnding()
+    {
+        StartCoroutine(BoatEndingTimer());
+    }
+
+    IEnumerator BoatEndingTimer()
+    {
+        yield return new WaitForSeconds(2f);
+        ShowBubble("You successfully made a boat and escaped this island with it.");
     }
 }

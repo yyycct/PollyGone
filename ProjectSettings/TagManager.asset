@@ -35,6 +35,7 @@ TagManager:
   - soup
   - RainFreeZone
   - torch
+  - plank
   layers:
   - Default
   - TransparentFX

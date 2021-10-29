@@ -29,9 +29,11 @@ public class PresetItems : MonoBehaviour
     public items cookedMush = new items(items.ItemType.CookedMush, true, true, false, 0);
     public items axe = new items(items.ItemType.Axe, false, false, true, 0);
     public items woodBlock = new items(items.ItemType.WoodBlock, false, true, false, 0);
+    public items plank = new items(items.ItemType.Plank, false, true, false, 0);
     public items water = new items(items.ItemType.Water, true, true, false, 0);
     public items coconut = new items(items.ItemType.Coconut, true, true, false, 0);
     public items soup = new items(items.ItemType.Soup, true, true, false, 0);
+    public items boat = new items(items.ItemType.Boat, false, false, false, 0);
     public items GetItemFromType(items.ItemType type)
     {
         switch (type)
@@ -70,12 +72,16 @@ public class PresetItems : MonoBehaviour
                 return axe;
             case items.ItemType.WoodBlock:
                 return woodBlock;
+            case items.ItemType.Plank:
+                return plank;
             case items.ItemType.Water:
                 return water;
             case items.ItemType.Coconut:
                 return coconut;
             case items.ItemType.Soup:
                 return soup;
+            case items.ItemType.Boat:
+                return boat;
             case items.ItemType.Empty:
                 return null;
             default:
