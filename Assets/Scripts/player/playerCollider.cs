@@ -135,7 +135,7 @@ public class playerCollider : MonoBehaviour
 
     void ChangeInstruText(string inteText, string inteTwoText, Collider other, int intecode)
     {
-        Tutorial.instance.PickUpTuto();
+        //Tutorial.instance.PickUpTuto();
         UiController.instance.changeInsText(inteText);
         UiController.instance.changeInsTwoText(inteTwoText);
         inteCode = intecode;

@@ -24,8 +24,15 @@ public class StarterAssetsInputs : MonoBehaviour
 	public bool cursorInputForLook = true;
 	public PlayerInput PlayerInput;
 	private int perviousHand = 0;
-	private bool fullControl;
-	public void SwitchMap()
+	public bool fullControl = true;
+
+	public static StarterAssetsInputs instance;
+    private void Awake()
+    {
+		instance = this;
+    }
+
+    public void SwitchMap()
     {
         if (fullControl)
         {
@@ -57,7 +64,6 @@ public class StarterAssetsInputs : MonoBehaviour
     {
 		PauseInput(value.isPressed);
     }
-
 	public void OnLook(InputValue value)
 	{
 		if(cursorInputForLook)

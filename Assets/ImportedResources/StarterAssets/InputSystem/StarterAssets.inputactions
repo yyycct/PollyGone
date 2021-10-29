@@ -389,11 +389,11 @@
             ]
         },
         {
-            "name": "Turtorial",
+            "name": "Tutorial",
             "id": "57467171-b606-4270-b8e5-c171b538e9b6",
             "actions": [
                 {
-                    "name": "Space",
+                    "name": "Anykey",
                     "type": "Button",
                     "id": "ce35f818-5e26-44e4-a0ee-7c0136b59325",
                     "expectedControlType": "Button",
@@ -409,7 +409,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Space",
+                    "action": "Anykey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

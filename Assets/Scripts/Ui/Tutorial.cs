@@ -29,10 +29,10 @@ public class Tutorial : MonoBehaviour
     }
     private void Update()
     {
-        if (_input.jump && tutorialBubble.activeInHierarchy && inTutorial)
+        if (_input.anykey && tutorialBubble.activeInHierarchy && inTutorial)
         {
             HideBubble();
-            _input.jump = false;
+            _input.anykey = false;
         }
     }
     
@@ -53,6 +53,7 @@ public class Tutorial : MonoBehaviour
         tutorialBubble.gameObject.SetActive(true);
         inTutorial = true;
         continueText.gameObject.SetActive(true);
+        StarterAssetsInputs.instance.SwitchMap();
     }
 
     public void OnlyShowBubble(string instruction)
@@ -73,6 +74,7 @@ public class Tutorial : MonoBehaviour
         UiController.instance.OneTimeScale();
         CloseTutorial();
         inTutorial = false;
+        StarterAssetsInputs.instance.SwitchMap();
     }
 
     public void OnlyHideBubble()
