@@ -115,12 +115,6 @@ public class UiController : MonoBehaviour
         equipArea.SetActive(false);
     }
 
-    public IEnumerator stopRadio()
-    {
-        yield return new WaitForSeconds(20f);
-        Radio.Stop();
-    }
-
     public void changeInsText(string t)
     {
         insText.text = t;
@@ -482,6 +476,10 @@ public class UiController : MonoBehaviour
     public void StartButtonClicked()
     {
         //CollectFeedback.instance.WriteMetricsToFile();
+        AudioManager.instance.homePageMusic.Stop();
+        AudioManager.instance.oceanWaveSFX.Play();
+        AudioManager.instance.dayOneMusic.Play();
+        AudioManager.instance.radioVoiceSFX.Play();
         StartPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

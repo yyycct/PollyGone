@@ -271,7 +271,7 @@ public class playerCollider : MonoBehaviour
         }
         else if (other.tag == "radio")
         {
-            StartCoroutine(UiController.instance.stopRadio());
+            StartCoroutine(AudioManager.instance.stopRadio());
         }
         else if (other.tag == "cookedMush")
         {
