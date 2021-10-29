@@ -39,13 +39,15 @@ public class items
     //public int index;
     public bool usable;
     public int amount;
-    public items(ItemType _itemType, bool _ediable, bool _combinable, bool _usable, int _amount)
+    public int fireTime;
+    public items(ItemType _itemType, bool _ediable, bool _combinable, bool _usable, int _amount, int _fireTime)
     {
         itemType = _itemType;
         ediable = _ediable;
         combinable = _combinable;
         usable = _usable;
         amount = _amount;
+        fireTime = _fireTime;
     }
 
     public items(ItemType _itemType)
@@ -58,6 +60,7 @@ public class items
                 combinable = true;
                 usable = true;
                 amount = 0;
+                fireTime = 0;
                 break;
             case ItemType.Mushroom:
                 itemType = _itemType;
@@ -65,6 +68,7 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
+                fireTime = 0;
                 break;
             case ItemType.Wood:
                 itemType = _itemType;
@@ -72,6 +76,7 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
+                fireTime = 30;
                 break;
             case ItemType.Knife:
                 itemType = _itemType;
@@ -79,6 +84,7 @@ public class items
                 combinable = false;
                 usable = false;
                 amount = 0;
+                fireTime = 0;
                 break;
             case ItemType.Cup:
                 itemType = _itemType;
@@ -86,6 +92,7 @@ public class items
                 combinable = false;
                 usable = false;
                 amount = 0;
+                fireTime = 0;
                 break;
             case ItemType.Pot:
                 itemType = _itemType;
@@ -93,6 +100,7 @@ public class items
                 combinable = false;
                 usable = false;
                 amount = 0;
+                fireTime = 0;
                 break;
             case ItemType.Pic:
                 itemType = _itemType;
@@ -100,6 +108,7 @@ public class items
                 combinable = false;
                 usable = false;
                 amount = 0;
+                fireTime = 20;
                 break;
             case ItemType.Can:
                 itemType = _itemType;
@@ -107,6 +116,7 @@ public class items
                 combinable = false;
                 usable = false;
                 amount = 0;
+                fireTime = 0;
                 break;
             case ItemType.GamCon:
                 itemType = _itemType;
@@ -114,6 +124,7 @@ public class items
                 combinable = false;
                 usable = false;
                 amount = 0;
+                fireTime = 0;
                 break;
             case ItemType.Candle:
                 itemType = _itemType;
@@ -121,6 +132,7 @@ public class items
                 combinable = false;
                 usable = false;
                 amount = 0;
+                fireTime = 10;
                 break;
             case ItemType.Book:
                 itemType = _itemType;
@@ -128,6 +140,7 @@ public class items
                 combinable = false;
                 usable = false;
                 amount = 0;
+                fireTime = 40;
                 break;
             case ItemType.Vase:
                 itemType = _itemType;
@@ -135,6 +148,7 @@ public class items
                 combinable = false;
                 usable = false;
                 amount = 0;
+                fireTime = 0;
                 break;
             case ItemType.Bat:
                 itemType = _itemType;
@@ -142,6 +156,7 @@ public class items
                 combinable = false;
                 usable = false;
                 amount = 0;
+                fireTime = 20;
                 break;
             case ItemType.CampFire:
                 itemType = _itemType;
@@ -149,6 +164,7 @@ public class items
                 combinable = false;
                 usable = false;
                 amount = 0;
+                fireTime = 60;
                 break;
             case ItemType.CookedMush:
                 itemType = _itemType;
@@ -156,6 +172,7 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
+                fireTime = 0;
                 break;
             case ItemType.Axe:
                 itemType = _itemType;
@@ -163,6 +180,7 @@ public class items
                 combinable = false;
                 usable = true;
                 amount = 0;
+                fireTime = 0;
                 break;
             case ItemType.WoodBlock:
                 itemType = _itemType;
@@ -170,6 +188,7 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
+                fireTime = 60;
                 break;
             case ItemType.Plank:
                 itemType = _itemType;
@@ -177,6 +196,7 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
+                fireTime = 180;
                 break;
             case ItemType.Water:
                 itemType = _itemType;
@@ -184,6 +204,7 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
+                fireTime = -20;
                 break;
             case ItemType.Coconut:
                 itemType = _itemType;
@@ -191,6 +212,7 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
+                fireTime = -10;
                 break;
             case ItemType.Soup:
                 itemType = _itemType;
@@ -198,6 +220,7 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
+                fireTime = -20;
                 break;
             case ItemType.Boat:
                 itemType = _itemType;
@@ -205,6 +228,7 @@ public class items
                 combinable = false;
                 usable = false;
                 amount = 0;
+                fireTime = 400;
                 break;
             default:
                 break;

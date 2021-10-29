@@ -123,18 +123,8 @@ public class FireAnimation : MonoBehaviour
         int sec = Mathf.FloorToInt(FireTime % 60f);
         FireText.text = string.Format("{0:00}:{1:00}", min, sec);
     }
-    public void UpdateFireTime(items.ItemType type)
+    public void UpdateFireTime(items item)
     {
-        switch (type)
-        {
-            case items.ItemType.Wood:
-                FireTime += WoodBranchTime;
-                break;
-            case items.ItemType.WoodBlock:
-                FireTime += WoodBlockTime;
-                break;
-            default:
-                break;
-        }
+        FireTime += item.fireTime;
     }
 }

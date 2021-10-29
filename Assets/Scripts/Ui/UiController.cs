@@ -277,12 +277,12 @@ public class UiController : MonoBehaviour
         }
         else if (objType == items.ItemType.Water)
         {
-            PlayerHealth.instance.drink(5);
+            PlayerHealth.instance.drink(10);
         }
         else if (objType == items.ItemType.Coconut)
         {
-            PlayerHealth.instance.EatFood(5);
-            PlayerHealth.instance.drink(5);
+            PlayerHealth.instance.EatFood(10);
+            PlayerHealth.instance.drink(10);
         }
         else if (objType == items.ItemType.CookedMush)
         {

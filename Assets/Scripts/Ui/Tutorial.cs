@@ -151,7 +151,7 @@ public class Tutorial : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("ColdTutorial"))
         {
-            ShowBubble("The cold value reaches 50%, my health is dropping");
+            ShowBubble("The cold value is less than 20%, my health is dropping");
             PlayerPrefs.SetInt("ColdTutorial", 1);
             coldArrow.SetActive(true);
         }
@@ -181,7 +181,7 @@ public class Tutorial : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("FullRaiseHealthTutorial"))
         {
-            ShowBubble("I am 80% percent full, my health is raising!");
+            ShowBubble("I am more than 70% full, my health is raising!");
             PlayerPrefs.SetInt("FullRaiseHealthTutorial", 1);
             hydrateArrow.SetActive(true);
         }

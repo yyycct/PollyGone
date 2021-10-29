@@ -41,8 +41,9 @@ public class playerCollider : MonoBehaviour
     }
     private void Update()
     {
-        if(_input.interact && interactable)
+        if(_input.interact)
         {
+            _input.interact = false;
             switch (inteCode)
             {
                 case 0:
@@ -63,10 +64,12 @@ public class playerCollider : MonoBehaviour
                     break;
                 default:
                     break;
-            }   
+            }
+            inteCode = -1;
         }
-        if(_input.interactTwo && interactable)
+        if(_input.interactTwo)
         {
+            _input.interactTwo = false;
             switch (inteCode)
             {
                 case 0:                   
@@ -87,6 +90,7 @@ public class playerCollider : MonoBehaviour
                 default:
                     break;
             }
+            inteCode = -1;
         }
         if (_input.bag)
         {
@@ -135,7 +139,6 @@ public class playerCollider : MonoBehaviour
         UiController.instance.changeInsTwoText(inteTwoText);
         inteCode = intecode;
         targetObject = other.gameObject;
-        interactable = true;
     }
 
     private void OnTriggerStay(Collider other)
@@ -319,12 +322,10 @@ public class playerCollider : MonoBehaviour
                 UiController.instance.changeInsTwoText(inteTwoText);
                 inteCode = -1;
             }
-            interactable = true;
             targetObject = other.gameObject;
         }
     }
 
-    
 
     private void OnTriggerExit(Collider other)
     {
@@ -371,7 +372,6 @@ public class playerCollider : MonoBehaviour
     {
         _input.interact = false;
         _input.interactTwo = false;
-        interactable = false;
         UiController.instance.changeInsText("");
         UiController.instance.changeInsTwoText("");
         PlayerHealth.instance.nearHeat = false;
@@ -521,7 +521,7 @@ public class playerCollider : MonoBehaviour
             int selection = UiController.instance.DragItemNumber;
             if (selection >= 0 && selection < playerBag.AllItem.Count())
             {
-                targetObject.GetComponent<FireAnimation>().UpdateFireTime(playerBag.AllItem[selection].itemType);
+                targetObject.GetComponent<FireAnimation>().UpdateFireTime(playerBag.AllItem[selection]);
 
                 playerBag.AllItem[selection].amount--;
                 Debug.Log(playerBag.AllItem[selection].amount);
@@ -537,7 +537,7 @@ public class playerCollider : MonoBehaviour
             int selection = UiController.instance.craftItemSelected;
             if (selection >= 0 && selection < UiController.instance.itemsInCraft.Count)
             {
-                targetObject.GetComponent<FireAnimation>().UpdateFireTime(playerBag.AllItem[selection].itemType);
+                targetObject.GetComponent<FireAnimation>().UpdateFireTime(playerBag.AllItem[selection]);
 
                 UiController.instance.itemsInCraft.Remove(UiController.instance.itemsInCraft[selection]);
                 UiController.instance.PrintCrafts();

@@ -173,7 +173,7 @@ public class PlayerHealth : MonoBehaviour
                 coldValue += Time.deltaTime * 10f;
             }
             coldValue = clampValue(coldValue);
-            if (!playerCollider.instance.bagOn)
+            if (!playerCollider.instance.bagOn && !Tutorial.instance.inTutorial)
             {
                 Tutorial.instance.OnlyShowBubble("Feel warm here");
             }
@@ -217,6 +217,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (coldValue <= 20f)
         {
+            Tutorial.instance.ColdTuto();
             healthPoints -= Time.deltaTime * coldHealthDropSpeed;
             coldSlider.color = Red;
         }

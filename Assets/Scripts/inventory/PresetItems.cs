@@ -10,30 +10,30 @@ public class PresetItems : MonoBehaviour
         instance = this;
     }
 
-    public items rock = new items(items.ItemType.Rock, false, true, true, 0);
-    public items mushroom = new items(items.ItemType.Mushroom, true, false, false, 0);
-    public items purpleMush = new items(items.ItemType.PurpleMush, true, false, false, 0);
-    public items redMush = new items(items.ItemType.RedMush, true, false, false, 0);
-    public items wood = new items(items.ItemType.Wood, false, true, false, 0);
-    public items cup = new items(items.ItemType.Cup, false, false, false, 0);
-    public items can = new items(items.ItemType.Can, true, false, false, 0);
-    public items pic = new items(items.ItemType.Pic, false, true, false, 0);
-    public items candle = new items(items.ItemType.Candle, false, true, false, 0);
-    public items pot = new items(items.ItemType.Pot, false, false, false, 0);
-    public items gamCon = new items(items.ItemType.GamCon, false, false, false, 0);
-    public items bat = new items(items.ItemType.Bat, false, false, false, 0);
-    public items vase = new items(items.ItemType.Vase, false, false, false, 0);
-    public items book = new items(items.ItemType.Book, false, true, false, 0);
-    public items knife = new items(items.ItemType.Knife, false, true, false, 0);
-    public items campFire = new items(items.ItemType.CampFire, false, false, false, 0);
-    public items cookedMush = new items(items.ItemType.CookedMush, true, true, false, 0);
-    public items axe = new items(items.ItemType.Axe, false, false, true, 0);
-    public items woodBlock = new items(items.ItemType.WoodBlock, false, true, false, 0);
-    public items plank = new items(items.ItemType.Plank, false, true, false, 0);
-    public items water = new items(items.ItemType.Water, true, true, false, 0);
-    public items coconut = new items(items.ItemType.Coconut, true, true, false, 0);
-    public items soup = new items(items.ItemType.Soup, true, true, false, 0);
-    public items boat = new items(items.ItemType.Boat, false, false, false, 0);
+    public items rock = new items(items.ItemType.Rock, false, true, true, 0, 0);
+    public items mushroom = new items(items.ItemType.Mushroom, true, false, false, 0, 0);
+    public items purpleMush = new items(items.ItemType.PurpleMush, true, false, false, 0, 0);
+    public items redMush = new items(items.ItemType.RedMush, true, false, false, 0, 0);
+    public items wood = new items(items.ItemType.Wood, false, true, false, 0, 30);
+    public items cup = new items(items.ItemType.Cup, false, false, false, 0, 0);
+    public items can = new items(items.ItemType.Can, true, false, false, 0, 0);
+    public items pic = new items(items.ItemType.Pic, false, true, false, 0, 20);
+    public items candle = new items(items.ItemType.Candle, false, true, false, 0, 10);
+    public items pot = new items(items.ItemType.Pot, false, false, false, 0, 0);
+    public items gamCon = new items(items.ItemType.GamCon, false, false, false, 0, 0);
+    public items bat = new items(items.ItemType.Bat, false, false, false, 0, 20);
+    public items vase = new items(items.ItemType.Vase, false, false, false, 0, 0);
+    public items book = new items(items.ItemType.Book, false, true, false, 0, 40);
+    public items knife = new items(items.ItemType.Knife, false, true, false, 0, 0);
+    public items campFire = new items(items.ItemType.CampFire, false, false, false, 0, 60);
+    public items cookedMush = new items(items.ItemType.CookedMush, true, true, false, 0, 0);
+    public items axe = new items(items.ItemType.Axe, false, false, true, 0, 0);
+    public items woodBlock = new items(items.ItemType.WoodBlock, false, true, false, 0, 60);
+    public items plank = new items(items.ItemType.Plank, false, true, false, 0, 180);
+    public items water = new items(items.ItemType.Water, true, true, false, 0, -20);
+    public items coconut = new items(items.ItemType.Coconut, true, true, false, 0, -10);
+    public items soup = new items(items.ItemType.Soup, true, true, false, 0, -20);
+    public items boat = new items(items.ItemType.Boat, false, false, false, 0, 400);
     public items GetItemFromType(items.ItemType type)
     {
         switch (type)
