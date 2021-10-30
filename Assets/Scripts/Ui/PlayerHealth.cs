@@ -22,6 +22,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float coldHealthDropSpeed = 0.2f;
     [SerializeField] private float hungerDropSpeed = 0.1f;
     [SerializeField] private float hydrateDropSpeed = 0.2f;
+    [SerializeField] private float coldDropSpeed = 0.2f;
     [SerializeField] private ParticleSystem eatEFX;
     [SerializeField] private ParticleSystem drinkEFX;
     [SerializeField] private Color Green;
@@ -151,7 +152,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (inCold)
         {
-            coldValue -= Time.deltaTime * 0.1f;
+            coldValue -= Time.deltaTime * coldDropSpeed;
             coldValue = clampValue(coldValue);
             //warningText.text = "It feels a little cold, where can I find some heat?";
             if(coldValue <= 20f && ! nearHeat)

@@ -40,6 +40,7 @@ public class StarterAssetsInputs : MonoBehaviour
             {
 				Cursor.lockState = CursorLockMode.Locked;
 				Cursor.visible = false;
+				playerCollider.instance.bagOn = true;
 			}
 			PlayerInput.SwitchCurrentActionMap("Tutorial");
 			fullControl = false;
@@ -50,6 +51,7 @@ public class StarterAssetsInputs : MonoBehaviour
 			{
 				Cursor.lockState = CursorLockMode.None;
 				Cursor.visible = true;
+				playerCollider.instance.bagOn = true;
 			}
 			PlayerInput.SwitchCurrentActionMap("Player");
 			fullControl = true;

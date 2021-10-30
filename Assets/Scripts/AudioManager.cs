@@ -10,11 +10,6 @@ public class AudioManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
-    {
-        homePageMusic.Play();
-    }
-
     public AudioSource homePageMusic;
     public AudioSource dayOneMusic;
     public AudioSource dayTwoMusic;

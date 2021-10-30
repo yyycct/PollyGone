@@ -5,6 +5,7 @@ using UnityEngine;
 public class PalmTree : MonoBehaviour
 {
     private int health = 6;
+    private int coconutHealth = 3;
     private Animator anim;
     public ParticleSystem TreeFallEFX;
     public ParticleSystem TreeHitEFX;
@@ -18,15 +19,24 @@ public class PalmTree : MonoBehaviour
 
     public void CutTree()
     {
-        health--;
+        if (UiController.instance.equipItem.itemType == items.ItemType.Axe)
+        {
+            health--;
+            coconutHealth--;
+        }
+        else if (UiController.instance.equipItem.itemType == items.ItemType.Rock)
+        {
+            coconutHealth--;
+        }
         TreeHitEFX.Play();
         TreeHitSmokeEFX.Play();
         audio.Play();
+        CheckState();
     }
 
     public void CheckState()
     {
-        if (health == 3)
+        if (coconutHealth == 0)
         {
             DropCoconut();
         }

@@ -9,22 +9,7 @@ using UnityEngine.InputSystem;
 public class UiController : MonoBehaviour
 {
     public static UiController instance;
-    public Texture WoodSprite;
-    public Texture RockSprite;
-    public Texture MushSprite;
-    public Texture Campfire;
-    public Texture AxeSprite;
-    public Texture PotSprite;
-    public Texture CupSprite;
-    public Texture CanSprite;
-    public Texture GameConSprite;
-    public Texture BatSprite;
-    public Texture VaseSprite;
     public Texture EmptySprite;
-    public Texture KnifeSprite;
-    public Texture CandleSprite;
-    public Texture PicFrameSprite;
-    public Texture BookSprite;
     //public List<Text> inventoryAmount = new List<Text>();
     public GameObject itemsInBag;
     public GameObject craftButton;
@@ -79,7 +64,12 @@ public class UiController : MonoBehaviour
     public TMP_Text insText;
     public TMP_Text insTwoText;
 
+    public GameObject rescuePanel;
+    public Image rescueImage;
+    public Sprite boatSprite;
+    public Sprite helicopterSprite;
 
+    public GameObject cloudImage;
 
     private void Awake()
     {
@@ -113,6 +103,7 @@ public class UiController : MonoBehaviour
         eatArea.SetActive(false);
         dropArea.SetActive(false);
         equipArea.SetActive(false);
+        rescuePanel.SetActive(false);
     }
 
     public void changeInsText(string t)
@@ -134,7 +125,6 @@ public class UiController : MonoBehaviour
         {
             itemsInBag.transform.GetChild(_index).GetChild(1).GetComponent<TMP_Text>().text = _amount.ToString();
         }
-        
     }
 
     public void printCookItems()
@@ -476,9 +466,9 @@ public class UiController : MonoBehaviour
     public void StartButtonClicked()
     {
         //CollectFeedback.instance.WriteMetricsToFile();
-        AudioManager.instance.homePageMusic.Stop();
+        //AudioManager.instance.homePageMusic.Stop();
         AudioManager.instance.oceanWaveSFX.Play();
-        AudioManager.instance.dayOneMusic.Play();
+        //AudioManager.instance.dayOneMusic.Play();
         AudioManager.instance.radioVoiceSFX.Play();
         StartPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
@@ -486,6 +476,21 @@ public class UiController : MonoBehaviour
         OneTimeScale();
         playerCollider.instance.bagOn = false;
         Tutorial.instance.WalkTuto();
+    }
+
+    public void Rescued(int reason)
+    {
+        if (reason == 0)
+        {
+            rescueImage.sprite = boatSprite;
+        }
+        else if (reason == 1)
+        {
+            rescueImage.sprite = helicopterSprite;
+        }
+        playerCollider.instance.bagOn = true;
+        ZeroTimeScale();
+        rescuePanel.SetActive(true);
     }
 
     public void ZeroTimeScale()

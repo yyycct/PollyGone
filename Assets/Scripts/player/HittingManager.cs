@@ -25,13 +25,10 @@ public class HittingManager : MonoBehaviour
 
     public void CutTree()
     {
-        if (UiController.instance.equipItem.itemType == items.ItemType.Axe)
+        if (col != null)
         {
-            if (col != null)
-            {
-                col.GetComponent<PalmTree>().CutTree();
-                col.GetComponent<PalmTree>().CheckState();
-            }
+            col.GetComponent<PalmTree>().CutTree();
+            //col.GetComponent<PalmTree>().CheckState();
         }
     }
 

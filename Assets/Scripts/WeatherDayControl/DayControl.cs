@@ -34,7 +34,7 @@ public class DayControl : MonoBehaviour
     void Start()
     {
         randomRainTime = Random.Range(11, 15);
-        rainRemainTime = Random.Range(1, 3);
+        rainRemainTime = Random.Range(6, 9);
         Debug.Log(randomRainTime);
     }
 
@@ -56,7 +56,7 @@ public class DayControl : MonoBehaviour
             raining = false;
             cloudy = false;
         }
-        else if (DayCount == 3)
+        else if (DayCount == 3 && timeofDay > 6 && timeofDay < 18)
         {
             cloudy = true;
             raining = false;
@@ -77,6 +77,7 @@ public class DayControl : MonoBehaviour
             Rain();
             rainEFX.SetActive(true);
             dayLightIntensity = 0.2f;
+            UiController.instance.cloudImage.SetActive(true);
         }
         else if (cloudy)
         {
@@ -85,12 +86,14 @@ public class DayControl : MonoBehaviour
             RenderSettings.skybox.SetFloat("_SkySize", 0f);
             raining = false;
             RenderSettings.fog = true;
+            UiController.instance.cloudImage.SetActive(true);
         }
         else
         {
             Sunny();
             rainEFX.SetActive(false);
             dayLightIntensity = 1f;
+            UiController.instance.cloudImage.SetActive(false);
         }
     }
 

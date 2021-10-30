@@ -52,8 +52,8 @@ public class Tutorial : MonoBehaviour
         tutorialBubble.gameObject.SetActive(true);
         inTutorial = true;
         continueText.gameObject.SetActive(true);
-        UiController.instance.ZeroTimeScale();
         StarterAssetsInputs.instance.SwitchMap();
+        UiController.instance.ZeroTimeScale();
     }
 
     public void OnlyShowBubble(string instruction)
@@ -73,6 +73,7 @@ public class Tutorial : MonoBehaviour
         UiController.instance.OneTimeScale();
         CloseTutorial();
         inTutorial = false;
+        playerCollider.instance.bagOn = false;
         StarterAssetsInputs.instance.SwitchMap();
     }
 
@@ -194,7 +195,18 @@ public class Tutorial : MonoBehaviour
 
     IEnumerator BoatEndingTimer()
     {
-        yield return new WaitForSeconds(2f);
-        ShowBubble("You successfully made a boat and escaped this island with it.");
+        yield return new WaitForSeconds(3f);
+        UiController.instance.Rescued(0);
+    }
+
+    public void HelicopterEnding()
+    {
+        StartCoroutine(HelicopterEndingTimer());
+    }
+
+    IEnumerator HelicopterEndingTimer()
+    {
+        yield return new WaitForSeconds(3f);
+        UiController.instance.Rescued(1);
     }
 }
