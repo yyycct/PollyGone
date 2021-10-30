@@ -187,7 +187,7 @@ public class StarterAssetsInputs : MonoBehaviour
     }
 	public void CraftInput(int hand)
     {
-		if(hand != perviousHand)
+		if(hand != perviousHand && UiController.instance.craftQTEPanel.activeInHierarchy)
         {
 			perviousHand = hand;
 			CraftQTE.instance.craftValue++;

@@ -20,6 +20,13 @@ public class FireAnimation : MonoBehaviour
     public float WoodBranchTime = 30f;
     public float WoodBlockTime = 60f;
     public bool UnderCover = false;
+
+    const float maxSizeTime = 300f;
+    const float minSizeTime = 60f;
+    const float maxSize = 3f;
+    const float minSize = 1f;
+    private float currentSize = 1f;
+    private ParticleSystem.VelocityOverLifetimeModule VelocityOverLifetimeModule;
     private void Awake()
     {
         instance = this;
@@ -86,7 +93,36 @@ public class FireAnimation : MonoBehaviour
             }
         }
 
+        FireSizeUpdate();
     }
+
+    private void FireSizeUpdate()
+    {
+        if (FireTime <= minSizeTime)
+        {
+            currentSize = minSize;
+        }
+        else if (FireTime >= maxSizeTime)
+        {
+            currentSize = maxSize;
+            ps.startSize = 0.9f;
+            ps.maxParticles = 150;
+            VelocityOverLifetimeModule = ps.velocityOverLifetime;
+            VelocityOverLifetimeModule.yMultiplier = 1.8f;
+        }
+        else
+        {
+            currentSize = Mathf.Lerp(minSize, maxSize, (FireTime - minSizeTime) / (maxSizeTime - minSizeTime));
+            ps.startSize = Mathf.Lerp(0.3f, 0.9f, (FireTime - minSizeTime) / (maxSizeTime - minSizeTime));
+            ps.maxParticles = (int)Mathf.Lerp(50f, 150f, (FireTime - minSizeTime) / (maxSizeTime - minSizeTime));
+            VelocityOverLifetimeModule = ps.velocityOverLifetime;
+            VelocityOverLifetimeModule.yMultiplier = Mathf.Lerp(0.6f, 1.8f, (FireTime - minSizeTime) / (maxSizeTime - minSizeTime));
+        }
+
+        this.gameObject.transform.localScale = new Vector3(currentSize, currentSize, currentSize);
+
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "RainFreeZone")

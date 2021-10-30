@@ -312,8 +312,8 @@ public class playerCollider : MonoBehaviour
             else
             {
                 Tutorial.instance.AddWoodTuto();
-                inteText = "Open bag start cooking"; //cooking state
-                inteTwoText = "Open bag to add to fire";
+                /*inteText = "Open bag start cooking"; //cooking state
+                inteTwoText = "Open bag to add to fire";*/
                 PlayerHealth.instance.nearHeat = true;
                 craftOrCook = 1;
                 UiController.instance.CookingMode();
@@ -613,7 +613,8 @@ public class playerCollider : MonoBehaviour
 
     public void openBox(GameObject target)
     {
-        Vector3 pos = new Vector3(target.transform.position.x, target.transform.position.y + 0.5f, target.transform.position.z);
+        Vector3 pos = new Vector3(target.transform.position.x, target.transform.position.y + 1f, target.transform.position.z);
+        GameObject box = Instantiate(BoxManager.instance.openedBoxes, target.transform.position, target.transform.rotation);
         GameObject item = Instantiate(BoxManager.instance.getItem(cont), pos, Quaternion.identity);
         cont++;
         wrapUp();

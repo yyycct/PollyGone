@@ -36,6 +36,7 @@ TagManager:
   - RainFreeZone
   - torch
   - plank
+  - openedBox
   layers:
   - Default
   - TransparentFX

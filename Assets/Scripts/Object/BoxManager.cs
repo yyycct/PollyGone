@@ -14,6 +14,7 @@ public class BoxManager : MonoBehaviour
         instance = this;
     }
     public GameObject[] boxItems;
+    public GameObject openedBoxes;
     public int[] itemId;
     void Start()
     {
