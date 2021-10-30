@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e772d6cd05039943813ab29ffe9709c, type: 3}
   m_Name: Soup1
   m_EditorClassIdentifier: 
-  craftMaterials: 1300000001000000
+  craftMaterials: 1400000001000000
   craftResult: 21
