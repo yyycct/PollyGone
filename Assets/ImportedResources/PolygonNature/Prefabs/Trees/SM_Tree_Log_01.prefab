@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33173216093989474}
   - component: {fileID: 23701383089980308}
   - component: {fileID: 64294127860275684}
+  - component: {fileID: 3590074160045588560}
   m_Layer: 0
   m_Name: SM_Tree_Log_01
   m_TagString: branch
@@ -94,6 +95,19 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 77ea8f3a78624e8459b3c7243f68bb2e, type: 3}
+--- !u!65 &3590074160045588560
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209787234085090}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2398243, y: 0.7138452, z: 3.0540142}
+  m_Center: {x: -0.0014367104, y: 0.13947538, z: -0.018512249}

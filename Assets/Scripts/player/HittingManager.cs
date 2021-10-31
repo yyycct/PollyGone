@@ -16,6 +16,10 @@ public class HittingManager : MonoBehaviour
         {
             col = other;
         }
+        else if (other.CompareTag("tree"))
+        {
+            col = other;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -27,7 +31,14 @@ public class HittingManager : MonoBehaviour
     {
         if (col != null)
         {
-            col.GetComponent<PalmTree>().CutTree();
+            if (col.CompareTag("palmTree"))
+            {
+                col.GetComponent<PalmTree>().CutTree();
+            }
+            else if (col.CompareTag("tree"))
+            {
+                col.GetComponent<PineTree>().CutTree();
+            }
             //col.GetComponent<PalmTree>().CheckState();
         }
     }

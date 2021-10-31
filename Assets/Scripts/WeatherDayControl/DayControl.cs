@@ -29,6 +29,9 @@ public class DayControl : MonoBehaviour
     private float timeRatio = 6 * 60 / 24;
     public static DayControl instance;
     private bool boxSpawned = false;
+    public int numOfBoxToSpawn = 5;
+    public int numOfMushToSpawn = 15;
+    private bool mushSpawned = false;
     private void Awake()
     {
         instance = this;
@@ -50,7 +53,7 @@ public class DayControl : MonoBehaviour
         {
             RenderSettings.fog = true;
             RenderSettings.fogColor = nightFog;
-            Debug.Log("Night fog on!");
+            RenderSettings.fogEndDistance = 20;
         }
         else
         {
@@ -61,10 +64,18 @@ public class DayControl : MonoBehaviour
             raining = true;
             cloudy = false;
         }
-        else if (DayCount == 2 && timeofDay > (randomRainTime + rainRemainTime) && !boxSpawned)
+        else if (DayCount == 2 && timeofDay > (randomRainTime + rainRemainTime) )
         {
-            SpawnBoxes.instance.spawnBox(5);
-            boxSpawned = true;
+            if (!boxSpawned)
+            {
+                SpawnBoxes.instance.spawnBox(numOfBoxToSpawn);
+                boxSpawned = true;
+            }
+            if (!mushSpawned)
+            {
+                SpawnMushroom.instance.spawnMush(numOfMushToSpawn);
+                mushSpawned = true;
+            }
             raining = false;
             cloudy = false;
         }
@@ -99,6 +110,7 @@ public class DayControl : MonoBehaviour
             raining = false;
             RenderSettings.fog = true;
             RenderSettings.fogColor = dayFog;
+            RenderSettings.fogEndDistance = 150;
             UiController.instance.cloudImage.SetActive(true);
         }
         else

@@ -70,7 +70,6 @@ public class UiController : MonoBehaviour
     public Sprite helicopterSprite;
 
     public GameObject cloudImage;
-
     private void Awake()
     {
         instance = this;

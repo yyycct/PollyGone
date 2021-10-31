@@ -149,12 +149,6 @@ public class playerCollider : MonoBehaviour
             interactable = true;
             ChangeInstruText(inteText, "", other, 0);
         }
-        else if (other.tag == "tree")
-        {
-            inteText = "(F) Cut Tree";
-            targetObject = other.gameObject;
-            ChangeInstruText(inteText, "", other, 3);
-        }
         else if (other.tag == "rock")
         {
             inteText = "(F) Pick Up Rock";
