@@ -15,6 +15,8 @@ public class DayControl : MonoBehaviour
     [SerializeField] private Color rainColor;
     [SerializeField] private Color normalColor;
     [SerializeField] private Color cloudyColor;
+    [SerializeField] private Color nightFog;
+    [SerializeField] private Color dayFog;
     [SerializeField] private int DayCount = 1;
     public float dayLightIntensity = 1f;
     public bool raining;
@@ -44,6 +46,16 @@ public class DayControl : MonoBehaviour
         timeofDay += Time.deltaTime / timeRatio;
         if (timeofDay >= 24) { DayCount++; }
         timeofDay %= 24;
+        if (timeofDay < 6 || timeofDay > 18)
+        {
+            RenderSettings.fog = true;
+            RenderSettings.fogColor = nightFog;
+            Debug.Log("Night fog on!");
+        }
+        else
+        {
+            RenderSettings.fog = false;
+        }
         if (DayCount == 2 && timeofDay >= randomRainTime && timeofDay <= (randomRainTime + rainRemainTime))
         {
             raining = true;
@@ -86,11 +98,13 @@ public class DayControl : MonoBehaviour
             RenderSettings.skybox.SetFloat("_SkySize", 0f);
             raining = false;
             RenderSettings.fog = true;
+            RenderSettings.fogColor = dayFog;
             UiController.instance.cloudImage.SetActive(true);
         }
         else
         {
-            Sunny();
+            if (timeofDay > 6 && timeofDay < 18) {
+                Sunny(); }
             rainEFX.SetActive(false);
             dayLightIntensity = 1f;
             UiController.instance.cloudImage.SetActive(false);
