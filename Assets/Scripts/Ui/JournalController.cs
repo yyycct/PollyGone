@@ -13,6 +13,12 @@ public class JournalController : MonoBehaviour
     [SerializeField] Text page2Text;
     private int pageNumber = 1;
     private int maxPage = 2;
+
+    private string dayOneText = "day 1";
+    private string dayTwoText = "day 2";
+    private string dayThreeText = "day 3";
+    private string dayFourText = "day 4";
+
     private void Awake()
     {
         instance = this;
@@ -22,7 +28,8 @@ public class JournalController : MonoBehaviour
     
     public void LoadInfo()
     {
-        
+        contextList.Add((dayOneText, dayTwoText));
+        contextList.Add((dayThreeText, dayFourText));
     }
 
     public void LoadPage()
