@@ -14,7 +14,16 @@ public class CollectFeedback : MonoBehaviour
     public static CollectFeedback instance;
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        
     }
     // You'll have more interesting metrics, and they will be better named.
     private int woodBranch =0;
@@ -63,7 +72,10 @@ public class CollectFeedback : MonoBehaviour
     }
     public void DeathReason(string reason)
     {
-        reasonOfDeath.Add(reason);
+        if (reason != "")
+        {
+            reasonOfDeath.Add(reason);
+        }
     }
     public void AxeCrafted()
     {
@@ -86,6 +98,18 @@ public class CollectFeedback : MonoBehaviour
     public void endTimer()
     {
         deathTime.Add(Time.time - startTime);
+    }
+
+    public string GetDeathReason()
+    {
+        if (death == 0)
+        {
+            return "";
+        }
+        else
+        {
+            return reasonOfDeath[death-1];
+        }
     }
     // Converts all metrics tracked in this script to their string representation
     // so they look correct when printing to a file.

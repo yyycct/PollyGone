@@ -65,18 +65,14 @@ public class PlayerHealth : MonoBehaviour
         if(healthPoints<= 0) 
         { 
             healthPoints = 0;
-            string reason = "You died";
-            /*if (inCold)
-            {
-                reason += ", Too Cold";
-            }*/
+            string reason = "";
             if(hungerPoints < 10f)
             {
                 reason += ", Too hungery";
             }
             if(hydratePoints < 10f)
             {
-                reason += ", Need Water";
+                reason += ", Thirsty";
             }
             UiController.instance.GameOver(reason);
         }

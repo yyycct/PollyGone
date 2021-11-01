@@ -294,11 +294,8 @@ public class UiController : MonoBehaviour
     public void GameOver(string reason)
     {
         GameOverPanel.SetActive(true);
-        deathText.text = reason;
-        CollectFeedback.instance.AddDeath(1);
-        CollectFeedback.instance.endTimer();
-        CollectFeedback.instance.DeathReason(reason);
-        StartCoroutine(Restart());
+        deathText.text = "You died, " + reason;
+        StartCoroutine(Restart(reason));
     }
 
     public void CraftButtonClicked()
@@ -433,11 +430,14 @@ public class UiController : MonoBehaviour
         }
     }
 
-    public IEnumerator Restart()
+    public IEnumerator Restart(string reason)
     {
         playerCollider.instance.bagOn = true;
         yield return new WaitForSeconds(3f);
         Debug.Log("Restarting");
+        CollectFeedback.instance.AddDeath(1);
+        CollectFeedback.instance.endTimer();
+        CollectFeedback.instance.DeathReason(reason);
         SceneManager.LoadScene(0);
     }
 

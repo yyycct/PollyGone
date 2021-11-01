@@ -116,7 +116,7 @@ public class playerCollider : MonoBehaviour
         }
         if (_input.restart)
         {
-            UiController.instance.Restart();
+            UiController.instance.Restart("");
         }
         if (_input.pause)
         {
@@ -622,6 +622,7 @@ public class playerCollider : MonoBehaviour
 
     public void ReadJournal()
     {
+        bagOn = true;
         JournalController.instance.LoadInfo();
         JournalController.instance.ShowJournal();
         JournalController.instance.LoadPage();
