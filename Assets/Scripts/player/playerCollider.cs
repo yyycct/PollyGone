@@ -376,17 +376,25 @@ public class playerCollider : MonoBehaviour
         PlayerHealth.instance.nearHeat = false;
         craftOrCook = 0;
         UiController.instance.CraftingMode();
+        Tutorial.instance.OnlyHideBubble();
+        inteCode = -1;
     }
     public void pickUpWater(GameObject target)
     {
+        bool addedSuccess = false;
         int waterCount = checkWater(target);
+        GameObject water = target.transform.GetChild(0).gameObject;
         if (waterCount > 0)
         {
             for (int i = 0; i < waterCount; i++)
             {
-                playerBag.AddItem(PresetItems.instance.water);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.water);
             }
             CollectFeedback.instance.AddtoWater(waterCount);
+            if (addedSuccess)
+            {
+                water.transform.localScale = new Vector3(water.transform.localScale.x, 0f, water.transform.localScale.z);
+            }
         }
         wrapUp();
     }
@@ -411,90 +419,91 @@ public class playerCollider : MonoBehaviour
     public void pickupItem(GameObject target)
     {
         Tutorial.instance.OpenBagTuto();
+        bool addedSuccess = false;
         switch (target.tag)
         {
             case "rock":
-                playerBag.AddItem(PresetItems.instance.rock);
+                addedSuccess =  playerBag.AddItem(PresetItems.instance.rock);
                 CollectFeedback.instance.AddToStone(1);
                 break;
             case "branch":
-                playerBag.AddItem(PresetItems.instance.wood);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.wood);
                 CollectFeedback.instance.AddToWoodBranch(1);
                 break;
             case "mushroom":
-                playerBag.AddItem(PresetItems.instance.mushroom);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.mushroom);
                 CollectFeedback.instance.AddtoMushroom(1);
                 break;
             case "purpleMush":
-                playerBag.AddItem(PresetItems.instance.purpleMush);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.purpleMush);
                 CollectFeedback.instance.AddtoMushroom(1);
                 break;
             case "redMush":
-                playerBag.AddItem(PresetItems.instance.redMush);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.redMush);
                 CollectFeedback.instance.AddtoMushroom(1);
                 break;
-            case "cup":                
-                playerBag.AddItem(PresetItems.instance.cup);
+            case "cup":
+                addedSuccess = playerBag.AddItem(PresetItems.instance.cup);
                 if (!playerBag.bagFull)
                 {
                     pickUpWater(target);
                 }
                 break;
             case "can":
-                playerBag.AddItem(PresetItems.instance.can);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.can);
                 break;
             case "picFrame":
-                playerBag.AddItem(PresetItems.instance.pic);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.pic);
                 break;
             case "candle":
-                playerBag.AddItem(PresetItems.instance.candle);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.candle);
                 break;
             case "pot":
-                playerBag.AddItem(PresetItems.instance.pot);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.pot);
                 if (!playerBag.bagFull)
                 {
                     pickUpWater(target);
                 }
                 break;
             case "gamCon":
-                playerBag.AddItem(PresetItems.instance.gamCon);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.gamCon);
                 break;
             case "bat":
-                playerBag.AddItem(PresetItems.instance.bat);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.bat);
                 break;
             case "vase":
-                playerBag.AddItem(PresetItems.instance.vase);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.vase);
                 if (!playerBag.bagFull)
                 {
                     pickUpWater(target);
                 }
                 break;
             case "book":
-                playerBag.AddItem(PresetItems.instance.book);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.book);
                 break;
             case "knife":
-                playerBag.AddItem(PresetItems.instance.knife);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.knife);
                 break;
             case "cookedMush":
-                playerBag.AddItem(PresetItems.instance.cookedMush);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.cookedMush);
                 break;
             case "coconut":
-                playerBag.AddItem(PresetItems.instance.coconut);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.coconut);
                 break;
             case "soup":
-                playerBag.AddItem(PresetItems.instance.soup);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.soup);
                 break;
             case "woodBlock":
-                playerBag.AddItem(PresetItems.instance.woodBlock);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.woodBlock);
                 break;
             case "plank":
-                playerBag.AddItem(PresetItems.instance.plank);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.plank);
                 break;
             case "axe":
-                playerBag.AddItem(PresetItems.instance.axe);
+                addedSuccess = playerBag.AddItem(PresetItems.instance.axe);
                 break;
         }
-        if (!playerBag.bagFull)
+        if (addedSuccess)
         {
             loopInventory();
             wrapUp();

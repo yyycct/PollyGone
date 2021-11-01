@@ -94,6 +94,10 @@ public class FireAnimation : MonoBehaviour
         }
 
         FireSizeUpdate();
+        if (HelicopterMove.instance.inRoute && FireTime >= 300f)
+        {
+            Tutorial.instance.HelicopterEnding();
+        }
     }
 
     private void FireSizeUpdate()

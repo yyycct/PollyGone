@@ -12,9 +12,10 @@ public class inventory
         AllItem = new List<items>();
     }
 
-    public void AddItem(items _item)
+    public bool AddItem(items _item)
     {
         bool repeat = false;
+        bool added = false;
         for (int i = 0; i < AllItem.Count; i++)
         {
             if (AllItem[i] == _item)
@@ -23,6 +24,7 @@ public class inventory
                 {
                     repeat = true;
                     AllItem[i].amount++;
+                    added = true;
                     break;
                 }
                 else
@@ -38,16 +40,18 @@ public class inventory
             if (AllItem.Count >= bagCapacity)
             {
                 bagFull = true;
-                UiController.instance.insText.text = "Bag is full";
+                Tutorial.instance.BagIsFull();
             }
             else
             {
                 bagFull = false;
                 AllItem.Add(_item);
+                added = true;
                 _item.amount = 1;
                 UiController.instance.lastInBagNumber = AllItem.Count-1;
             }
         }
+        return added;
     }
     public items GetItem(int i)
     {

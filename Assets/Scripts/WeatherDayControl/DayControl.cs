@@ -32,6 +32,7 @@ public class DayControl : MonoBehaviour
     public int numOfBoxToSpawn = 5;
     public int numOfMushToSpawn = 15;
     private bool mushSpawned = false;
+    private bool heli = false;
     private void Awake()
     {
         instance = this;
@@ -83,6 +84,11 @@ public class DayControl : MonoBehaviour
         {
             cloudy = true;
             raining = false;
+            if(timeofDay>=10 && !heli)
+            {
+                HelicopterMove.instance.play = true;
+                heli = true;
+            }
         }
         else
         {

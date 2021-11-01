@@ -68,7 +68,7 @@ public class CollectFeedback : MonoBehaviour
     }
     public void AddtoTree(int value)
     {
-        tree += tree;
+        tree += value;
     }
     public void DeathReason(string reason)
     {

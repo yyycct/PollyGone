@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HelicopterMove : MonoBehaviour
 {
+    public static HelicopterMove instance;
     public GameObject[] Route;
     public GameObject PlaneStartPosition;
     public GameObject RouteStartPosition;
@@ -16,7 +17,10 @@ public class HelicopterMove : MonoBehaviour
     public bool play = false;
     public float beforeCicleBoxTime = 10f;
     public float betweenCicleBoxTime = 2f;
-
+    private void Awake()
+    {
+        instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +72,7 @@ public class HelicopterMove : MonoBehaviour
                 timer = 0f;
             }
         }
+
     }
     public void LerpPosition(GameObject start, GameObject end,  float totalTime)
     {        

@@ -25,7 +25,7 @@ public class JournalController : MonoBehaviour
         "I am full, I think I have the energy to search for more resources";
     private string dayThreeText = "day 3, Cloudy\n\n" +
         "A helicopter came, but they didn't see me. " +
-        "I hope they come back because I made this huge fire, shuould draw their attention.\n\n" +
+        "I hope they come back because I made this huge fire, should draw their attention.\n\n" +
         "I made a Axe with a knife and a wood branch, it made cutting tree much easier.";
     private string dayFourText = "";
 

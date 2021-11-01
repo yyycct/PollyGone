@@ -19,6 +19,8 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject coldArrow;
     [SerializeField] private GameObject hungerArrow;
     [SerializeField] private GameObject hydrateArrow;
+
+    [SerializeField] private GameObject bagFullText;
     bool cursorVis = false;
     CursorLockMode lockMode = CursorLockMode.Locked;
     public bool inTutorial = false;
@@ -208,5 +210,17 @@ public class Tutorial : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         UiController.instance.Rescued(1);
+    }
+
+    public void BagIsFull()
+    {
+        bagFullText.SetActive(true);
+        StartCoroutine(BagIsFullDisappear());
+    }
+
+    IEnumerator BagIsFullDisappear()
+    {
+        yield return new WaitForSeconds(3f);
+        bagFullText.SetActive(false);
     }
 }
