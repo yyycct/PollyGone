@@ -70,6 +70,7 @@ public class UiController : MonoBehaviour
     public Sprite helicopterSprite;
 
     public GameObject cloudImage;
+    public GameObject CreditPanel;
     private void Awake()
     {
         instance = this;
@@ -103,6 +104,7 @@ public class UiController : MonoBehaviour
         dropArea.SetActive(false);
         equipArea.SetActive(false);
         rescuePanel.SetActive(false);
+        CreditPanel.SetActive(false);
     }
 
     public void changeInsText(string t)
@@ -491,10 +493,16 @@ public class UiController : MonoBehaviour
             rescueImage.sprite = helicopterSprite;
         }
         playerCollider.instance.bagOn = true;
-        ZeroTimeScale();
+        StartCoroutine(CreditTimer());
         rescuePanel.SetActive(true);
     }
-
+    IEnumerator CreditTimer()
+    {
+        yield return new WaitForSeconds(4f);
+        closeMenu();
+        ZeroTimeScale();
+        CreditPanel.SetActive(true);
+    }
     public void ZeroTimeScale()
     {
         Time.timeScale = 0;
