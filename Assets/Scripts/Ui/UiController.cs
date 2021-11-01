@@ -513,6 +513,10 @@ public class UiController : MonoBehaviour
         Application.Quit();
     }
 
+    public void SetQuality(int i)
+    {
+        QualitySettings.SetQualityLevel(i);
+    }
 
 }
 
