@@ -60,7 +60,7 @@ public class playerCollider : MonoBehaviour
                     //cook();
                     break;
                 case 4:
-                    //pickUpWater(targetObject);
+                    ReadJournal();
                     break;
                 default:
                     break;
@@ -295,6 +295,11 @@ public class playerCollider : MonoBehaviour
             Debug.Log("Enter cave");
             inCave = true;
             PlayerHealth.instance.nearHeat = true;
+        }
+        else if (other.tag == "journal")
+        {
+            inteText = "(F) Read";
+            ChangeInstruText(inteText, "", other, 4);
         }
         else if (other.tag == "campFire")
         {
@@ -613,6 +618,13 @@ public class playerCollider : MonoBehaviour
         cont++;
         wrapUp();
         Destroy(target);
+    }
+
+    public void ReadJournal()
+    {
+        JournalController.instance.LoadInfo();
+        JournalController.instance.ShowJournal();
+        JournalController.instance.LoadPage();
     }
 }
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System;
 
@@ -21,10 +22,14 @@ public class CollectFeedback : MonoBehaviour
     private int mush = 0;
     private int water = 0;
     private int tree = 0;
-    private string reasonOfDeath;
+    private int death = 0;
+    private List<string> reasonOfDeath = new List<string>();
+    private List<float> deathTime = new List<float>();
     private bool axeCrafted;
     private bool campFireCrafted;
     private bool cave;
+    private float startTime;
+
     private string dataFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\PollyGone_Builds\FeedBackData\";
     //private string dataFolderPath = @"C:\Users\yyycc\Desktop\PollyGone_Builds\FeedBackData\";
 
@@ -47,13 +52,18 @@ public class CollectFeedback : MonoBehaviour
     {
         water += value;
     }
+
+    public void AddDeath(int value)
+    {
+        death += value;
+    }
     public void AddtoTree(int value)
     {
         tree += tree;
     }
     public void DeathReason(string reason)
     {
-        reasonOfDeath = reason;
+        reasonOfDeath.Add(reason);
     }
     public void AxeCrafted()
     {
@@ -66,6 +76,16 @@ public class CollectFeedback : MonoBehaviour
     public void FoundCave()
     {
         cave = true;
+    }
+
+    public void startTimer()
+    {
+        startTime = Time.time;
+    }
+
+    public void endTimer()
+    {
+        deathTime.Add(Time.time - startTime);
     }
     // Converts all metrics tracked in this script to their string representation
     // so they look correct when printing to a file.
@@ -82,8 +102,12 @@ public class CollectFeedback : MonoBehaviour
         metrics += "Axe: " + axeCrafted.ToString() + "\n";
         metrics += "Camp Fire: " + campFireCrafted.ToString() + "\n";
         metrics += "Find Cave: " + cave.ToString() + "\n";
+        metrics += "Death: " + death.ToString() + "\n";
         metrics += "Reason of Death:  ";
-        metrics += reasonOfDeath + "\n";
+        for (int i = 0; i < death; i++)
+        {
+            metrics += reasonOfDeath[i] + " for " + deathTime[i] +" seconds\n";
+        }
 
         return metrics;
     }
@@ -96,7 +120,7 @@ public class CollectFeedback : MonoBehaviour
         dateTime = dateTime.Replace("/", "_");
         dateTime = dateTime.Replace(":", "_");
         dateTime = dateTime.Replace(" ", "___");
-        return dataFolderPath + "PollyGone_metrics_" + dateTime + ".txt";
+        return "PollyGone_metrics_" + dateTime + ".txt";
     }
 
     // Generate the report that will be saved out to a file.

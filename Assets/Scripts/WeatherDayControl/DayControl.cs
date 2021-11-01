@@ -39,7 +39,7 @@ public class DayControl : MonoBehaviour
     void Start()
     {
         randomRainTime = Random.Range(11, 15);
-        rainRemainTime = Random.Range(6, 9);
+        rainRemainTime = Random.Range(3, 6);
         Debug.Log(randomRainTime);
     }
 
@@ -59,7 +59,7 @@ public class DayControl : MonoBehaviour
         {
             RenderSettings.fog = false;
         }
-        if (DayCount == 2 && timeofDay >= randomRainTime && timeofDay <= (randomRainTime + rainRemainTime))
+        if (DayCount == 2 && timeofDay >= randomRainTime && timeofDay <= (randomRainTime + rainRemainTime) && timeofDay < 18)
         {
             raining = true;
             cloudy = false;

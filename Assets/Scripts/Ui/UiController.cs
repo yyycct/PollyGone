@@ -295,6 +295,8 @@ public class UiController : MonoBehaviour
     {
         GameOverPanel.SetActive(true);
         deathText.text = reason;
+        CollectFeedback.instance.AddDeath(1);
+        CollectFeedback.instance.endTimer();
         CollectFeedback.instance.DeathReason(reason);
         StartCoroutine(Restart());
     }
@@ -475,6 +477,7 @@ public class UiController : MonoBehaviour
         OneTimeScale();
         playerCollider.instance.bagOn = false;
         Tutorial.instance.WalkTuto();
+        CollectFeedback.instance.startTimer();
     }
 
     public void Rescued(int reason)

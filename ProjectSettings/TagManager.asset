@@ -37,6 +37,7 @@ TagManager:
   - torch
   - plank
   - openedBox
+  - journal
   layers:
   - Default
   - TransparentFX
