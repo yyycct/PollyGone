@@ -5,7 +5,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 
-public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
+    IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private Canvas canvas;
     private Transform topLayerTransform;
@@ -124,5 +125,35 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log(this.GetComponentInParent<Transform>().name);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        int selection = int.Parse(this.transform.parent.name);
+        items item = null;
+        if (this.name == "itemImage")
+        {
+            if (playerCollider.instance.playerBag.GetSize() <= selection + 1)
+            {
+                item = playerCollider.instance.playerBag.GetItem(selection);
+            }
+        }
+        else if (this.name == "CraftSlot")
+        {
+            if (UiController.instance.itemsInCraft.Count <= selection + 1)
+            {
+                item = UiController.instance.itemsInCraft[selection];
+            }
+        }
+        else if (this.name == "EquipImage")
+        {
+            item = UiController.instance.equipItem;
+        }
+        ItemDescriptionController.instance.ShowDescription(item, this.rectTransform);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ItemDescriptionController.instance.HideDescription();
     }
 }

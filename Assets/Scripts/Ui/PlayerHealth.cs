@@ -236,16 +236,22 @@ public class PlayerHealth : MonoBehaviour
     }
     public void EatFood(int points)
     {
-        hungerPoints += points;
-        eatEFX.Play();
-        hungerPoints = clampValue(hungerPoints);
+        if (points > 0)
+        {
+            hungerPoints += points;
+            eatEFX.Play();
+            hungerPoints = clampValue(hungerPoints);
+        }
     }
 
     public void drink(int points)
     {
-        hydratePoints += points;
-        drinkEFX.Play();
-        hydratePoints = clampValue(hydratePoints);
+        if (points > 0)
+        {
+            hydratePoints += points;
+            drinkEFX.Play();
+            hydratePoints = clampValue(hydratePoints);
+        }
     }
 
     public void StartCold()

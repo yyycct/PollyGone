@@ -8,6 +8,7 @@ public class StarterAssetsInputs : MonoBehaviour
 	[Header("Character Input Values")]
 	public Vector2 move;
 	public Vector2 look;
+	public Vector2 mousePosition;
 	public bool jump;
 	public bool sprint;
 	public bool interact;
@@ -75,7 +76,10 @@ public class StarterAssetsInputs : MonoBehaviour
 	{
 		MoveInput(value.Get<Vector2>());
 	}
-
+	public void OnMousePosition(InputValue value)
+    {
+		MousePositionInput(value.Get<Vector2>());
+    }
 	public void OnAnykey(InputValue value)
     {
 		AnykeyInput(value.isPressed);
@@ -140,7 +144,10 @@ public class StarterAssetsInputs : MonoBehaviour
     {
 		action = newActionState;
     }
-
+	public void MousePositionInput(Vector2 newMousePosition)
+    {
+		mousePosition = newMousePosition;
+    }
 	public void AnykeyInput(bool newAnykeyState)
     {
 		anykey = newAnykeyState;

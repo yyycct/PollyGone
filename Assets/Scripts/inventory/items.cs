@@ -34,20 +34,28 @@ public class items
     }
 
     public ItemType itemType;
-    public bool ediable;
-    public bool combinable;
-    //public int index;
-    public bool usable;
-    public int amount;
-    public int fireTime;
-    public items(ItemType _itemType, bool _ediable, bool _combinable, bool _usable, int _amount, int _fireTime)
+    public bool ediable = false;
+    public bool combinable = true;
+    public bool usable = false;
+    public int amount = 0;
+    public int hungerValuePlus = 0;
+    public int hydrateValuePlus = 0;
+    public int fireTime = 0;
+    public string itemName;
+    public string description;
+    public items(ItemType _itemType, bool _ediable, bool _combinable, bool _usable, int _amount, 
+       int _hungerValuePlus, int _hydrateValuePlus, int _fireTime, string _itemName, string _description)
     {
         itemType = _itemType;
         ediable = _ediable;
         combinable = _combinable;
         usable = _usable;
         amount = _amount;
+        hungerValuePlus = _hungerValuePlus;
+        hydrateValuePlus = _hydrateValuePlus;
         fireTime = _fireTime;
+        itemName = _itemName;
+        description = _description;
     }
 
     public items(ItemType _itemType)
@@ -61,6 +69,8 @@ public class items
                 usable = true;
                 amount = 0;
                 fireTime = 0;
+                itemName = "Rock";
+                description = "Hit tree?";
                 break;
             case ItemType.Mushroom:
                 itemType = _itemType;
@@ -68,6 +78,7 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
+                hungerValuePlus = 10;
                 fireTime = 0;
                 break;
             case ItemType.Wood:
@@ -77,6 +88,8 @@ public class items
                 usable = false;
                 amount = 0;
                 fireTime = 30;
+                itemName = "Wood Branch";
+                description = "Put in fire";
                 break;
             case ItemType.Knife:
                 itemType = _itemType;
@@ -172,6 +185,7 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
+                hungerValuePlus = 20;
                 fireTime = 0;
                 break;
             case ItemType.Axe:
@@ -193,7 +207,7 @@ public class items
             case ItemType.Plank:
                 itemType = _itemType;
                 ediable = false;
-                combinable = true;
+                combinable = false;
                 usable = false;
                 amount = 0;
                 fireTime = 180;
@@ -204,6 +218,7 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
+                hydrateValuePlus = 10;
                 fireTime = -20;
                 break;
             case ItemType.Coconut:
@@ -212,6 +227,8 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
+                hungerValuePlus = 10;
+                hydrateValuePlus = 10;
                 fireTime = -10;
                 break;
             case ItemType.Soup:
@@ -220,6 +237,8 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
+                hungerValuePlus = 20;
+                hydrateValuePlus = 20;
                 fireTime = -20;
                 break;
             case ItemType.Boat:

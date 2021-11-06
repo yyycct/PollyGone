@@ -245,42 +245,25 @@ public class UiController : MonoBehaviour
     public void EatButtonClicked(bool bag)
     {
         Debug.Log("Eating");
+        items item;
         items.ItemType objType;
+        if (bag) item = playerCollider.instance.playerBag.GetItem(DragItemNumber);
+        else item = itemsInCraft[craftItemSelected];
+
         if (bag) objType = playerCollider.instance.playerBag.GetItem(DragItemNumber).itemType;
         else objType = itemsInCraft[craftItemSelected].itemType;
-            
+
+        PlayerHealth.instance.EatFood(item.hungerValuePlus);
+        PlayerHealth.instance.drink(item.hydrateValuePlus);
         if (objType == items.ItemType.PurpleMush)
         {
             ThirdPersonController.instance.MoveSpeed -= 0.5f;
             ThirdPersonController.instance.SprintSpeed -= 1f;
-            PlayerHealth.instance.EatFood(10);
             StartCoroutine(GainSpeedBack());
         }
         else if (objType == items.ItemType.RedMush)
         {
             GameOver("posioned");
-        }
-        else if (objType == items.ItemType.Water)
-        {
-            PlayerHealth.instance.drink(10);
-        }
-        else if (objType == items.ItemType.Coconut)
-        {
-            PlayerHealth.instance.EatFood(10);
-            PlayerHealth.instance.drink(10);
-        }
-        else if (objType == items.ItemType.CookedMush)
-        {
-            PlayerHealth.instance.EatFood(20);
-        }
-        else if (objType == items.ItemType.Soup)
-        {
-            PlayerHealth.instance.EatFood(10);
-            PlayerHealth.instance.drink(10);
-        }
-        else
-        {
-            PlayerHealth.instance.EatFood(10);
         }
         
         playerCollider.instance.DropItem(false, bag);
