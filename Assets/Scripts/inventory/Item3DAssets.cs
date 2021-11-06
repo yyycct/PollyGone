@@ -13,7 +13,7 @@ public class Item3DAssets : MonoBehaviour
     public GameObject Rock;
     public GameObject Mushroom;
     public GameObject Wood;
-    public GameObject Knife;
+    public GameObject SkateShoe;
     public GameObject Cup;
     public GameObject Pot;
     public GameObject Pic;

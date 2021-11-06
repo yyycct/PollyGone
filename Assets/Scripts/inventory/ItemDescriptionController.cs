@@ -22,7 +22,6 @@ public class ItemDescriptionController : MonoBehaviour
     {
         if (item != null)
         {
-            Debug.Log("Showing");
             PositionPanel(trans);
             descriptionPanel.SetActive(true);
             itemName.text = item.itemName;
@@ -63,19 +62,10 @@ public class ItemDescriptionController : MonoBehaviour
         }
         descriptionPanel.GetComponent<RectTransform>().pivot = new Vector2(pivX, pivY);
         descriptionPanel.transform.position = new Vector2(posX, posY);
-
-        /*Vector2 pos = StarterAssetsInputs.instance.mousePosition;
-
-        float pivX = pos.x / Screen.width;
-        float pivY = pos.y / Screen.height;
-
-        descriptionPanel.GetComponent<RectTransform>().pivot = new Vector2(pivX, pivY);
-        descriptionPanel.GetComponent<RectTransform>().position = trans.rect.position;*/
     }
 
     public void HideDescription()
     {
-        Debug.Log("Exit");
         descriptionPanel.SetActive(false);
     }
 }

@@ -30,68 +30,67 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         canvas = UiController.instance.canvas;
         topLayerTransform = UiController.instance.topLayerTransform;
     }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        /*if (Tutorial.instance.inTutorial)
-        {*/
-            int selection = -1;
-            if (this.name != "EquipImage")
-            {
-                selection = int.Parse(this.transform.parent.name);
-            }
+        int selection = -1;
+        if (this.name != "EquipImage")
+        {
+            selection = int.Parse(this.transform.parent.name);
+        }
 
-            if (this.name == "itemImage")
+        if (this.name == "itemImage")
+        {
+            UiController.instance.DragItemNumber = selection;
+            if (playerCollider.instance.playerBag.GetItem(selection).ediable)
             {
-                UiController.instance.DragItemNumber = selection;
-                if (playerCollider.instance.playerBag.GetItem(selection).ediable)
-                {
-                    UiController.instance.eatArea.SetActive(true);
-                }
-                if (playerCollider.instance.playerBag.GetItem(selection).usable)
-                {
-                    UiController.instance.equipArea.SetActive(true);
-                }
+                UiController.instance.eatArea.SetActive(true);
             }
-            else if (this.name == "CraftSlot")
+            if (playerCollider.instance.playerBag.GetItem(selection).usable)
             {
-                UiController.instance.craftItemSelected = selection;
-                if (UiController.instance.itemsInCraft[selection].ediable)
-                {
-                    UiController.instance.eatArea.SetActive(true);
-                }
-                if (UiController.instance.itemsInCraft[selection].usable)
-                {
-                    UiController.instance.equipArea.SetActive(true);
-                }
+                UiController.instance.equipArea.SetActive(true);
             }
+        }
+        else if (this.name == "CraftSlot")
+        {
+            UiController.instance.craftItemSelected = selection;
+            if (UiController.instance.itemsInCraft[selection].ediable)
+            {
+                UiController.instance.eatArea.SetActive(true);
+            }
+            if (UiController.instance.itemsInCraft[selection].usable)
+            {
+                UiController.instance.equipArea.SetActive(true);
+            }
+        }
 
-            if (this.name == "EquipImage")
-            {
-                UiController.instance.DraggingTool = true;
-            }
-            else
-            {
-                UiController.instance.DraggingTool = false;
-            }
+        if (this.name == "EquipImage")
+        {
+            UiController.instance.DraggingTool = true;
+        }
+        else
+        {
+            UiController.instance.DraggingTool = false;
+        }
 
 
-            if (GetComponent<RawImage>().texture == null ||
-                GetComponent<RawImage>().texture == UiController.instance.EmptySprite)
-            {
-                isObject = false;
-            }
-            else
-            {
-                isObject = true;
-            }
+        if (GetComponent<RawImage>().texture == null ||
+            GetComponent<RawImage>().texture == UiController.instance.EmptySprite)
+        {
+            isObject = false;
+        }
+        else
+        {
+            isObject = true;
+        }
 
-            UiController.instance.dropArea.SetActive(true);
+        UiController.instance.dropArea.SetActive(true);
 
-            canvasGroup.blocksRaycasts = false;
-            canvasGroup.alpha = 0.8f;
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = 0.8f;
 
-            this.transform.parent = topLayerTransform;
-        //}
+        this.transform.parent = topLayerTransform;
+        UiController.instance.isDragging = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -100,10 +99,12 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         {
             rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         }
+        UiController.instance.isDragging = true;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        UiController.instance.isDragging = false;
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
         this.transform.SetParent(parentTransform);
@@ -124,32 +125,36 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log(this.GetComponentInParent<Transform>().name);
+        //Debug.Log(this.GetComponentInParent<Transform>().name);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        int selection = int.Parse(this.transform.parent.name);
-        items item = null;
-        if (this.name == "itemImage")
+        if (!UiController.instance.isDragging)
         {
-            if (playerCollider.instance.playerBag.GetSize() <= selection + 1)
+            int selection = int.Parse(this.transform.parent.name);
+            items item = null;
+            if (this.name == "itemImage")
             {
-                item = playerCollider.instance.playerBag.GetItem(selection);
+                if (playerCollider.instance.playerBag.GetSize() >= selection + 1)
+                {
+                    item = playerCollider.instance.playerBag.GetItem(selection);
+                }
             }
-        }
-        else if (this.name == "CraftSlot")
-        {
-            if (UiController.instance.itemsInCraft.Count <= selection + 1)
+            else if (this.name == "CraftSlot")
             {
-                item = UiController.instance.itemsInCraft[selection];
+                if (UiController.instance.itemsInCraft.Count >= selection + 1)
+                {
+                    item = UiController.instance.itemsInCraft[selection];
+                }
             }
+            else if (this.name == "EquipImage")
+            {
+                item = UiController.instance.equipItem;
+            }
+            ItemDescriptionController.instance.ShowDescription(item, this.rectTransform);
         }
-        else if (this.name == "EquipImage")
-        {
-            item = UiController.instance.equipItem;
-        }
-        ItemDescriptionController.instance.ShowDescription(item, this.rectTransform);
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)

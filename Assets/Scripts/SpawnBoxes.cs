@@ -7,6 +7,7 @@ public class SpawnBoxes : MonoBehaviour
     // Start is called before the first frame update
     public GameObject[] boxSpawnPoints;
     public GameObject boxPrefab;
+    public GameObject boxParents;
     public static SpawnBoxes instance;
     private void Awake()
     {
@@ -33,7 +34,8 @@ public class SpawnBoxes : MonoBehaviour
             Vector3 tempPosition = spawnBox.transform.position;
             boxPosition = new Vector3(Random.Range(tempPosition.x - 30, tempPosition.x + 30), tempPosition.y,
                 Random.Range(tempPosition.z - 5, tempPosition.z + 5));
-            Instantiate(boxPrefab, boxPosition, Quaternion.identity);
+            GameObject box = Instantiate(boxPrefab, boxPosition, Quaternion.identity);
+            box.transform.SetParent(boxParents.transform, true);
         }
     }
 }

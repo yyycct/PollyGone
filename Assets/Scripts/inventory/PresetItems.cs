@@ -24,7 +24,7 @@ public class PresetItems : MonoBehaviour
     public items bat = new items(items.ItemType.Bat);
     public items vase = new items(items.ItemType.Vase);
     public items book = new items(items.ItemType.Book);
-    public items knife = new items(items.ItemType.Knife);
+    public items skateShoes = new items(items.ItemType.SkateShoe);
     public items campFire = new items(items.ItemType.CampFire);
     public items cookedMush = new items(items.ItemType.CookedMush);
     public items axe = new items(items.ItemType.Axe);
@@ -44,8 +44,8 @@ public class PresetItems : MonoBehaviour
                 return mushroom;
             case items.ItemType.Wood:
                 return wood;
-            case items.ItemType.Knife:
-                return knife;
+            case items.ItemType.SkateShoe:
+                return skateShoes;
             case items.ItemType.Cup:
                 return cup;
             case items.ItemType.Pot:

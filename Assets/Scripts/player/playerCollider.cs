@@ -178,7 +178,7 @@ public class playerCollider : MonoBehaviour
         {
             if (checkWater(other.gameObject) > 0)
             {
-                inteTwoText = "(R) Collect Water";
+                inteTwoText = "(R) Collect Rain Water";
             }
             else
             {
@@ -202,7 +202,7 @@ public class playerCollider : MonoBehaviour
         }
         else if (other.tag == "picFrame")
         {
-            inteText = "(F) Pick up picture frame";
+            inteText = "(F) Pick up painting";
             ChangeInstruText(inteText, "", other, 1);
         }
         else if (other.tag == "book")
@@ -220,9 +220,9 @@ public class playerCollider : MonoBehaviour
             inteText = "(F) Pick up game controller";
             ChangeInstruText(inteText, "", other, 1);
         }
-        else if (other.tag == "knife")
+        else if (other.tag == "SkateShoes")
         {
-            inteText = "(F) Pick up knife";
+            inteText = "(F) Pick up skate shoes";
             ChangeInstruText(inteText, "", other, 1);
         }
         else if (other.tag == "vase")
@@ -481,8 +481,8 @@ public class playerCollider : MonoBehaviour
             case "book":
                 addedSuccess = playerBag.AddItem(PresetItems.instance.book);
                 break;
-            case "knife":
-                addedSuccess = playerBag.AddItem(PresetItems.instance.knife);
+            case "skateShoes":
+                addedSuccess = playerBag.AddItem(PresetItems.instance.skateShoes);
                 break;
             case "cookedMush":
                 addedSuccess = playerBag.AddItem(PresetItems.instance.cookedMush);

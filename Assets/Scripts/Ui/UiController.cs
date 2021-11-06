@@ -71,6 +71,8 @@ public class UiController : MonoBehaviour
 
     public GameObject cloudImage;
     public GameObject CreditPanel;
+
+    public bool isDragging = false;
     private void Awake()
     {
         instance = this;

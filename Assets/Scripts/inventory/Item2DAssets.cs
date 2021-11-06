@@ -13,7 +13,7 @@ public class Item2DAssets : MonoBehaviour
     public Texture Rock;
     public Texture Mushroom;
     public Texture Wood;
-    public Texture Knife;
+    public Texture SkateShoe;
     public Texture Cup;
     public Texture Pot;
     public Texture Pic;
