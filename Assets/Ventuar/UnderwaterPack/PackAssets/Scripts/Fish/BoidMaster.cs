@@ -56,7 +56,7 @@ namespace LowPolyUnderwaterPack
         {
             if (runWithJobs)
             {
-                player = GameObject.FindGameObjectWithTag("MainCamera").transform;
+                player = GameObject.FindGameObjectWithTag("Player").transform;
                 boids = FindObjectsOfType<FlockingBoidAI>();
 
                 boidRends = new MeshRenderer[boids.Length];

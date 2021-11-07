@@ -14,7 +14,7 @@ namespace LowPolyUnderwaterPack
 	{
 		[Tooltip("Compute shader used to by the CPU to calculate water height.")]
 		public ComputeShader computeShader;
-
+		private GameObject camera;
 		#region Visualization Settings
 
 		[Tooltip("Display a wireframe view of the water grid mesh.")]
@@ -158,6 +158,7 @@ namespace LowPolyUnderwaterPack
 
 		private void Start() 
 		{
+			camera = GameObject.FindGameObjectWithTag("MainCamera");
 			col.isTrigger = true;
 
 			// Make sure mesh is generated correctly on start
@@ -342,6 +343,7 @@ namespace LowPolyUnderwaterPack
 			float f2 = k2 * (((pos.x * -dir.x + pos.z * dir.y) / (zSize * 2)) - ((waveSpeed2 / 10) * (time)));
 
 			pos.y = (a1 * Mathf.Sin(f1)) + (a2 * Mathf.Sin(f2));
+			camera.transform.position = new Vector3(camera.transform.position.x, pos.y, camera.transform.position.z);
 			pos.x += a1 * Mathf.Cos(f1) / (waveAmplitude1 * 5) * dir.x;
 			pos.z += a1 * Mathf.Cos(f1) / (waveAmplitude1 * 5) * dir.y;
 
