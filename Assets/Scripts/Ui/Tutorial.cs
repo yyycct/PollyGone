@@ -49,13 +49,21 @@ public class Tutorial : MonoBehaviour
 
     void ShowBubble(string instruction)
     {
-        playerCollider.instance.bagOn = true;
+        //playerCollider.instance.bagOn = true;
         tutorialText.text = instruction;
         tutorialBubble.gameObject.SetActive(true);
         inTutorial = true;
-        continueText.gameObject.SetActive(true);
-        StarterAssetsInputs.instance.SwitchMap();
-        UiController.instance.ZeroTimeScale();
+        StartCoroutine(HideBubbleAfter(3f));
+        //continueText.gameObject.SetActive(true);
+        //StarterAssetsInputs.instance.SwitchMap();
+        //UiController.instance.ZeroTimeScale();
+    }
+
+    IEnumerator HideBubbleAfter(float second)
+    {
+        yield return new WaitForSeconds(second);
+        CloseTutorial();
+        inTutorial = false;
     }
 
     public void OnlyShowBubble(string instruction)

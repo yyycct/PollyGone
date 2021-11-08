@@ -76,19 +76,19 @@ public class UiController : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        StartPanel.SetActive(true);
+        //StartPanel.SetActive(true);
     }
 
     void Start()
     {
-        ZeroTimeScale();
+        //ZeroTimeScale();
         for (int i = 0; i < itemsInBag.transform.childCount; i++)
         {
             ItemImage.Add(itemsInBag.transform.GetChild(i).GetChild(0).GetComponent<RawImage>());
             itemsInBag.transform.GetChild(i).GetChild(1).GetComponent<TMP_Text>().text = "";
         }
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         closeMenu();
         CraftingMode();
     }
@@ -425,12 +425,12 @@ public class UiController : MonoBehaviour
         CollectFeedback.instance.AddDeath(1);
         CollectFeedback.instance.endTimer();
         CollectFeedback.instance.DeathReason(reason);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("StartPage");
     }
 
     public void RestartButtonClicked()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("StartPage");
     }
 
     public void PauseClicked()
