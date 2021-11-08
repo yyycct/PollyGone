@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 
 public class UiController : MonoBehaviour
 {
+    [SerializeField] private Animation StartingAnimation;
     public static UiController instance;
     public Texture EmptySprite;
     //public List<Text> inventoryAmount = new List<Text>();
@@ -91,6 +92,7 @@ public class UiController : MonoBehaviour
         Cursor.visible = false;
         closeMenu();
         CraftingMode();
+        StartingAnimation.Play();
     }
 
     void closeMenu()
