@@ -92,7 +92,14 @@ public class UiController : MonoBehaviour
         Cursor.visible = false;
         closeMenu();
         CraftingMode();
+        StartCoroutine(PlayStartingAnimaiton());
+    }
+
+    IEnumerator PlayStartingAnimaiton()
+    {
         StartingAnimation.Play();
+        yield return new WaitForSeconds(StartingAnimation.clip.length);
+        //StartingAnimation.Stop();
     }
 
     void closeMenu()
@@ -423,16 +430,18 @@ public class UiController : MonoBehaviour
     {
         playerCollider.instance.bagOn = true;
         yield return new WaitForSeconds(3f);
-        Debug.Log("Restarting");
+        playerCollider.instance.bagOn = false;
         CollectFeedback.instance.AddDeath(1);
         CollectFeedback.instance.endTimer();
         CollectFeedback.instance.DeathReason(reason);
-        SceneManager.LoadScene("StartPage");
+        OneTimeScale();
+        SceneManager.LoadScene("Island");
     }
 
     public void RestartButtonClicked()
     {
-        SceneManager.LoadScene("StartPage");
+        OneTimeScale();
+        SceneManager.LoadScene("Island");
     }
 
     public void PauseClicked()

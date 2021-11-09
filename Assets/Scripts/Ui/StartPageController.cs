@@ -5,6 +5,7 @@ using System.Collections;
 public class StartPageController : MonoBehaviour
 {
     [SerializeField] private Animation anim;
+    [SerializeField] private Animation cutsceneAnim;
     public void StartButtonClicked()
     {
         anim.Play();
@@ -20,6 +21,6 @@ public class StartPageController : MonoBehaviour
     IEnumerator NextScene()
     {
         yield return new WaitForSeconds(anim.clip.length);
-        SceneManager.LoadScene("Cutscene");
+        cutsceneAnim.Play();
     }
 }
