@@ -6,6 +6,7 @@ namespace DigitalRuby.WeatherMaker
 {
     public class WeatherControl : MonoBehaviour
     {
+        public static WeatherControl instance;
         public bool cloudy;
         public bool rainy;
         public bool lighting;
@@ -16,6 +17,10 @@ namespace DigitalRuby.WeatherMaker
         private float timer;
         public float lightingTimeout;
         private float lightingTimer;
+        private void Awake()
+        {
+            instance = this;
+        }
         // Start is called before the first frame update
         void Start()
         {

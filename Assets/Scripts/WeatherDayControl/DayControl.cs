@@ -21,6 +21,7 @@ public class DayControl : MonoBehaviour
     public float dayLightIntensity = 1f;
     public bool raining;
     public bool cloudy = false;
+    public bool nightTime = false;
     [SerializeField] GameObject rainEFX;
     float timeElapsed;
     private int randomRainTime;
@@ -31,6 +32,7 @@ public class DayControl : MonoBehaviour
     private bool boxSpawned = false;
     public int numOfBoxToSpawn = 5;
     public int numOfMushToSpawn = 15;
+    public GameObject helicopater;
     private bool mushSpawned = false;
     private bool heli = false;
     private void Awake()
@@ -52,13 +54,15 @@ public class DayControl : MonoBehaviour
         timeofDay %= 24;
         if (timeofDay < 6 || timeofDay > 18)
         {
-            RenderSettings.fog = true;
-            RenderSettings.fogColor = nightFog;
-            RenderSettings.fogEndDistance = 20;
+            //RenderSettings.fog = true;
+            //RenderSettings.fogColor = nightFog;
+            //RenderSettings.fogEndDistance = 20;
+            nightTime = true;
         }
         else
         {
             RenderSettings.fog = false;
+            nightTime = false;
         }
         if (DayCount == 2 && timeofDay >= randomRainTime && timeofDay <= (randomRainTime + rainRemainTime) && timeofDay < 18)
         {
@@ -86,6 +90,7 @@ public class DayControl : MonoBehaviour
             raining = false;
             if(timeofDay>=10 && !heli)
             {
+                helicopater.SetActive(true);
                 HelicopterMove.instance.play = true;
                 heli = true;
             }
@@ -103,8 +108,9 @@ public class DayControl : MonoBehaviour
         changeTemp();
         if (raining)
         {
-            Rain();
-            rainEFX.SetActive(true);
+            //Rain();
+            //rainEFX.SetActive(true);
+            
             dayLightIntensity = 0.2f;
             UiController.instance.cloudImage.SetActive(true);
         }

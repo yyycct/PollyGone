@@ -89,10 +89,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Palm_Tree
       objectReference: {fileID: 0}
+    - target: {fileID: 1286838609966116681, guid: cae086abf33266b469d81f0b3f3c2b27, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 3946d80b7d29c674099b239146158dcf, type: 3}
     - target: {fileID: 6164609430095984104, guid: cae086abf33266b469d81f0b3f3c2b27, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6164609430097082152, guid: cae086abf33266b469d81f0b3f3c2b27, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 3946d80b7d29c674099b239146158dcf, type: 3}
     - target: {fileID: 8167002695541009620, guid: cae086abf33266b469d81f0b3f3c2b27, type: 3}
       propertyPath: TreeHitEFX
       value: 

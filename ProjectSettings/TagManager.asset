@@ -38,6 +38,7 @@ TagManager:
   - plank
   - openedBox
   - journal
+  - SkateShoe
   layers:
   - Default
   - TransparentFX

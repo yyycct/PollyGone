@@ -86,6 +86,9 @@ public class ThirdPersonController : MonoBehaviour
 
 	private bool _hasAnimator;
 	private bool running = false;
+	private float walkFootstepTimeOut = 0.46f;
+	private float runFootstepTimeOut = 0.3f;
+	public AudioSource footstep;
 	private void Awake()
 	{
 		instance = this;
@@ -149,7 +152,7 @@ public class ThirdPersonController : MonoBehaviour
 	}
 	private void UseTool()
     {
-		if(_input.action && _input.move == Vector2.zero && playerCollider.instance.equipped)
+		if(_input.action && _input.move == Vector2.zero && playerCollider.instance.equipped&&!playerCollider.instance.bagOn)
         {
 			HittingManager.instance.CutTree();
 			_animator.Play("UseTool");
@@ -228,11 +231,46 @@ public class ThirdPersonController : MonoBehaviour
 		{
 			_targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
 			float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
+            if (_input.sprint)
+            {
+                if (runFootstepTimeOut > 0f)
+                {
+					runFootstepTimeOut -= Time.deltaTime;
+                }
+                else
+                {
+                    if (footstep.isPlaying)
+                    {
+						footstep.Stop();
+                    }
+					footstep.Play();
+					runFootstepTimeOut = 0.34f;
+				}
+            }
+            else
+            {
+				if (walkFootstepTimeOut > 0f)
+				{
+					walkFootstepTimeOut -= Time.deltaTime ;
+				}
+				else
+				{
+					if (footstep.isPlaying)
+					{
+						footstep.Stop();
+					}
+					footstep.Play();
+					walkFootstepTimeOut = 0.5f;
+				}
 
+			}
 			// rotate to face input direction relative to camera position
 			transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
 		}
-
+        else
+        {
+			footstep.Stop();
+        }
 
 		Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
