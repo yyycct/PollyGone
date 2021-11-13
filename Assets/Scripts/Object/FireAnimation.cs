@@ -37,6 +37,7 @@ public class FireAnimation : MonoBehaviour
         ps = this.transform.GetChild(0).GetComponent<ParticleSystem>();
         FireLight = this.transform.GetChild(1).GetComponent<Light>();
         FireText = this.transform.GetChild(2).GetComponent<TMP_Text>();
+
     }
 
     private void Update()
@@ -113,12 +114,14 @@ public class FireAnimation : MonoBehaviour
             ps.maxParticles = 150;
             VelocityOverLifetimeModule = ps.velocityOverLifetime;
             VelocityOverLifetimeModule.yMultiplier = 1.8f;
+            FireLight.range = 6f;
         }
         else
         {
             currentSize = Mathf.Lerp(minSize, maxSize, (FireTime - minSizeTime) / (maxSizeTime - minSizeTime));
             ps.startSize = Mathf.Lerp(0.3f, 0.9f, (FireTime - minSizeTime) / (maxSizeTime - minSizeTime));
             ps.maxParticles = (int)Mathf.Lerp(50f, 150f, (FireTime - minSizeTime) / (maxSizeTime - minSizeTime));
+            FireLight.range = Mathf.Lerp(2f, 6f, (FireTime - minSizeTime) / (maxSizeTime - minSizeTime));
             VelocityOverLifetimeModule = ps.velocityOverLifetime;
             VelocityOverLifetimeModule.yMultiplier = Mathf.Lerp(0.6f, 1.8f, (FireTime - minSizeTime) / (maxSizeTime - minSizeTime));
         }
