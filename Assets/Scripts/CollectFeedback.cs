@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using UnityEngine.Analytics;
 
 // This class encapsulates all of the metrics that need to be tracked in your game. These may range
 // from number of deaths, number of times the player uses a particular mechanic, or the total time
@@ -155,6 +156,7 @@ public class CollectFeedback : MonoBehaviour
         totalReport += ConvertMetricsToStringRepresentation();
         totalReport = totalReport.Replace("\n", System.Environment.NewLine);
         string reportFile = CreateUniqueFileName();
+        Analytics.CustomEvent("GameOver");
         //File.WriteAllText(reportFile, totalReport);
 #if !UNITY_WEBPLAYER
         File.WriteAllText(reportFile, totalReport);

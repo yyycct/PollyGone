@@ -697,7 +697,7 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
-    Analytics: 0
+    Analytics: 1
     Build: 0
     Collab: 0
     Game Performance: 0
@@ -718,10 +718,10 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 2
-  cloudProjectId: 117b3160-11c7-4999-a19e-59cd904a0ca3
+  cloudProjectId: da5a291a-c3d0-467c-bf7c-7ec9306230c6
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: PollyGone
+  projectName: PollyGone (1)
   organizationId: alanfeiyuchang
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

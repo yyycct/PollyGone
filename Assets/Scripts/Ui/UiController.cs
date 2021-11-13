@@ -74,6 +74,7 @@ public class UiController : MonoBehaviour
     public GameObject CreditPanel;
 
     public GameObject journalIcon;
+    [SerializeField] GameObject blackPanel;
 
     public bool isDragging = false;
     private void Awake()
@@ -483,20 +484,35 @@ public class UiController : MonoBehaviour
 
     public void Rescued(int reason)
     {
+        StartCoroutine(FadeOut(2f, reason));
+        
+    }
+
+    IEnumerator FadeOut(float durationTime, int reason)
+    {
+        blackPanel.transform.parent.gameObject.SetActive(true);
+        blackPanel.SetActive(true);
+        blackPanel.GetComponent<CanvasGroup>().alpha = 0f;
+        float elapse = 0f;
+        float fadeOutDuration = durationTime;
+        while (elapse < fadeOutDuration)
+        {
+            blackPanel.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0f, 1f, elapse / fadeOutDuration);
+            elapse += Time.deltaTime;
+            yield return null;
+        }
         if (reason == 0)
         {
-            rescueImage.sprite = boatSprite;
             SceneManager.LoadScene("BoatRescue");
         }
         else if (reason == 1)
         {
-            rescueImage.sprite = helicopterSprite;
             SceneManager.LoadScene("HelicopterRescue");
         }
-        playerCollider.instance.bagOn = true;
-        StartCoroutine(CreditTimer());
-        rescuePanel.SetActive(true);
+        /*blackPanel.transform.parent.gameObject.SetActive(false);
+        blackPanel.SetActive(false);*/
     }
+
     IEnumerator CreditTimer()
     {
         yield return new WaitForSeconds(4f);

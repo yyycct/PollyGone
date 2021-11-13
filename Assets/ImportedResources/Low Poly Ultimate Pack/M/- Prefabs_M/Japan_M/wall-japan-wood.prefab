@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23000011769827560}
   - component: {fileID: 64000013208160896}
   - component: {fileID: 6068740069841588248}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wall-japan-wood
   m_TagString: plank
   m_Icon: {fileID: 0}
