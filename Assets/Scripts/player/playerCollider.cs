@@ -317,8 +317,8 @@ public class playerCollider : MonoBehaviour
                 craftOrCook = 1;
                 UiController.instance.CookingMode();
                 targetObject = other.gameObject;
-                UiController.instance.changeInsText(inteText);
-                UiController.instance.changeInsTwoText(inteTwoText);
+                UiController.instance.changeInsText("");
+                UiController.instance.changeInsTwoText("");
                 inteCode = -1;
             }
             targetObject = other.gameObject;

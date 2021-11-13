@@ -6,5 +6,9 @@ TextAsset:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: current_version
-  m_Script: 97
+  m_Name: 
+<<<<<<< HEAD
+  m_Script: 100
+=======
+  m_Script: 98
+>>>>>>> d9e1c1bc054522cb7028f048462f5b7d68ad0ae6

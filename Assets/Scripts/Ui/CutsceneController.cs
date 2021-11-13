@@ -17,4 +17,5 @@ public class CutsceneController : MonoBehaviour
         yield return new WaitForSeconds(anim.clip.length);
         SceneManager.LoadScene("Island");
     }
+
 }
