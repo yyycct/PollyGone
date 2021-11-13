@@ -239,12 +239,19 @@ public class ThirdPersonController : MonoBehaviour
                 }
                 else
                 {
-                    if (footstep.isPlaying)
+					if (Grounded)
+                    {
+						if (footstep.isPlaying)
+						{
+							footstep.Stop();
+						}
+						footstep.Play();
+						runFootstepTimeOut = 0.34f;
+					}
+                    else
                     {
 						footstep.Stop();
-                    }
-					footstep.Play();
-					runFootstepTimeOut = 0.34f;
+					}
 				}
             }
             else
@@ -255,12 +262,19 @@ public class ThirdPersonController : MonoBehaviour
 				}
 				else
 				{
-					if (footstep.isPlaying)
-					{
-						footstep.Stop();
+					if (Grounded)
+                    {
+						if (footstep.isPlaying)
+						{
+							footstep.Stop();
+						}
+						footstep.Play();
+						walkFootstepTimeOut = 0.5f;
 					}
-					footstep.Play();
-					walkFootstepTimeOut = 0.5f;
+					else
+                    {
+						footstep.Stop();
+                    }
 				}
 
 			}

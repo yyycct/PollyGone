@@ -207,6 +207,7 @@ public class UiController : MonoBehaviour
         inventoryPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        ItemDescriptionController.instance.HideDescription();
     }
 
     public void AddItemsInCraft()

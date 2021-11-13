@@ -1,0 +1,16 @@
+Report generated on 11/12/2021 4:38:37 PM
+
+Total Report:
+Here are my metrics:
+Resources:           Amount:
+Wood Branch: 2
+Stond: 1
+Mushroom: 1
+Water: 0
+Tree Chopped: 1
+Item Crated:
+Axe: False
+Camp Fire: True
+Find Cave: False
+Death: 0
+Reason of Death:  
