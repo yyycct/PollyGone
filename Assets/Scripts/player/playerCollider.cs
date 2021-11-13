@@ -300,7 +300,6 @@ public class playerCollider : MonoBehaviour
             inteText = "(F) Pick up wood block";
             ChangeInstruText(inteText, "", other, 1);
         }
-
         //Debug.Log(other);
         else if (other.tag == "cave")
         {

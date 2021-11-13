@@ -193,7 +193,7 @@ public class UiController : MonoBehaviour
         craftQTEImage.sprite = craftSprite;
 
         dropAreaFireImage.SetActive(false);
-        dropAreaText.text = "Drop To Ground";
+        dropAreaText.text = "Place On Ground";
     }
     public void CookDoneClicked()
     {
@@ -339,6 +339,10 @@ public class UiController : MonoBehaviour
                     if (tempList.Count <=0)
                     {
                         hasRecipe = true;
+                        if (!JournalController.instance.recipesIGot.ContainsKey(recipe.name))
+                        {
+                            JournalController.instance.recipesIGot.Add(recipe.name, recipe);
+                        }
                         StartCoroutine(ShowResult(recipe, remains));
                         return;
                     }

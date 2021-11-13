@@ -7,6 +7,7 @@ public class JournalController : MonoBehaviour
 {
     public static JournalController instance;
     private List<(string, string)> contextList = new List<(string, string)>();
+    public Dictionary<string, Recipe> recipesIGot = null;
     [SerializeField] Text page1Text;
     [SerializeField] Text page2Text;
     private int pageNumber = 1;
@@ -17,16 +18,16 @@ public class JournalController : MonoBehaviour
         "day 1, Sunny\n\n" +
         "I can't believe this actaully happened, I'm the only survivor. " +
         "I should find some rock and wood to make a campfire.\n\n" +
-        "I hit the palm tree with a rock, coconut dropped. Those should keep me hydrate.";
+        "I hit the palm tree with a rock, coconut dropped. Those should keep me hydrated.";
     private string dayTwoText = 
         "day 2, Rainy\n\n" +
-        "I found a pot in the delivery box and collect water with it, lucky me.\n\n" +
+        "I found a pot in the delivery box, I put it on the ground and collected rain water with it, lucky me.\n\n" +
         "I cooked some mushroom with the campfire, it's the most delicious thing.\n\n" +
         "I am full, I think I have the energy to search for more resources";
     private string dayThreeText = "day 3, Cloudy\n\n" +
         "A helicopter came, but they didn't see me. " +
         "I hope they come back because I made this huge fire, should draw their attention.\n\n" +
-        "I made a Axe with a knife and a wood branch, it made cutting tree much easier.";
+        "I made a Axe with a skate shoe I found and a wood branch, it made cutting tree much easier.";
     private string dayFourText = "";
 
     private void Awake()
@@ -41,6 +42,14 @@ public class JournalController : MonoBehaviour
         LoadDeathReason();
         contextList.Add((dayOneText, dayTwoText));
         contextList.Add((dayThreeText, dayFourText));
+    }
+
+    public void LoadRecipe()
+    {
+        if (recipesIGot.Count != 0)
+        {
+            maxPage += (int)Mathf.Ceil(recipesIGot.Count / 6f);
+        }
     }
 
     public void LoadDeathReason()
