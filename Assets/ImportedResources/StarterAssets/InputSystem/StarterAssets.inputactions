@@ -116,6 +116,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Read",
+                    "type": "Button",
+                    "id": "f49655bb-ecb8-4b06-99a6-162ece5fea37",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -402,6 +410,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86866ec3-e4d1-42fe-bb9d-15fff91acf25",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Read",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

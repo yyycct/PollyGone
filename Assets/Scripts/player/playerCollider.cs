@@ -30,6 +30,8 @@ public class playerCollider : MonoBehaviour
     public GameObject axeInHand;
     public GameObject rockInHand;
 
+    public bool holdingJournal = false;
+
     public int craftOrCook = 0; //0 for craft, 1 for cook
 
     private void Start()
@@ -113,6 +115,17 @@ public class playerCollider : MonoBehaviour
             }
             
             _input.bag = false;
+        }
+        if (_input.read)
+        {
+            if (holdingJournal)
+            {
+                if (!bagOn && !UiController.instance.pausePanel.activeInHierarchy)
+                {
+                    JournalController.instance.ShowJournal();
+                }
+            }
+            _input.read = false;
         }
         if (_input.restart)
         {
@@ -635,6 +648,10 @@ public class playerCollider : MonoBehaviour
         JournalController.instance.LoadInfo();
         JournalController.instance.ShowJournal();
         JournalController.instance.LoadPage();
+        holdingJournal = true;
+        UiController.instance.journalIcon.SetActive(true);
+        Destroy(targetObject);
+        UiController.instance.changeInsText("");
     }
 }
 

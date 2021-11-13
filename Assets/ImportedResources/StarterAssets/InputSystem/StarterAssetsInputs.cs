@@ -18,6 +18,7 @@ public class StarterAssetsInputs : MonoBehaviour
 	public bool pause;
 	public bool action;
 	public bool anykey;
+	public bool read;
 	[Header("Movement Settings")]
 	public bool analogMovement;
 	[Header("Mouse Cursor Settings")]
@@ -26,6 +27,7 @@ public class StarterAssetsInputs : MonoBehaviour
 	public PlayerInput PlayerInput;
 	private int perviousHand = 0;
 	public bool fullControl = true;
+	
 
 	public static StarterAssetsInputs instance;
     private void Awake()
@@ -107,6 +109,11 @@ public class StarterAssetsInputs : MonoBehaviour
 		JumpInput(value.isPressed);
 	}
 
+	public void OnRead(InputValue value)
+    {
+		ReadInput(value.isPressed);
+    }
+
 	public void OnSprint(InputValue value)
 	{
 		SprintInput(value.isPressed);
@@ -160,6 +167,11 @@ public class StarterAssetsInputs : MonoBehaviour
 	public void PauseInput(bool newPauseState)
     {
 		pause = newPauseState;
+    }
+
+	public void ReadInput(bool newReadState)
+    {
+		read = newReadState;
     }
 
 	public void LookInput(Vector2 newLookDirection)

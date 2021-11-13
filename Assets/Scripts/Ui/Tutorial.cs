@@ -198,6 +198,16 @@ public class Tutorial : MonoBehaviour
         }
     }
 
+    public void ReadJournalTuto()
+    {
+        if (!PlayerPrefs.HasKey("ReadJournalTutorial"))
+        {
+            ShowBubble("Now I can read to journal by pressing J");
+            PlayerPrefs.SetInt("ReadJournalTutorial", 1);
+            hydrateArrow.SetActive(true);
+        }
+    }
+
     public void BoatEnding()
     {
         StartCoroutine(BoatEndingTimer());

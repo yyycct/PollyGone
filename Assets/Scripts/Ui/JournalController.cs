@@ -71,6 +71,7 @@ public class JournalController : MonoBehaviour
 
     public void ShowJournal()
     {
+        playerCollider.instance.bagOn = true;
         journalPanel.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;

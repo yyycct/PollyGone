@@ -73,6 +73,8 @@ public class UiController : MonoBehaviour
     public GameObject cloudImage;
     public GameObject CreditPanel;
 
+    public GameObject journalIcon;
+
     public bool isDragging = false;
     private void Awake()
     {
@@ -484,10 +486,12 @@ public class UiController : MonoBehaviour
         if (reason == 0)
         {
             rescueImage.sprite = boatSprite;
+            SceneManager.LoadScene("BoatRescue");
         }
         else if (reason == 1)
         {
             rescueImage.sprite = helicopterSprite;
+            SceneManager.LoadScene("HelicopterRescue");
         }
         playerCollider.instance.bagOn = true;
         StartCoroutine(CreditTimer());
