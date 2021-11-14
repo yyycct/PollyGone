@@ -103,6 +103,7 @@ public class UiController : MonoBehaviour
         StartingAnimation.Play();
         yield return new WaitForSeconds(StartingAnimation.clip.length);
         //StartingAnimation.Stop();
+        Tutorial.instance.WalkTuto();
     }
 
     void closeMenu()

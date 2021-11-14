@@ -91,7 +91,6 @@ public class DropSlot : MonoBehaviour, IDropHandler
         }
         else if (this.name == "EquipArea")
         {
-            
             if (eventData.pointerDrag.GetComponent<Transform>().name == "itemImage")
             {
                 EquipTool(temp, true);
@@ -100,7 +99,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
             {
                 EquipTool(temp, false);
             }
-            
+            Tutorial.instance.AttackTuto();
         }
     }
 

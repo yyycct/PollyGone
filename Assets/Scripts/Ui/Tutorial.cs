@@ -59,6 +59,18 @@ public class Tutorial : MonoBehaviour
         //UiController.instance.ZeroTimeScale();
     }
 
+    void ShowBubble(string instruction, float duration)
+    {
+        //playerCollider.instance.bagOn = true;
+        tutorialText.text = instruction;
+        tutorialBubble.gameObject.SetActive(true);
+        inTutorial = true;
+        StartCoroutine(HideBubbleAfter(duration));
+        //continueText.gameObject.SetActive(true);
+        //StarterAssetsInputs.instance.SwitchMap();
+        //UiController.instance.ZeroTimeScale();
+    }
+
     IEnumerator HideBubbleAfter(float second)
     {
         yield return new WaitForSeconds(second);
@@ -99,7 +111,7 @@ public class Tutorial : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("WalkTutorial"))
         {
-            ShowBubble("I should walk around ('wasd')");
+            ShowBubble("WASD to walk, hold SHIFT to run, ESC to pause", 5f);
             PlayerPrefs.SetInt("WalkTutorial", 1);
         }
     }
@@ -204,6 +216,16 @@ public class Tutorial : MonoBehaviour
         {
             ShowBubble("Now I can read to journal by pressing J");
             PlayerPrefs.SetInt("ReadJournalTutorial", 1);
+            hydrateArrow.SetActive(true);
+        }
+    }
+
+    public void AttackTuto()
+    {
+        if (!PlayerPrefs.HasKey("AttackTutorial"))
+        {
+            ShowBubble("Left mouse click to hit with your tool");
+            PlayerPrefs.SetInt("AttackTutorial", 1);
             hydrateArrow.SetActive(true);
         }
     }
