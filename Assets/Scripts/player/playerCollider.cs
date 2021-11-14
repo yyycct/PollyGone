@@ -122,7 +122,7 @@ public class playerCollider : MonoBehaviour
             {
                 if (!bagOn && !UiController.instance.pausePanel.activeInHierarchy)
                 {
-                    JournalController.instance.ShowJournal();
+                    ReadJournal();
                 }
             }
             _input.read = false;

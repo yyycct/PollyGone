@@ -260,7 +260,7 @@ public class items
             case ItemType.Plank:
                 itemType = _itemType;
                 ediable = false;
-                combinable = false;
+                combinable = true;
                 usable = false;
                 amount = 0;
                 fireTime = 180;

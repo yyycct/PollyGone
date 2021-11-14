@@ -7,7 +7,8 @@ public class JournalController : MonoBehaviour
 {
     public static JournalController instance;
     private List<(string, string)> contextList = new List<(string, string)>();
-    public Dictionary<string, Recipe> recipesIGot = null;
+    public Dictionary<string, Recipe> recipesIGot = new Dictionary<string, Recipe>();
+    public List<Recipe> preloadedRecipes = new List<Recipe>();
     [SerializeField] Text page1Text;
     [SerializeField] Text page2Text;
     private int pageNumber = 1;
@@ -36,20 +37,84 @@ public class JournalController : MonoBehaviour
     }
 
     public GameObject journalPanel;
-    
+
+    private void Start()
+    {
+        journalPanel.SetActive(false);
+        foreach (Recipe recipe in preloadedRecipes)
+        {
+            recipesIGot.Add(recipe.name, recipe);
+        }
+    }
+
     public void LoadInfo()
     {
+        contextList.Clear();
         LoadDeathReason();
         contextList.Add((dayOneText, dayTwoText));
         contextList.Add((dayThreeText, dayFourText));
+        LoadRecipe();
     }
 
     public void LoadRecipe()
     {
+        maxPage = 2;
         if (recipesIGot.Count != 0)
         {
             maxPage += (int)Mathf.Ceil(recipesIGot.Count / 6f);
         }
+
+        int recipeCounter = 1;
+        string page1 = "";
+        string page2 = "";
+        int i = 0;
+        foreach (var recipe in recipesIGot)
+        {
+            if (recipeCounter <= 4)
+            {
+                page1 += WriteRecipe(recipe.Value);
+                recipeCounter++;
+            }
+            else if (recipeCounter > 4 && recipeCounter <= 8)
+            {
+                page2 += WriteRecipe(recipe.Value);
+                recipeCounter++;
+            }
+            else if (recipeCounter > 8)
+            {
+                contextList.Add((page1, page2));
+                recipeCounter = 1;
+                page1 = "";
+                page2 = "";
+            }
+            i++;
+            if (i == recipesIGot.Count)
+            {
+                contextList.Add((page1, page2));
+            }
+        }
+    }
+
+    private string WriteRecipe(Recipe recipe)
+    {
+        string res = "";
+        if (recipe.isCookRecipe)
+        {
+            res += "(Cook) ";
+        }
+
+        for (int i = 0; i < recipe.craftMaterials.Count; i++)
+        {
+            if (i + 1 < recipe.craftMaterials.Count)
+            {
+                res += recipe.GetMaterialName(i) + " + ";
+            }
+            else
+            {
+                res += recipe.GetMaterialName(i) + " = " + recipe.GetResultName() + "\n\n";
+            }
+        }
+        return res;
     }
 
     public void LoadDeathReason()
@@ -76,6 +141,8 @@ public class JournalController : MonoBehaviour
     {
         page1Text.text = contextList[pageNumber - 1].Item1;
         page2Text.text = contextList[pageNumber - 1].Item2;
+        Debug.Log("context list: " + contextList.Count);
+        Debug.Log("recipe I got: " + recipesIGot.Count);
     }
 
     public void ShowJournal()

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   craftMaterials: 0f000000
   craftResult: 16
+  isCookRecipe: 1
