@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 64114931875734578}
   - component: {fileID: 618559196850008349}
   - component: {fileID: 8602119613978856104}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skate Shoes
   m_TagString: SkateShoe
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 8948252869832228764}
   - component: {fileID: 5334691409538936051}
   - component: {fileID: 2010848508799639599}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 6735778857852219545}
   - component: {fileID: 7175222094814038869}
   - component: {fileID: 4485802370396086484}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 2703977467955572459}
   - component: {fileID: 529675188009887985}
   - component: {fileID: 7319436466147239744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 8986492198213814520}
   - component: {fileID: 5657832715522117144}
   - component: {fileID: 1785226203372462957}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

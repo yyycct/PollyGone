@@ -233,9 +233,9 @@ public class playerCollider : MonoBehaviour
             inteText = "(F) Pick up game controller";
             ChangeInstruText(inteText, "", other, 1);
         }
-        else if (other.tag == "SkateShoes")
+        else if (other.tag == "SkateShoe")
         {
-            inteText = "(F) Pick up skate shoes";
+            inteText = "(F) Pick up skate shoe";
             ChangeInstruText(inteText, "", other, 1);
         }
         else if (other.tag == "vase")
@@ -493,7 +493,7 @@ public class playerCollider : MonoBehaviour
             case "book":
                 addedSuccess = playerBag.AddItem(PresetItems.instance.book);
                 break;
-            case "skateShoes":
+            case "SkateShoe":
                 addedSuccess = playerBag.AddItem(PresetItems.instance.skateShoes);
                 break;
             case "cookedMush":
