@@ -36,12 +36,22 @@ public class CollectFeedback : MonoBehaviour
     private List<string> reasonOfDeath = new List<string>();
     private List<float> deathTime = new List<float>();
     private bool axeCrafted;
+    private bool rescued = false;
+    private string rescueReason = "";
     private bool campFireCrafted;
     private bool cave;
     private float startTime;
 
     private string dataFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\PollyGone_Builds\FeedBackData\";
     //private string dataFolderPath = @"C:\Users\yyycc\Desktop\PollyGone_Builds\FeedBackData\";
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            WriteMetricsToFile();
+        }
+    }
 
     // Public method to add to Metric 1.
     public void AddToWoodBranch(int value)
@@ -62,7 +72,11 @@ public class CollectFeedback : MonoBehaviour
     {
         water += value;
     }
-
+    public void AddRescue(string reason)
+    {
+        rescued = true;
+        rescueReason = reason;
+    }
     public void AddDeath(int value)
     {
         death += value;
@@ -117,6 +131,7 @@ public class CollectFeedback : MonoBehaviour
     private string ConvertMetricsToStringRepresentation()
     {
         string metrics = "Here are my metrics:\n";
+        metrics += CreateUniqueFileName() + "\n";
         metrics += "Resources:           Amount:\n";
         metrics += "Wood Branch: " + woodBranch.ToString() + "\n";
         metrics += "Stond: " + stone.ToString() + "\n";
@@ -126,7 +141,8 @@ public class CollectFeedback : MonoBehaviour
         metrics += "Item Crated:\n";
         metrics += "Axe: " + axeCrafted.ToString() + "\n";
         metrics += "Camp Fire: " + campFireCrafted.ToString() + "\n";
-        metrics += "Find Cave: " + cave.ToString() + "\n";
+        metrics += "Rescued: " + rescued.ToString();
+        metrics += "Rescue Reason: " + rescueReason;
         metrics += "Death: " + death.ToString() + "\n";
         metrics += "Reason of Death:  ";
         for (int i = 0; i < death; i++)
@@ -156,7 +172,7 @@ public class CollectFeedback : MonoBehaviour
         totalReport += ConvertMetricsToStringRepresentation();
         totalReport = totalReport.Replace("\n", System.Environment.NewLine);
         string reportFile = CreateUniqueFileName();
-        Analytics.CustomEvent("GameOver");
+        Analytics.CustomEvent(totalReport);
         //File.WriteAllText(reportFile, totalReport);
 #if !UNITY_WEBPLAYER
         File.WriteAllText(reportFile, totalReport);
