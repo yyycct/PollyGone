@@ -42,6 +42,10 @@ public class PresetItems : MonoBehaviour
                 return rock;
             case items.ItemType.Mushroom:
                 return mushroom;
+            case items.ItemType.PurpleMush:
+                return purpleMush;
+            case items.ItemType.RedMush:
+                return redMush;
             case items.ItemType.Wood:
                 return wood;
             case items.ItemType.SkateShoe:

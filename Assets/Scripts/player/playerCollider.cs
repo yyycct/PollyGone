@@ -242,7 +242,7 @@ public class playerCollider : MonoBehaviour
         {
             if (checkWater(other.gameObject) > 0)
             {
-                inteTwoText = "(R) Collect Water";
+                inteTwoText = "(R) Collect Rain Water";
             }
             else
             {
@@ -315,10 +315,15 @@ public class playerCollider : MonoBehaviour
         }
         else if (other.tag == "campFire")
         {
-            if (!other.gameObject.GetComponent<FireAnimation>().onFire)
+            if (!other.gameObject.GetComponent<FireAnimation>().onFire && !DayControl.instance.raining)
             {
                 inteText = "(F) Set Fire";
                 ChangeInstruText(inteText,"", other, 2);
+            }
+            else if(!other.gameObject.GetComponent<FireAnimation>().onFire && DayControl.instance.raining)
+            {
+                inteText = "Can't start fire, it's raining";
+                ChangeInstruText(inteText, "", other, -1);
             }
             else
             {

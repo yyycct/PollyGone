@@ -158,7 +158,7 @@ public class items
                 break;
             case ItemType.Can:
                 itemType = _itemType;
-                ediable = false;
+                ediable = true;
                 combinable = false;
                 usable = false;
                 amount = 0;

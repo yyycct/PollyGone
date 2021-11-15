@@ -100,14 +100,21 @@ public class DayControl : MonoBehaviour
         {
             AudioManager.instance.OnRaining();
         }
-        else if (DayCount == 2 && timeofDay > randomRainTime && timeofDay < (randomRainTime + rainRemainTime) && timeofDay < 18)
+        else if (DayCount == 2 && timeofDay > randomRainTime && timeofDay < (randomRainTime + rainRemainTime))
         {
             raining = true;
             cloudy = false;
         }
         else if(DayCount == 2 && timeofDay == (randomRainTime + rainRemainTime))
         {
-            AudioManager.instance.OnDayBegin();
+            if (nightTime)
+            {
+                AudioManager.instance.OnNighBegin();
+            }
+            else
+            {
+                AudioManager.instance.OnDayBegin();
+            }
         }
         else if (DayCount == 2 && timeofDay > (randomRainTime + rainRemainTime) )
         {
@@ -137,7 +144,7 @@ public class DayControl : MonoBehaviour
         }
         else
         {
-            raining = false;
+            //raining = true;
             cloudy = false;
         }
 

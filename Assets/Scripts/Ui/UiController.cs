@@ -242,6 +242,11 @@ public class UiController : MonoBehaviour
 
     public void PrintCrafts()
     {
+        //Debug.Log("__________________");
+        /*foreach (var item in itemsInCraft)
+        {
+            Debug.Log(item.itemType);
+        }*/
         for (int i = 0; i < 5; i++)
         {
             craftItems.transform.GetChild(i).GetChild(0).localPosition = new Vector3(0f, 0f, 0f);
@@ -375,12 +380,12 @@ public class UiController : MonoBehaviour
         itemsInCraft.Clear();
         foreach (items.ItemType _itemType in remains)
         {
+            //Debug.Log("remain:" + _itemType);
             itemsInCraft.Add(PresetItems.instance.GetItemFromType(_itemType));
         }
 
         foreach (var i in result)
         {
-            Debug.Log(PresetItems.instance.GetItemFromType(i).itemType);
             playerCollider.instance.playerBag.AddItem(PresetItems.instance.GetItemFromType(i));
         }
         PrintCrafts();
@@ -488,6 +493,10 @@ public class UiController : MonoBehaviour
 
     public void Rescued(int reason)
     {
+        if (reason == 0)
+            CollectFeedback.instance.AddRescue("Boat");
+        else if (reason == 1)
+            CollectFeedback.instance.AddRescue("Helicopter");
         StartCoroutine(FadeOut(2f, reason));
         
     }

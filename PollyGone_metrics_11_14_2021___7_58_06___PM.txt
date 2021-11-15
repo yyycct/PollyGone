@@ -1,0 +1,16 @@
+Report generated on 11/14/2021 7:58:06 PM
+
+Total Report:
+Here are my metrics:
+PollyGone_metrics_11_14_2021___7_58_06___PM.txt
+Resources:           Amount:
+Wood Branch: 3
+Stond: 2
+Mushroom: 3
+Water: 0
+Tree Chopped: 0
+Item Crated:
+Axe: False
+Camp Fire: True
+Rescued: FalseRescue Reason: Death: 0
+Reason of Death:  

@@ -1,0 +1,16 @@
+Report generated on 11/14/2021 7:32:12 PM
+
+Total Report:
+Here are my metrics:
+PollyGone_metrics_11_14_2021___7_32_12___PM.txt
+Resources:           Amount:
+Wood Branch: 12
+Stond: 6
+Mushroom: 8
+Water: 4
+Tree Chopped: 11
+Item Crated:
+Axe: True
+Camp Fire: True
+Rescued: FalseRescue Reason: Death: 1
+Reason of Death:  , Thirsty for 940.6214 seconds

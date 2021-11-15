@@ -26,6 +26,7 @@ public class FireAnimation : MonoBehaviour
     const float maxSize = 3f;
     const float minSize = 1f;
     private float currentSize = 1f;
+    private bool wet = false;
     private ParticleSystem.VelocityOverLifetimeModule VelocityOverLifetimeModule;
     private void Awake()
     {
@@ -49,9 +50,10 @@ public class FireAnimation : MonoBehaviour
             playerCollider.instance.wrapUp();
             Destroy(gameObject);
         }
-        if (DayControl.instance.raining && !UnderCover)
+        if (DayControl.instance.raining && !UnderCover && !wet && used)
         {
             FireTime = 2f;
+            wet = true;
         }
         UpdateFireText();
         if (FireTime > settingTime)
@@ -144,20 +146,8 @@ public class FireAnimation : MonoBehaviour
     public void StartFireAnim()
     {
         //ps = this.transform.GetChild(0).GetComponent<ParticleSystem>();
-        if (!DayControl.instance.raining)
-        {
-            FireTime += 60f;
-            used = true;
-        }
-        else if(DayControl.instance.raining && UnderCover)
-        {
-            FireTime += 60f;
-            used = true;
-        }
-        else
-        {
-            UiController.instance.changeInsText("It's raining, can't start a fire");
-        }
+        FireTime += 60f;
+        used = true;
         //Debug.Log("Starting Fire");
     }
     public void UpdateFireText()
