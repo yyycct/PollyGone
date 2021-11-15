@@ -49,12 +49,13 @@ public class PalmTree : MonoBehaviour
 
     public void DropCoconut()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        int childCount = transform.childCount;
+        for (int i = 0; i < childCount; i++)
         {
             if (transform.GetChild(0).CompareTag("coconut"))
             {
-                Transform temp = transform.GetChild(i).transform;
-                GameObject gob = transform.GetChild(i).gameObject;
+                Transform temp = transform.GetChild(0).transform;
+                GameObject gob = transform.GetChild(0).gameObject;
                 
                 gob.transform.SetParent(this.transform.parent.parent);
                 gob.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;

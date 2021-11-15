@@ -204,9 +204,9 @@ public class Tutorial : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("FullRaiseHealthTutorial"))
         {
-            ShowBubble("I am more than 70% full, my health is raising!");
+            ShowBubble("I am more than 50% full, my health is raising!");
             PlayerPrefs.SetInt("FullRaiseHealthTutorial", 1);
-            hydrateArrow.SetActive(true);
+            hungerArrow.SetActive(true);
         }
     }
 
@@ -216,7 +216,6 @@ public class Tutorial : MonoBehaviour
         {
             ShowBubble("Now I can read to journal by pressing J");
             PlayerPrefs.SetInt("ReadJournalTutorial", 1);
-            hydrateArrow.SetActive(true);
         }
     }
 
@@ -226,7 +225,15 @@ public class Tutorial : MonoBehaviour
         {
             ShowBubble("Left mouse click to hit with your tool");
             PlayerPrefs.SetInt("AttackTutorial", 1);
-            hydrateArrow.SetActive(true);
+        }
+    }
+
+    public void HelicopterTuto()
+    {
+        if (!PlayerPrefs.HasKey("HelicopterTutorial"))
+        {
+            ShowBubble("A helicopter! What should I do to draw their attention?", 10f);
+            PlayerPrefs.SetInt("HelicopterTutorial", 1);
         }
     }
 

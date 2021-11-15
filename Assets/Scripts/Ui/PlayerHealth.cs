@@ -206,7 +206,7 @@ public class PlayerHealth : MonoBehaviour
         {
             hungerSlider.color = Green;
         }
-        if(hungerPoints > 70f)
+        if(hungerPoints > 50f)
         {
             Tutorial.instance.FullRaiseHealthTuto();
             healthPoints += Time.deltaTime * hungerHealthDropSpeed;

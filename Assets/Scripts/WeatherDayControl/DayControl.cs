@@ -139,6 +139,7 @@ public class DayControl : MonoBehaviour
             {
                 helicopater.SetActive(true);
                 HelicopterMove.instance.play = true;
+                Tutorial.instance.HelicopterTuto();
                 heli = true;
             }
         }

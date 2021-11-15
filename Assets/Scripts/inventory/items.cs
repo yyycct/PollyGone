@@ -284,7 +284,7 @@ public class items
                 combinable = true;
                 usable = false;
                 amount = 0;
-                hungerValuePlus = 10;
+                hungerValuePlus = 5;
                 hydrateValuePlus = 10;
                 fireTime = -10;
                 itemName = "Coconut";

@@ -10,7 +10,7 @@ public class HittingManager : MonoBehaviour
         instance = this;
     }
     private Collider col;
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("palmTree"))
         {

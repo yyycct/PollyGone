@@ -27,7 +27,10 @@ public class ItemDescriptionController : MonoBehaviour
             itemName.text = item.itemName;
             hunger.text = "+" + item.hungerValuePlus;
             hydrate.text = "+" + item.hydrateValuePlus;
-            fire.text = "+" + item.fireTime;
+            if (item.fireTime >= 0)
+                fire.text = "+" + item.fireTime;
+            else
+                fire.text = "-" + item.fireTime * -1;
             description.text = item.description;
         }
         

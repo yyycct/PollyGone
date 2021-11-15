@@ -11,6 +11,7 @@ public class EndingController : MonoBehaviour
     void Start()
     {
         StartCoroutine(NextScene());
+
     }
 
     IEnumerator NextScene()
@@ -27,5 +28,12 @@ public class EndingController : MonoBehaviour
     public void QuitClicked()
     {
         Application.Quit();
+    }
+
+    private IEnumerator CursorAppear()
+    {
+        yield return new WaitForSeconds(creditAnim.clip.length - 3f);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

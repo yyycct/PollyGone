@@ -102,16 +102,19 @@ public class playerCollider : MonoBehaviour
             }
             else
             {
-                if (PlayerHealth.instance.nearHeat)
+                if (!JournalController.instance.journalPanel.activeInHierarchy)
                 {
-                    Tutorial.instance.CookTuto();
+                    if (PlayerHealth.instance.nearHeat)
+                    {
+                        Tutorial.instance.CookTuto();
+                    }
+                    Tutorial.instance.DragAndDropTuto();
+                    bagOn = true;
+                    UiController.instance.inventoryPanel.SetActive(true);
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    loopInventory();
                 }
-                Tutorial.instance.DragAndDropTuto();
-                bagOn = true;
-                UiController.instance.inventoryPanel.SetActive(true);
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                loopInventory();
             }
             
             _input.bag = false;
