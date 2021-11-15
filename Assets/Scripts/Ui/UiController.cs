@@ -75,8 +75,8 @@ public class UiController : MonoBehaviour
 
     public GameObject journalIcon;
     [SerializeField] GameObject blackPanel;
-
     public bool isDragging = false;
+    public GameObject sun;
     private void Awake()
     {
         instance = this;
@@ -475,7 +475,6 @@ public class UiController : MonoBehaviour
     {
         //CollectFeedback.instance.WriteMetricsToFile();
         //AudioManager.instance.homePageMusic.Stop();
-        AudioManager.instance.oceanWaveSFX.Play();
         //AudioManager.instance.dayOneMusic.Play();
         AudioManager.instance.radioVoiceSFX.Play();
         StartPanel.SetActive(false);
@@ -546,6 +545,22 @@ public class UiController : MonoBehaviour
     public void SetQuality(int i)
     {
         QualitySettings.SetQualityLevel(i);
+        Light sunlight = sun.GetComponent<Light>();
+        if (i == 0)
+        {
+            Camera.main.clearFlags = CameraClearFlags.Skybox;
+            sunlight.enabled = true;
+        }
+        else if(i == 1)
+        {
+            Camera.main.clearFlags = CameraClearFlags.Skybox;
+            sunlight.enabled = false;
+        }
+        else if (i == 2)
+        {
+            Camera.main.clearFlags = CameraClearFlags.SolidColor;
+            sunlight.enabled = false;
+        }
     }
 
 }
