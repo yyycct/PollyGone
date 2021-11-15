@@ -36,7 +36,6 @@ namespace DigitalRuby.WeatherMaker
 #if UNITY_EDITOR
 
 #pragma warning disable 0414
-
         [ReadOnlyLabel]
         [SerializeField]
         private string TimeOfDayLabel = string.Empty;

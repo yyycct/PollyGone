@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d4dbdbf04c6ebf4ab9bbaaea3ca6638, type: 3}
   m_Name: WeatherMakerDayNightCycleProfile_Default
   m_EditorClassIdentifier: 
-  Speed: 240
-  NightSpeed: 240
+  Speed: 1200
+  NightSpeed: 1200
   UpdateInterval: 0.03
   TimeOfDay: 32400
   TimeOfDayLabel: 09:00 AM
@@ -262,7 +262,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  DawnDuskAmbientColorIntensity: 0
+  DawnDuskAmbientColorIntensity: 0.5
   DawnDuskAmbientColorSky:
     serializedVersion: 2
     key0: {r: 0.9852941, g: 0.47106257, b: 0.3839749, a: 1}
@@ -382,7 +382,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  NightAmbientColorIntensity: 0
+  NightAmbientColorIntensity: 0.3
   NightAmbientColorSky:
     serializedVersion: 2
     key0: {r: 0.5808823, g: 0.5837729, b: 1, a: 1}

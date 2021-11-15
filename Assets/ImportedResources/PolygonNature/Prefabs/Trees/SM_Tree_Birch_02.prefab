@@ -174,7 +174,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.9701054, y: 5.278905, z: 1.4506363}
-  m_Center: {x: -0.19142947, y: 2.139453, z: -0.22531804}
+  m_Center: {x: 0, y: 2.139453, z: 0}
 --- !u!54 &1841139806045607483
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -203,8 +203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b294d3c5d1db59b4cae2d5a19c863985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  cutable: 1
+  health: 6
+  cutable: 0
   TreeFallEFX: {fileID: 3588934443693408666}
   TreeHitEFX: {fileID: 551766274671613862}
   TreeHitSmokeEFX: {fileID: 2182462185357507867}

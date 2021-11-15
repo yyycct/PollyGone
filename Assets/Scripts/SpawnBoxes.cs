@@ -35,7 +35,8 @@ public class SpawnBoxes : MonoBehaviour
             boxPosition = new Vector3(Random.Range(tempPosition.x - 30, tempPosition.x + 30), tempPosition.y,
                 Random.Range(tempPosition.z - 5, tempPosition.z + 5));
             GameObject box = Instantiate(boxPrefab, boxPosition, Quaternion.identity);
-            box.transform.SetParent(boxParents.transform, true);
+            box.transform.RotateAround(tempPosition,Vector3.up, tempPosition.y);
+            //box.transform.SetParent(boxParents.transform, true);
         }
     }
 }

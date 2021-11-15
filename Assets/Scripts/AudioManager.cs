@@ -84,6 +84,7 @@ public class AudioManager : MonoBehaviour
     public void OnDayBegin()
     {
         MusicTransition(dayMusic, 3f, 3f);
+        
     }
 
     public void OnNighBegin()
@@ -94,5 +95,9 @@ public class AudioManager : MonoBehaviour
     public void OnSunRise()
     {
         MusicTransition(sunriseMusic, 3f, 3f);
+    }
+    public void OnRaining()
+    {
+        MusicTransition(rainMusic, 3f, 3f);
     }
 }
