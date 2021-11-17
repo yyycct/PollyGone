@@ -33,6 +33,7 @@ public class playerCollider : MonoBehaviour
     public bool holdingJournal = false;
 
     public int craftOrCook = 0; //0 for craft, 1 for cook
+    [SerializeField] private AudioSource collectSFX;
 
     private void Start()
     {
@@ -525,6 +526,7 @@ public class playerCollider : MonoBehaviour
         }
         if (addedSuccess)
         {
+            collectSFX.Play();
             loopInventory();
             wrapUp();
             Destroy(target);

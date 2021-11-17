@@ -215,6 +215,8 @@ public class items
                 usable = false;
                 amount = 0;
                 fireTime = 20;
+                itemName = "Badminton Racket";
+                description = "I don't have the mood for playing, but can I make something with it?";
                 break;
             case ItemType.CampFire:
                 itemType = _itemType;

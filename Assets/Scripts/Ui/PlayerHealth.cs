@@ -40,6 +40,9 @@ public class PlayerHealth : MonoBehaviour
     public VolumeProfile Rainny;
     public VolumeProfile Cloudy;
     private Vignette vignette;
+    [SerializeField] private Animation warmthAnim;
+    [SerializeField] private Animation hungerAnim;
+    [SerializeField] private Animation thirstAnim;
     private void Awake()
     {
         instance = this;
@@ -138,9 +141,11 @@ public class PlayerHealth : MonoBehaviour
         hungerSlider.fillAmount = hungerPoints/100f;
         if(hungerPoints < 10f)
         {
+            hungerAnim.Play();
             hungerSlider.color = Red;
         }
         else{
+            hungerAnim.Stop();
             hungerSlider.color = Green;
         }
     }
@@ -217,9 +222,11 @@ public class PlayerHealth : MonoBehaviour
             Tutorial.instance.ColdTuto();
             healthPoints -= Time.deltaTime * coldHealthDropSpeed;
             coldSlider.color = Red;
+            warmthAnim.Play();
         }
         else
         {
+            warmthAnim.Stop();
             coldSlider.color = Green;
         }
         if(hydratePoints <= 10f)
@@ -227,10 +234,12 @@ public class PlayerHealth : MonoBehaviour
             Tutorial.instance.HydrateTuto();
             healthPoints -= Time.deltaTime * 0.4f;
             hydrateSlider.color = Red;
+            thirstAnim.Play();
         }
         else
         {
             hydrateSlider.color = Green;
+            thirstAnim.Stop();
         }       
         healthPoints = clampValue(healthPoints);
     }

@@ -50,6 +50,7 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
             {
                 UiController.instance.equipArea.SetActive(true);
             }
+            Tutorial.instance.UseItemTuto(playerCollider.instance.playerBag.GetItem(selection));
         }
         else if (this.name == "CraftSlot")
         {

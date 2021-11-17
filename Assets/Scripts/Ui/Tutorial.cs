@@ -19,6 +19,9 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject coldArrow;
     [SerializeField] private GameObject hungerArrow;
     [SerializeField] private GameObject hydrateArrow;
+    [SerializeField] private GameObject DropArrow;
+    [SerializeField] private GameObject EatArrow;
+    [SerializeField] private GameObject EquipArrow;
 
     [SerializeField] private GameObject bagFullText;
     bool cursorVis = false;
@@ -45,6 +48,9 @@ public class Tutorial : MonoBehaviour
         coldArrow.SetActive(false);
         hungerArrow.SetActive(false);
         hydrateArrow.SetActive(false);
+        DropArrow.SetActive(false);
+        EatArrow.SetActive(false);
+        EquipArrow.SetActive(false);
     }
 
     void ShowBubble(string instruction)
@@ -66,9 +72,6 @@ public class Tutorial : MonoBehaviour
         tutorialBubble.gameObject.SetActive(true);
         inTutorial = true;
         StartCoroutine(HideBubbleAfter(duration));
-        //continueText.gameObject.SetActive(true);
-        //StarterAssetsInputs.instance.SwitchMap();
-        //UiController.instance.ZeroTimeScale();
     }
 
     IEnumerator HideBubbleAfter(float second)
@@ -77,6 +80,7 @@ public class Tutorial : MonoBehaviour
         CloseTutorial();
         inTutorial = false;
     }
+
 
     public void OnlyShowBubble(string instruction)
     {
@@ -138,10 +142,39 @@ public class Tutorial : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("DragAndDropTutorial"))
         {
-            ShowBubble("I think I can drag thing around");
+            ShowBubble("I should be able to drag items around", 5f);
             PlayerPrefs.SetInt("DragAndDropTutorial", 1);
         }
     }
+
+    public void UseItemTuto(items item)
+    {
+        if (!PlayerPrefs.HasKey("PlaceOnGroundTutorial"))
+        {
+            DropArrow.SetActive(true);
+            ShowBubble("You can drop the item to the drop area to place it on the ground", 3f);
+            PlayerPrefs.SetInt("PlaceOnGroundTutorial", 1);
+        }
+        else if (!PlayerPrefs.HasKey("EquipTutorial"))
+        {
+            if (item.usable)
+            {
+                EquipArrow.SetActive(true);
+                ShowBubble("Drop to the equip area to hold in hand", 3f);
+                PlayerPrefs.SetInt("EquipTutorial", 1);
+            }
+        }
+        else if (!PlayerPrefs.HasKey("EatTutorial"))
+        {
+            if (item.ediable)
+            {
+                EatArrow.SetActive(true);
+                ShowBubble("Drop to the eat area to eat or drink", 3f);
+                PlayerPrefs.SetInt("EatTutorial", 1);
+            }
+        }
+    }
+
 
     public void CraftTuto()
     {
