@@ -172,7 +172,7 @@ public class CollectFeedback : MonoBehaviour
         totalReport += ConvertMetricsToStringRepresentation();
         totalReport = totalReport.Replace("\n", System.Environment.NewLine);
         string reportFile = CreateUniqueFileName();
-        Analytics.CustomEvent(totalReport);
+        //Analytics.CustomEvent(totalReport);
         //File.WriteAllText(reportFile, totalReport);
 #if !UNITY_WEBPLAYER
         File.WriteAllText(reportFile, totalReport);

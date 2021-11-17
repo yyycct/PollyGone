@@ -18,6 +18,7 @@ public class EndingController : MonoBehaviour
     {
         yield return new WaitForSeconds(anim.clip.length);
         creditAnim.Play();
+        StartCoroutine(CursorAppear());
     }
 
     public void RestartButtonClicked()
