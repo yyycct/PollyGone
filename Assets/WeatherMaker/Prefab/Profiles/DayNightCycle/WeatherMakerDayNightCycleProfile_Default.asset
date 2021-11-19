@@ -29,8 +29,8 @@ MonoBehaviour:
     serializedVersion: 2
     key0: {r: 0, g: 0, b: 1, a: 1}
     key1: {r: 0, g: 0, b: 1, a: 1}
-    key2: {r: 1, g: 0, b: 0, a: 0}
-    key3: {r: 1, g: 0, b: 0, a: 0}
+    key2: {r: 1, g: 0.39999998, b: 0.39999998, a: 0}
+    key3: {r: 1, g: 0.390566, b: 0.390566, a: 0}
     key4: {r: 0, g: 1, b: 0, a: 0}
     key5: {r: 1, g: 1, b: 1, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
@@ -58,7 +58,7 @@ MonoBehaviour:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
     key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 1, g: 0.102941155, b: 0.102941155, a: 0}
+    key2: {r: 1, g: 0.3433962, b: 0.3433962, a: 0}
     key3: {r: 1, g: 1, b: 1, a: 0}
     key4: {r: 1, g: 1, b: 1, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -477,8 +477,8 @@ MonoBehaviour:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
     key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0.8627451, g: 0.39215687, b: 0.19607843, a: 0}
-    key3: {r: 0.8897059, g: 0.41245896, b: 0.045793675, a: 0}
+    key2: {r: 0.8627451, g: 0.39215687, b: 0.19607843, a: 1}
+    key3: {r: 0.8897059, g: 0.41245896, b: 0.045793675, a: 1}
     key4: {r: 1, g: 1, b: 1, a: 0}
     key5: {r: 1, g: 1, b: 1, a: 0}
     key6: {r: 1, g: 1, b: 1, a: 0}
@@ -492,16 +492,16 @@ MonoBehaviour:
     ctime6: 65535
     ctime7: 0
     atime0: 386
-    atime1: 65535
-    atime2: 0
-    atime3: 0
+    atime1: 25250
+    atime2: 26021
+    atime3: 65535
     atime4: 0
     atime5: 0
     atime6: 0
     atime7: 0
     m_Mode: 0
     m_NumColorKeys: 6
-    m_NumAlphaKeys: 2
+    m_NumAlphaKeys: 4
   SunIntensityGradient:
     serializedVersion: 2
     key0: {r: 0, g: 0, b: 0, a: 1}
