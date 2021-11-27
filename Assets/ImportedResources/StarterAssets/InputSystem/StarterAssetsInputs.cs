@@ -214,7 +214,7 @@ public class StarterAssetsInputs : MonoBehaviour
 			CraftQTE.instance.craftValue++;
         }
     }
-
+	
 	private void OnApplicationFocus(bool hasFocus)
 	{
 		SetCursorState(cursorLocked);
