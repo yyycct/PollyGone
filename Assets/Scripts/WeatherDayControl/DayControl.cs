@@ -42,8 +42,8 @@ public class DayControl : MonoBehaviour
     }
     void Start()
     {
-        randomRainTime = Random.Range(11, 15);
-        rainRemainTime = Random.Range(3, 6);
+        randomRainTime = Random.Range(7, 8);
+        rainRemainTime = Random.Range(9, 10);
         Debug.Log(randomRainTime);
     }
 
@@ -78,7 +78,7 @@ public class DayControl : MonoBehaviour
         {
             boxSpawned = 1;
         }
-        else if(DayCount == 2 && timeofDay == 8f)
+     /*   else if(DayCount == 2 && timeofDay == 8f)
         {
             raining = true;
             cloudy = false;
@@ -99,11 +99,12 @@ public class DayControl : MonoBehaviour
         else if(DayCount == 2 && timeofDay == randomRainTime)
         {
             AudioManager.instance.OnRaining();
-        }
+        }*/
         else if (DayCount == 2 && timeofDay > randomRainTime && timeofDay < (randomRainTime + rainRemainTime))
         {
             raining = true;
             cloudy = false;
+            rainwaterdemo.SetActive(true);
         }
         else if(DayCount == 2 && timeofDay == (randomRainTime + rainRemainTime))
         {

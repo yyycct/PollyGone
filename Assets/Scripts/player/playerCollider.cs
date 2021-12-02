@@ -100,6 +100,7 @@ public class playerCollider : MonoBehaviour
             if (UiController.instance.inventoryPanel.activeInHierarchy)
             {
                 UiController.instance.closeBag();
+                Tutorial.instance.CloseArrows();
             }
             else
             {

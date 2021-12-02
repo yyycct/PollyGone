@@ -21,7 +21,7 @@ public class FireAnimation : MonoBehaviour
     public float WoodBlockTime = 60f;
     public bool UnderCover = false;
 
-    const float maxSizeTime = 300f;
+    const float maxSizeTime = 600f;
     const float minSizeTime = 60f;
     const float maxSize = 3f;
     const float minSize = 1f;
@@ -97,7 +97,7 @@ public class FireAnimation : MonoBehaviour
         }
 
         FireSizeUpdate();
-        if (HelicopterMove.instance.inRoute && FireTime >= 300f)
+        if (HelicopterMove.instance.inRoute && FireTime >= maxSizeTime)
         {
             Tutorial.instance.HelicopterEnding();
         }

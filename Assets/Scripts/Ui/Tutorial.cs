@@ -53,6 +53,16 @@ public class Tutorial : MonoBehaviour
         EquipArrow.SetActive(false);
     }
 
+    public void CloseArrows()
+    {
+        coldArrow.SetActive(false);
+        hungerArrow.SetActive(false);
+        hydrateArrow.SetActive(false);
+        DropArrow.SetActive(false);
+        EatArrow.SetActive(false);
+        EquipArrow.SetActive(false);
+    }
+
     void ShowBubble(string instruction)
     {
         //playerCollider.instance.bagOn = true;
