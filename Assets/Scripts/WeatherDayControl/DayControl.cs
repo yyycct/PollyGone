@@ -5,7 +5,7 @@ using DigitalRuby.WeatherMaker;
 public class DayControl : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField]private float timeofDay;
+    public float timeofDay;
     [SerializeField] private LayerMask night;
     [SerializeField] private LayerMask day;
     [SerializeField] private Light theSun;
