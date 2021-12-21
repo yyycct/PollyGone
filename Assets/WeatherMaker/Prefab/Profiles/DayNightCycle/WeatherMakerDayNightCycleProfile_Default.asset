@@ -19,7 +19,7 @@ MonoBehaviour:
   TimeOfDayLabel: 09:00 AM
   Year: 1900
   Month: 1
-  Day: 2
+  Day: 1
   AdjustDateWhenDayEnds: 1
   TimeZoneOffsetSeconds: -21600
   Latitude: 17.799999237060547

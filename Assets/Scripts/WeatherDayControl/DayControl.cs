@@ -78,28 +78,29 @@ public class DayControl : MonoBehaviour
         {
             boxSpawned = 1;
         }
-     /*   else if(DayCount == 2 && timeofDay == 8f)
+        /*   else if(DayCount == 2 && timeofDay == 8f)
+           {
+               raining = true;
+               cloudy = false;
+               rainwaterdemo.SetActive(true);
+               AudioManager.instance.OnRaining();
+           }
+           else if(DayCount == 2 && timeofDay > 8f && timeofDay < 9f)
+           {
+               raining = true;
+               cloudy = false;
+           }
+           else if(DayCount == 2 && timeofDay == 9f)
+           {
+               raining = false;
+               cloudy = false;
+               AudioManager.instance.OnDayBegin();
+           }*/
+
+        else if (DayCount == 2 && timeofDay == randomRainTime)
         {
-            raining = true;
-            cloudy = false;
-            rainwaterdemo.SetActive(true);
             AudioManager.instance.OnRaining();
         }
-        else if(DayCount == 2 && timeofDay > 8f && timeofDay < 9f)
-        {
-            raining = true;
-            cloudy = false;
-        }
-        else if(DayCount == 2 && timeofDay == 9f)
-        {
-            raining = false;
-            cloudy = false;
-            AudioManager.instance.OnDayBegin();
-        }
-        else if(DayCount == 2 && timeofDay == randomRainTime)
-        {
-            AudioManager.instance.OnRaining();
-        }*/
         else if (DayCount == 2 && timeofDay > randomRainTime && timeofDay < (randomRainTime + rainRemainTime))
         {
             raining = true;
