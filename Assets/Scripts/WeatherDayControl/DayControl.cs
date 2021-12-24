@@ -17,7 +17,7 @@ public class DayControl : MonoBehaviour
     [SerializeField] private Color cloudyColor;
     [SerializeField] private Color nightFog;
     [SerializeField] private Color dayFog;
-    [SerializeField] private int DayCount = 1;
+    public int DayCount = 1;
     [SerializeField] private GameObject rainwaterdemo;
     public float dayLightIntensity = 1f;
     public bool raining;
@@ -100,6 +100,7 @@ public class DayControl : MonoBehaviour
         else if (DayCount == 2 && timeofDay == randomRainTime)
         {
             AudioManager.instance.OnRaining();
+            WeatherSwitch.instance.ChangePPSToRainy();
         }
         else if (DayCount == 2 && timeofDay > randomRainTime && timeofDay < (randomRainTime + rainRemainTime))
         {
@@ -112,10 +113,12 @@ public class DayControl : MonoBehaviour
             if (nightTime)
             {
                 AudioManager.instance.OnNighBegin();
+                WeatherSwitch.instance.ChangePPSToNight();
             }
             else
             {
                 AudioManager.instance.OnDayBegin();
+                WeatherSwitch.instance.ChangePPSToDay();
             }
         }
         else if (DayCount == 2 && timeofDay > (randomRainTime + rainRemainTime) )
@@ -132,6 +135,10 @@ public class DayControl : MonoBehaviour
             }
             raining = false;
             cloudy = false;
+        }
+        else if (DayCount == 3 && timeofDay == 6)
+        {
+            WeatherSwitch.instance.ChangePPSToCloudy();
         }
         else if (DayCount == 3 && timeofDay > 6 && timeofDay < 18)
         {

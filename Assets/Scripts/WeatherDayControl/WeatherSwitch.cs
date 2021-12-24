@@ -5,43 +5,58 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 public class WeatherSwitch : MonoBehaviour
 {
-    public Volume volume;
-    public VolumeProfile Sunny;
-    public VolumeProfile Rainny;
-    public VolumeProfile Cloudy;
-    public VolumeProfile Night;
+    public static WeatherSwitch instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+    public Volume Sunny;
+    public Volume Rainny;
+    public Volume Cloudy;
+    public Volume Night;
 
     private ColorAdjustments ca;
     private float timeElapsed = 0f;
     Color whiteColor = new Color(1f, 1f, 1f);
     Color blueFilterColor = new Color(0.52f, 0.65f, 0.96f);
     private bool inTransition = false;
-    // Start is called before the first frame update
-    void Start()
+
+    private Volume currentWeather;
+
+    private void Start()
     {
-        volume.profile.TryGet(out ca);
+        currentWeather = Sunny;
+        ResetWeather();
     }
 
-    // Update is called once per frame
+    private void ResetWeather()
+    {
+        Sunny.weight = 0;
+        Night.weight = 0;
+        Cloudy.weight = 0;
+        Rainny.weight = 0;
+        currentWeather.weight = 1;
+    }
+
     void Update()
     {
-        if (DayControl.instance.raining)
+        /*if (DayControl.instance.raining)
         {
             volume.profile = Rainny;
         }
         else if (DayControl.instance.cloudy)
         {
             volume.profile = Cloudy;
-        }
+        }*/
 
-        if (DayControl.instance.nightTime && !inTransition)
+        /*if (DayControl.instance.nightTime && !inTransition)
         {
             ca.colorFilter.value = blueFilterColor;
         }
         else if (!DayControl.instance.nightTime && !inTransition)
         {
             ca.colorFilter.value = whiteColor;
-        }
+        }*/
     }
 
     IEnumerator ChangeFilter(float duration, bool dayToNight)
@@ -56,6 +71,42 @@ public class WeatherSwitch : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+        timeElapsed = 0f;
+        inTransition = false;
+    }
+
+    public void ChangePPSToNight()
+    {
+        StartCoroutine(ChangePPSWithDelay(5f, Night));
+    }
+    public void ChangePPSToDay()
+    {
+        if (DayControl.instance.DayCount != 3)
+            StartCoroutine(ChangePPSWithDelay(5f, Sunny));
+    }
+
+    public void ChangePPSToCloudy()
+    {
+        StartCoroutine(ChangePPSWithDelay(10f, Cloudy));
+    }
+
+    public void ChangePPSToRainy()
+    {
+        StartCoroutine(ChangePPSWithDelay(5f, Rainny));
+    }
+
+    IEnumerator ChangePPSWithDelay(float duration, Volume toWeather)
+    {
+        inTransition = true;
+        while (timeElapsed < duration && currentWeather != toWeather)
+        {
+            currentWeather.weight = Mathf.Lerp(1f, 0f, timeElapsed / duration);
+            toWeather.weight = Mathf.Lerp(0f, 1f, timeElapsed / duration);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        currentWeather = toWeather;
+        ResetWeather();
         timeElapsed = 0f;
         inTransition = false;
     }
